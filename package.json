@@ -5,12 +5,15 @@
   "description": "Save any Discord message as an image",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "lint": "eslint ."
   },
   "author": "Ryan Luu",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^14.20.0"
+    "discord.js": "^14.20.0",
+    "dotenv": "^16.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
