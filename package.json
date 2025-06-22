@@ -1,0 +1,12 @@
+{
+  "name": "disclip",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Save any Discord message as an image",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan Luu",
+  "license": "MIT"
+}
