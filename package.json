@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "description": "Save any Discord message as an image",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
