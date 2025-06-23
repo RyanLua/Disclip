@@ -5,6 +5,6 @@ module.exports = {
 		.setName('Clip Message')
 		.setType(ApplicationCommandType.Message),
 	async execute(interaction) {
-		await interaction.reply('message has been clipped!');
+		await console.log(interaction);
 	},
 };
