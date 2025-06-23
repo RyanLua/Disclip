@@ -1,16 +1,34 @@
 {
   "name": "disclip",
-  "private": true,
   "version": "0.0.1",
-  "description": "Save any Discord message as an image",
+  "private": true,
+  "description": "Save precious messages and funny moments with Disclip. Turn any Discord message into a high-quality image to share across friends and social media.",
+  "keywords": [
+    "discord",
+    "image",
+    "screenshot",
+    "clip"
+  ],
+  "homepage": "https://github.com/RyanLua/Disclip#readme",
+  "bugs": {
+    "url": "https://github.com/RyanLua/Disclip/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanLua/Disclip.git"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/RyanLua"
+  },
+  "license": "MIT",
+  "author": "Ryan Luu <ryan.luu@ryanluu.dev>",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
     "start": "node .",
-    "lint": "eslint ."
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Ryan Luu",
-  "license": "MIT",
   "dependencies": {
     "discord.js": "^14.20.0",
     "dotenv": "^16.5.0"
