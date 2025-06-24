@@ -10,6 +10,15 @@ module.exports = {
 			InteractionContextType.Guild,
 		]),
 	async execute(interaction) {
-		await console.log(interaction);
+		const messageAuthor = interaction.targetMessage.author;
+
+		await interaction.reply({
+			content: [
+				`**User:** ${messageAuthor.globalName}`,
+				`**Avatar:** ${messageAuthor.avatarURL()}`,
+				'**Message:**',
+				`${interaction.targetMessage.content}`,
+			].join('\n'),
+		});
 	},
 };
