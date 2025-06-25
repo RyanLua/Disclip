@@ -25,7 +25,9 @@
   "author": "Ryan Luu <ryan.luu@ryanluu.dev>",
   "main": "index.js",
   "scripts": {
+    "fix": "eslint --fix",
     "lint": "eslint .",
+    "register": "node deploy-commands.js",
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
