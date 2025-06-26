@@ -32,11 +32,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "discord.js": "^14.20.0"
+    "discord.js": "^14.20.0",
+    "dotenv": "^16.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
-    "eslint": "^9.29.0",
-    "wrangler": "^4.21.0"
+    "eslint": "^9.29.0"
   }
 }
