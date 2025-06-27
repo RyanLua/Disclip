@@ -23,18 +23,20 @@
   },
   "license": "MIT",
   "author": "Ryan Luu <ryan.luu@ryanluu.dev>",
-  "main": "index.js",
+  "main": "app.js",
+  "type": "module",
   "scripts": {
     "fix": "eslint --fix",
     "lint": "eslint .",
-    "register": "node deploy-commands.js",
+    "register": "node commands.js",
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "discord-api-types": "^0.38.13",
     "discord-interactions": "^4.3.0",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
