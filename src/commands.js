@@ -1,9 +1,12 @@
-import { ApplicationIntegrationType, InteractionContextType, ApplicationCommandType } from 'discord-api-types/v10';
-import 'dotenv/config';
-import { InstallGlobalCommands } from './utils.js';
+/**
+ * Share command metadata from a common spot to be used for both runtime
+ * and registration.
+ */
+
+import { ApplicationCommandType, ApplicationIntegrationType, InteractionContextType } from 'discord-api-types/v10';
 
 // Ping command
-const PING_COMMAND = {
+export const PING_COMMAND = {
 	name: 'ping',
 	type: ApplicationCommandType.ChatInput,
 	description: 'Replies with pong',
@@ -19,7 +22,7 @@ const PING_COMMAND = {
 };
 
 // Clip command, for guild install only
-const CLIP_COMMAND = {
+export const CLIP_COMMAND = {
 	name: 'clip',
 	type: ApplicationCommandType.Message,
 	integration_types: [
@@ -31,10 +34,3 @@ const CLIP_COMMAND = {
 		InteractionContextType.Guild,
 	],
 };
-
-const ALL_COMMANDS = [
-	PING_COMMAND,
-	CLIP_COMMAND,
-];
-
-InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS);
