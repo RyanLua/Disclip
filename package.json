@@ -28,6 +28,7 @@
   "scripts": {
     "fix": "eslint --fix",
     "lint": "eslint .",
+    "deploy": "wrangler deploy",
     "register": "node src/register.js",
     "start": "wrangler dev",
     "test": "echo \"Error: no test specified\" && exit 1"
