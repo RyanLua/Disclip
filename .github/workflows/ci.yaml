@@ -8,12 +8,14 @@ permissions:
   contents: read
 
 jobs:
-  lint:
+  quality:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
         with:
-          node-version: 24
-      - run: npm install
-      - run: npm run lint
+          version: latest
+      - name: Run Biome
+        run: biome ci .
