@@ -2,14 +2,14 @@
  * The core server that runs on a Cloudflare worker.
  */
 
-import { AutoRouter } from 'itty-router';
 import {
+	InteractionResponseFlags,
 	InteractionResponseType,
 	InteractionType,
 	verifyKey,
 } from 'discord-interactions';
+import { AutoRouter } from 'itty-router';
 import { PING_COMMAND } from './commands.js';
-import { InteractionResponseFlags } from 'discord-interactions';
 
 class JsonResponse extends Response {
 	constructor(body, init) {
@@ -61,7 +61,7 @@ router.post('/', async (request, env) => {
 				return new JsonResponse({
 					type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
 					data: {
-						content: "Pong! 🏓",
+						content: 'Pong! 🏓',
 						flags: InteractionResponseFlags.EPHEMERAL,
 					},
 				});

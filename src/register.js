@@ -1,6 +1,6 @@
-import { PING_COMMAND, CLIP_COMMAND } from './commands.js';
-import dotenv from 'dotenv';
 import process from 'node:process';
+import dotenv from 'dotenv';
+import { CLIP_COMMAND, PING_COMMAND } from './commands.js';
 
 /**
  * This file is meant to be run from the command line, and is not used by the
