@@ -27,7 +27,7 @@
   "main": "app.js",
   "scripts": {
     "deploy": "wrangler deploy",
-    "fix": "biome check --apply .",
+    "fix": "biome check --write .",
     "lint": "biome check .",
     "register": "node src/register.js",
     "start": "wrangler dev",
