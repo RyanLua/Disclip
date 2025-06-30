@@ -24,7 +24,7 @@
   "license": "MIT",
   "author": "Ryan Luu <ryan.luu@ryanluu.dev>",
   "type": "module",
-  "main": "app.js",
+  "main": "src/server.js",
   "scripts": {
     "deploy": "wrangler deploy",
     "fix": "biome check --write .",
