@@ -2,8 +2,6 @@ name: Continuous Integration
 
 on:
   push:
-    branches:
-      - main
   pull_request:
 
 permissions:
@@ -14,8 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: biomejs/setup-biome@v2
         with:
-          node-version: 24
-      - run: npm install
-      - run: npm run lint
+          version: latest
+      - run: biome ci .

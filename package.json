@@ -23,20 +23,24 @@
   },
   "license": "MIT",
   "author": "Ryan Luu <ryan.luu@ryanluu.dev>",
-  "main": "index.js",
+  "type": "module",
+  "main": "app.js",
   "scripts": {
-    "fix": "eslint --fix",
-    "lint": "eslint .",
-    "register": "node deploy-commands.js",
-    "start": "node .",
+    "deploy": "wrangler deploy",
+    "fix": "biome check --write .",
+    "lint": "biome check .",
+    "register": "node src/register.js",
+    "start": "wrangler dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "discord.js": "^14.20.0",
-    "dotenv": "^16.5.0"
+    "discord-api-types": "^0.38.13",
+    "discord-interactions": "^4.3.0",
+    "dotenv": "^16.6.0",
+    "itty-router": "^5.0.18",
+    "wrangler": "^4.22.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.29.0",
-    "eslint": "^9.29.0"
+    "@biomejs/biome": "2.0.6"
   }
 }
