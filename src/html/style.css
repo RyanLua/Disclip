@@ -1,17 +1,57 @@
+@font-face {
+	font-family: "gg sans";
+	src: url("fonts/ggsansvf-VF.woff2") format("woff2-variations");
+	font-weight: 125 950;
+	font-stretch: 75% 125%;
+
+	font-style: normal;
+}
+
 :root {
-	--gradient-dark: rgb(25, 23, 92);
-	--gradient-light: rgb(88, 101, 242);
+	color-scheme: light dark;
+
+	--light-user: rgb(223, 224, 226);
+	--light-message: rgb(255, 255, 255);
+
+	--blurple: rgb(88, 101, 242);
+	--light-blurple: rgb(224, 227, 255);
+	--dark-blurple: rgb(25, 23, 92);
+
+	--green: rgb(83, 237, 126);
+	--light-green: rgb(200, 255, 239);
+	--dark-green: rgb(0, 41, 32);
+
+	--pink: rgb(255, 76, 210);
+	--light-pink: rgb(245, 201, 255);
+	--dark-pink: rgb(56, 31, 44);
+
+	--black: rgb(0, 0, 0);
+	--dark: rgb(31, 31, 31);
+	--white: rgb(255, 255, 255);
+
+	--dark-blurple-gradient: radial-gradient(
+		105.43% 127.05% at 50.1% 127.05%,
+		var(--blurple) 20.65%,
+		var(--dark-blurple) 85.16%
+	);
+
+	--gradient-dark: light-dark(var(--light-blurple), var(--dark-blurple));
+	--gradient-light: var(--blurple);
+}
+
+html {
+	font-family:
+		"gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 16px;
 }
 
 body {
-	background: radial-gradient(
-		105.43% 127.05% at 50.1% 127.05%,
-		var(--gradient-light) 20.65%,
-		var(--gradient-dark) 85.16%
-	);
+	background: var(--dark-blurple-gradient);
 	background-attachment: fixed;
 }
 
 .avatar {
+	width: 40px;
+	height: 40px;
 	border-radius: 50%;
 }
