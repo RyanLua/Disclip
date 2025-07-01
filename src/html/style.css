@@ -40,9 +40,6 @@
 	--black: rgb(0, 0, 0);
 	--dark: rgb(31, 31, 31);
 	--white: rgb(255, 255, 255);
-
-	--gradient-dark: var(--dark-blurple);
-	--gradient-light: var(--blurple);
 }
 
 html {
