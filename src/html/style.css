@@ -80,6 +80,10 @@ body {
 	justify-content: center;
 }
 
+p {
+	margin: 0px;
+}
+
 .card {
 	background-color: light-dark(var(--white), var(--dark));
 	border-radius: var(--radius-sm);
