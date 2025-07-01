@@ -14,5 +14,10 @@
 		"formatter": {
 			"quoteStyle": "single"
 		}
+	},
+	"html": {
+		"formatter": {
+			"enabled": true
+		}
 	}
 }
