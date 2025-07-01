@@ -24,6 +24,25 @@
 	--font-weight-bold: 700;
 	--font-weight-extrabold: 800;
 
+	/* Font Sizes */
+	--radius-none: 0px;
+	--radius-xs: 4px;
+	--radius-sm: 8px;
+	--radius-md: 12px;
+	--radius-lg: 16px;
+	--radius-xl: 24px;
+	--radius-xxl: 32px;
+	--radius-round: 2147483647px;
+
+	/* Space */
+	--space-xxs: 4px;
+	--space-xs: 10px;
+	--space-sm: 16px;
+	--space-md: 20px;
+	--space-lg: 24px;
+	--space-xl: 30px;
+	--space-xxl: 40px;
+
 	/* Background Colors */
 	--blurple: rgb(88, 101, 242);
 	--light-blurple: rgb(224, 227, 255);
@@ -55,6 +74,16 @@ body {
 		var(--dark-blurple) 85.16%
 	);
 	background-attachment: fixed;
+}
+
+.card {
+	background-color: light-dark(var(--white), var(--dark));
+	border-radius: var(--radius-sm);
+
+	padding-top: var(--space-xs);
+	padding-bottom: var(--space-xs);
+	padding-left: var(--space-xl);
+	padding-right: var(--space-xl);
 }
 
 .user {
