@@ -10,9 +10,21 @@
 :root {
 	color-scheme: light dark;
 
-	--light-user: rgb(223, 224, 226);
-	--light-message: rgb(255, 255, 255);
+	/* Text Colors */
+	--light-text-user: rgb(50, 51, 56);
+	--light-text-message: rgb(47, 48, 53);
 
+	--dark-text-user: rgb(255, 255, 255);
+	--dark-text-message: rgb(223, 224, 226);
+
+	/* Font Weights */
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+	--font-weight-extrabold: 800;
+
+	/* Background Colors */
 	--blurple: rgb(88, 101, 242);
 	--light-blurple: rgb(224, 227, 255);
 	--dark-blurple: rgb(25, 23, 92);
@@ -46,6 +58,15 @@ body {
 		var(--dark-blurple) 85.16%
 	);
 	background-attachment: fixed;
+}
+
+.user {
+	font-weight: var(--font-weight-medium);
+	color: light-dark(var(--light-text-user), var(--dark-text-user));
+}
+
+.message {
+	color: light-dark(var(--light-text-message), var(--dark-text-message));
 }
 
 .avatar {
