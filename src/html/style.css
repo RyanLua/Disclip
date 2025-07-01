@@ -64,7 +64,6 @@
 html {
 	font-family:
 		"gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 16px;
 }
 
 body {
@@ -74,16 +73,17 @@ body {
 		var(--dark-blurple) 85.16%
 	);
 	background-attachment: fixed;
+	padding: var(--space-lg);
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .card {
 	background-color: light-dark(var(--white), var(--dark));
 	border-radius: var(--radius-sm);
-
-	padding-top: var(--space-xs);
-	padding-bottom: var(--space-xs);
-	padding-left: var(--space-xl);
-	padding-right: var(--space-xl);
+	padding: var(--space-md);
 }
 
 .user {
