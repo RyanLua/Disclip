@@ -88,6 +88,10 @@ p {
 	background-color: light-dark(var(--white), var(--dark));
 	border-radius: var(--radius-sm);
 	padding: var(--space-md);
+	padding-right: var(--space-xl);
+	display: flex;
+	align-items: flex-start;
+	gap: var(--space-md);
 }
 
 .user {
