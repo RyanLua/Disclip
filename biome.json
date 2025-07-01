@@ -1,9 +1,8 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
 	"files": {
-		"includes": ["**", "!node_modules", "!.wrangler"]
+		"ignoreUnknown": false
 	},
-	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"linter": {
 		"enabled": true,
 		"rules": {
@@ -18,6 +17,14 @@
 	"html": {
 		"formatter": {
 			"enabled": true
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
 		}
 	}
 }
