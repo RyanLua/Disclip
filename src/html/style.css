@@ -23,6 +23,9 @@
 	--dark-card: rgb(57, 58, 65);
 	--dark-card-border: rgb(68, 69, 76);
 
+	--light-card-shadow: 0 12px 36px 0 hsl(none 0% 0% / 0.12);
+	--dark-card-shadow: 0 12px 24px 0 hsl(none 0% 0% / 0.24);
+
 	--tag-color: rgba(151, 151, 159, 0.2);
 
 	/* Core Colors */
@@ -92,6 +95,7 @@ p {
 }
 
 .card {
+	box-shadow: light-dark(var(--light-card-shadow), var(--dark-card-shadow));
 	background-color: light-dark(var(--light-card), var(--dark-card));
 	border-radius: var(--radius-sm);
 	padding: var(--space-sm);
