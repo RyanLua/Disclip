@@ -90,7 +90,7 @@ p {
 	padding-right: var(--space-xl);
 	display: flex;
 	align-items: flex-start;
-	gap: var(--space-md);
+	gap: var(--space-sm);
 }
 
 .user {
