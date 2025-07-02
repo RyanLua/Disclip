@@ -73,7 +73,6 @@ body {
 		var(--dark-blurple) 85.16%
 	);
 	background-attachment: fixed;
-	padding: var(--space-lg);
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
@@ -87,7 +86,7 @@ p {
 .card {
 	background-color: light-dark(var(--white), var(--dark));
 	border-radius: var(--radius-sm);
-	padding: var(--space-md);
+	padding: var(--space-sm);
 	padding-right: var(--space-xl);
 	display: flex;
 	align-items: flex-start;
