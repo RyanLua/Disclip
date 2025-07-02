@@ -80,7 +80,7 @@ body {
 }
 
 p {
-	margin: 0px;
+	margin: 0;
 }
 
 .card {
@@ -95,7 +95,26 @@ p {
 
 .user {
 	font-weight: var(--font-weight-medium);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	color: light-dark(var(--light-text-user), var(--dark-text-user));
+}
+
+.tag {
+	font-size: 12px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	background-color: var(--blurple);
+	border-radius: var(--radius-xs);
+	padding: 0 var(--space-xxs);
+	margin: 0 var(--space-xxs);
+}
+
+.timestamp {
+	font-size: 12px;
+	margin: 0 var(--space-xxs);
 }
 
 .message {
