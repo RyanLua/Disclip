@@ -88,7 +88,7 @@ p {
 	border-radius: var(--radius-sm);
 	padding: var(--space-sm);
 	padding-right: var(--space-xl);
-	display: flex;	
+	display: flex;
 	align-items: flex-start;
 	gap: var(--space-md);
 }
