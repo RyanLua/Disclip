@@ -10,40 +10,22 @@
 :root {
 	color-scheme: light dark;
 
-	/* Text Colors */
+	/* Colors */
 	--light-text-user: rgb(50, 51, 56);
 	--light-text-message: rgb(47, 48, 53);
 
 	--dark-text-user: rgb(255, 255, 255);
 	--dark-text-message: rgb(223, 224, 226);
 
-	/* Font Weights */
-	--font-weight-normal: 400;
-	--font-weight-medium: 500;
-	--font-weight-semibold: 600;
-	--font-weight-bold: 700;
-	--font-weight-extrabold: 800;
+	--light-card: rgb(255, 255, 255);
+	--light-card-border: rgb(226, 226, 228);
 
-	/* Font Sizes */
-	--radius-none: 0px;
-	--radius-xs: 4px;
-	--radius-sm: 8px;
-	--radius-md: 12px;
-	--radius-lg: 16px;
-	--radius-xl: 24px;
-	--radius-xxl: 32px;
-	--radius-round: 2147483647px;
+	--dark-card: rgb(57, 58, 65);
+	--dark-card-border: rgb(68, 69, 76);
 
-	/* Space */
-	--space-xxs: 4px;
-	--space-xs: 10px;
-	--space-sm: 16px;
-	--space-md: 20px;
-	--space-lg: 24px;
-	--space-xl: 30px;
-	--space-xxl: 40px;
+	--tag-color: rgba(151, 151, 159, 0.2);
 
-	/* Background Colors */
+	/* Core Colors */
 	--blurple: rgb(88, 101, 242);
 	--light-blurple: rgb(224, 227, 255);
 	--dark-blurple: rgb(25, 23, 92);
@@ -59,6 +41,32 @@
 	--black: rgb(0, 0, 0);
 	--dark: rgb(31, 31, 31);
 	--white: rgb(255, 255, 255);
+
+	/* Font Weights */
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+	--font-weight-extrabold: 800;
+
+	/* Corner Radius */
+	--radius-none: 0px;
+	--radius-xs: 4px;
+	--radius-sm: 8px;
+	--radius-md: 12px;
+	--radius-lg: 16px;
+	--radius-xl: 24px;
+	--radius-xxl: 32px;
+	--radius-round: 2147483647px;
+
+	/* Spacing */
+	--space-xxs: 4px;
+	--space-xs: 10px;
+	--space-sm: 16px;
+	--space-md: 20px;
+	--space-lg: 24px;
+	--space-xl: 30px;
+	--space-xxl: 40px;
 }
 
 html {
@@ -84,13 +92,15 @@ p {
 }
 
 .card {
-	background-color: light-dark(var(--white), var(--dark));
+	background-color: light-dark(var(--light-card), var(--dark-card));
 	border-radius: var(--radius-sm);
 	padding: var(--space-sm);
 	padding-right: var(--space-xl);
 	display: flex;
 	align-items: flex-start;
 	gap: var(--space-sm);
+	border: 1px solid
+		light-dark(var(--light-card-border), var(--dark-card-border));
 }
 
 .user {
@@ -106,10 +116,16 @@ p {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	background-color: var(--blurple);
+	background-color: var(--tag-color);
 	border-radius: var(--radius-xs);
 	padding: 0 var(--space-xxs);
 	margin: 0 var(--space-xxs);
+}
+
+.tag img {
+	width: 12px;
+	height: 12px;
+	margin-right: var(--space-xxs);
 }
 
 .timestamp {
