@@ -18,13 +18,16 @@
 	--dark-text-message: rgb(223, 224, 226);
 
 	--light-card: rgb(255, 255, 255);
-	--light-card-border: rgb(226, 226, 228);
-
 	--dark-card: rgb(57, 58, 65);
+
+	--light-card-border: rgb(226, 226, 228);
 	--dark-card-border: rgb(68, 69, 76);
 
 	--light-card-shadow: 0 12px 36px 0 hsl(none 0% 0% / 0.12);
 	--dark-card-shadow: 0 12px 24px 0 hsl(none 0% 0% / 0.24);
+
+	--light-timestamp-color: rgb(112, 113, 122);
+	--dark-timestamp-color: rgb(155, 156, 163);
 
 	--tag-color: rgba(151, 151, 159, 0.2);
 
@@ -133,6 +136,7 @@ p {
 }
 
 .timestamp {
+	color: light-dark(var(--light-timestamp-color), var(--dark-timestamp-color));
 	font-size: 12px;
 	margin: 0 var(--space-xxs);
 }
