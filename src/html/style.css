@@ -121,6 +121,7 @@ p {
 .tag {
 	font-size: 12px;
 	display: flex;
+	font-weight: var(--font-weight-semibold);
 	flex-direction: row;
 	align-items: center;
 	background-color: var(--tag-color);
