@@ -14,10 +14,7 @@
 	--text-user: light-dark(rgb(50, 51, 56), rgb(255, 255, 255));
 	--text-message: light-dark(rgb(47, 48, 53), rgb(223, 224, 226));
 	--card-background: light-dark(rgb(255, 255, 255), rgb(57, 58, 65));
-	--card-border: light-dark(
-		1px solid rgb(226, 226, 228),
-		1px solid rgb(68, 69, 76)
-	);
+	--card-border: 1px solid light-dark(rgb(226, 226, 228), rgb(68, 69, 76));
 	--card-shadow: light-dark(
 		0 12px 36px 0 hsl(none 0% 0% / 0.12),
 		0 12px 24px 0 hsl(none 0% 0% / 0.24)
