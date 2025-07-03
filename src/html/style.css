@@ -114,12 +114,12 @@ p {
 	border-radius: var(--radius-xs);
 	padding: 0 var(--space-xxs);
 	margin: 0 var(--space-xxs);
-}
 
-.tag img {
-	width: 12px;
-	height: 12px;
-	margin-right: var(--space-xxs);
+	& img {
+		width: 12px;
+		height: 12px;
+		margin-right: var(--space-xxs);
+	}
 }
 
 .timestamp {
@@ -130,12 +130,12 @@ p {
 
 .message {
 	color: var(--text-message);
-}
 
-.message img {
-	max-width: 100%;
-	border-radius: var(--radius-sm);
-	margin-top: var(--space-xxs);
+	& img {
+		max-width: 100%;
+		border-radius: var(--radius-sm);
+		margin-top: var(--space-xxs);
+	}
 }
 
 .avatar {
