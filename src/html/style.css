@@ -90,11 +90,11 @@ p {
 	background-color: var(--card-background);
 	border-radius: var(--radius-sm);
 	padding: var(--space-sm);
-	padding-right: var(--space-xl);
 	display: flex;
 	align-items: flex-start;
 	gap: var(--space-sm);
 	border: var(--card-border);
+	word-break: break-word;
 	max-width: 400px;
 }
 
@@ -122,12 +122,11 @@ p {
 	align-items: center;
 	background-color: var(--tag-color);
 	border-radius: var(--radius-xs);
-	padding: 0 var(--space-xxs);
 
 	& img {
 		width: 12px;
 		height: 12px;
-		margin-right: var(--space-xxs);
+		margin-left: var(--space-xxs);
 	}
 }
 
@@ -142,5 +141,6 @@ p {
 		max-width: 100%;
 		border-radius: var(--radius-sm);
 		margin-top: var(--space-xxs);
+		display: block;
 	}
 }
