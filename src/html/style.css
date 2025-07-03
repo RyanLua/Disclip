@@ -10,44 +10,36 @@
 :root {
 	color-scheme: light dark;
 
-	/* Colors */
-	--text-user: light-dark(rgb(50, 51, 56), rgb(255, 255, 255));
-	--text-message: light-dark(rgb(47, 48, 53), rgb(223, 224, 226));
-	--card-background: light-dark(rgb(255, 255, 255), rgb(57, 58, 65));
+	--username-color: light-dark(rgb(50, 51, 56), rgb(255, 255, 255));
+	--message-color: light-dark(rgb(47, 48, 53), rgb(223, 224, 226));
+	--timestamp-color: light-dark(rgb(112, 113, 122), rgb(155, 156, 163));
+	--tag-background-color: rgba(151, 151, 159, 0.2);
+	--card-background-color: light-dark(rgb(255, 255, 255), rgb(57, 58, 65));
 	--card-border: 1px solid light-dark(rgb(226, 226, 228), rgb(68, 69, 76));
 	--card-shadow: light-dark(
 		0 12px 36px 0 hsl(none 0% 0% / 0.12),
 		0 12px 24px 0 hsl(none 0% 0% / 0.24)
 	);
-	--timestamp-color: light-dark(rgb(112, 113, 122), rgb(155, 156, 163));
 
-	--tag-color: rgba(151, 151, 159, 0.2);
+	--color-blurple: rgb(88, 101, 242);
+	--color-light-blurple: rgb(224, 227, 255);
+	--color-dark-blurple: rgb(25, 23, 92);
+	--color-green: rgb(83, 237, 126);
+	--color-light-green: rgb(200, 255, 239);
+	--color-dark-green: rgb(0, 41, 32);
+	--color-pink: rgb(255, 76, 210);
+	--color-light-pink: rgb(245, 201, 255);
+	--color-dark-pink: rgb(56, 31, 44);
+	--color-black: rgb(0, 0, 0);
+	--color-dark: rgb(31, 31, 31);
+	--color-white: rgb(255, 255, 255);
 
-	/* Core Colors */
-	--blurple: rgb(88, 101, 242);
-	--light-blurple: rgb(224, 227, 255);
-	--dark-blurple: rgb(25, 23, 92);
-
-	--green: rgb(83, 237, 126);
-	--light-green: rgb(200, 255, 239);
-	--dark-green: rgb(0, 41, 32);
-
-	--pink: rgb(255, 76, 210);
-	--light-pink: rgb(245, 201, 255);
-	--dark-pink: rgb(56, 31, 44);
-
-	--black: rgb(0, 0, 0);
-	--dark: rgb(31, 31, 31);
-	--white: rgb(255, 255, 255);
-
-	/* Font Weights */
 	--font-weight-normal: 400;
 	--font-weight-medium: 500;
 	--font-weight-semibold: 600;
 	--font-weight-bold: 700;
 	--font-weight-extrabold: 800;
 
-	/* Corner Radius */
 	--radius-none: 0px;
 	--radius-xs: 4px;
 	--radius-sm: 8px;
@@ -57,7 +49,6 @@
 	--radius-xxl: 32px;
 	--radius-round: 2147483647px;
 
-	/* Spacing */
 	--space-xxs: 4px;
 	--space-xs: 10px;
 	--space-sm: 16px;
@@ -72,8 +63,8 @@ html {
 		"gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	background: radial-gradient(
 		105.43% 127.05% at 50.1% 127.05%,
-		var(--blurple) 20.65%,
-		var(--dark-blurple) 85.16%
+		var(--color-blurple) 20.65%,
+		var(--color-dark-blurple) 85.16%
 	);
 	height: 100%;
 	display: flex;
@@ -87,7 +78,7 @@ p {
 
 .card {
 	box-shadow: var(--card-shadow);
-	background-color: var(--card-background);
+	background-color: var(--card-background-color);
 	border-radius: var(--radius-sm);
 	padding: var(--space-sm);
 	display: flex;
@@ -108,7 +99,7 @@ p {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	color: var(--text-user);
+	color: var(--username-color);
 	gap: var(--space-xxs);
 
 	& :not(:first-child) {
@@ -120,14 +111,14 @@ p {
 	display: flex;
 	font-weight: var(--font-weight-semibold);
 	align-items: center;
-	background-color: var(--tag-color);
+	background-color: var(--tag-background-color);
 	border-radius: var(--radius-xs);
 	gap: var(--space-xxs);
 	padding: 0 var(--space-xxs);
 
 	&.bot {
-		color: var(--white);
-		background-color: var(--blurple);
+		color: var(--color-white);
+		background-color: var(--color-blurple);
 	}
 
 	& img {
@@ -141,7 +132,7 @@ p {
 }
 
 .message {
-	color: var(--text-message);
+	color: var(--message-color);
 
 	& img {
 		max-width: 100%;
