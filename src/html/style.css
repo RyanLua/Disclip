@@ -98,22 +98,31 @@ p {
 	max-width: 400px;
 }
 
+.avatar {
+	width: 40px;
+	height: 40px;
+	border-radius: var(--radius-round);
+}
+
 .username {
 	font-weight: var(--font-weight-medium);
 	display: flex;
 	align-items: center;
 	color: var(--text-user);
+
+	& :not(:first-child) {
+		font-size: 0.75rem;
+		margin: 0 var(--space-xxs);
+	}
 }
 
 .tag {
-	font-size: 0.75rem;
 	display: flex;
 	font-weight: var(--font-weight-semibold);
 	align-items: center;
 	background-color: var(--tag-color);
 	border-radius: var(--radius-xs);
 	padding: 0 var(--space-xxs);
-	margin: 0 var(--space-xxs);
 
 	& img {
 		width: 12px;
@@ -124,8 +133,6 @@ p {
 
 .timestamp {
 	color: var(--timestamp-color);
-	font-size: 0.75rem;
-	margin: 0 var(--space-xxs);
 }
 
 .message {
@@ -136,10 +143,4 @@ p {
 		border-radius: var(--radius-sm);
 		margin-top: var(--space-xxs);
 	}
-}
-
-.avatar {
-	width: 40px;
-	height: 40px;
-	border-radius: var(--radius-round);
 }
