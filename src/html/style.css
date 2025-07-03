@@ -125,6 +125,11 @@ p {
 	gap: var(--space-xxs);
 	padding: 0 var(--space-xxs);
 
+	&.bot {
+		color: var(--white);
+		background-color: var(--blurple);
+	}
+
 	& img {
 		width: 12px;
 		height: 12px;
