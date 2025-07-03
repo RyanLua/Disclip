@@ -75,7 +75,7 @@
 	--space-xxl: 40px;
 }
 
-body {
+html {
 	font-family:
 		"gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	background: radial-gradient(
@@ -83,8 +83,7 @@ body {
 		var(--blurple) 20.65%,
 		var(--dark-blurple) 85.16%
 	);
-	background-attachment: fixed;
-	min-height: 100vh;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
