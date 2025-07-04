@@ -98,7 +98,7 @@ html {
 	color: var(--username-color);
 	gap: var(--space-xxs);
 
-	& > :not(:first-child) {
+	& > * {
 		font-size: 0.75rem;
 	}
 }
