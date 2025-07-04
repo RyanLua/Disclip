@@ -1,6 +1,8 @@
 # Disclip
 
+[![Continuous Integration](https://github.com/RyanLua/Disclip/actions/workflows/ci.yaml/badge.svg)](https://github.com/RyanLua/Disclip/actions/workflows/ci.yaml)
 [![Discord](https://discord.com/api/guilds/1387009688641732639/widget.png)](https://discord.com/invite/KYcCPPjF)
+[![GitHub License](https://img.shields.io/github/license/RyanLua/Disclip)](https://github.com/RyanLua/Disclip?tab=MIT-1-ov-file#readme)
 
 > [!WARNING]
 > This project is in active development and is not a final product. There is no proper documentation and the Discord app is not installable.
