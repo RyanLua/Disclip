@@ -72,10 +72,6 @@ html {
 	justify-content: center;
 }
 
-p {
-	margin: 0;
-}
-
 .card {
 	box-shadow: var(--card-shadow);
 	background-color: var(--card-background-color);
