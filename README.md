@@ -1,5 +1,7 @@
 # Disclip
 
+[![Discord](https://discord.com/api/guilds/1387009688641732639/widget.png)](https://discord.com/invite/KYcCPPjF)
+
 > [!WARNING]
 > This project is in active development and is not a final product. There is no proper documentation and the Discord app is not installable.
 
