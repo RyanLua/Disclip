@@ -1,3 +1,5 @@
+//@ts-check
+
 import process from 'node:process';
 import dotenv from 'dotenv';
 import { CLIP_COMMAND, PING_COMMAND } from './commands.js';

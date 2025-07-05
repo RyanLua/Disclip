@@ -1,3 +1,5 @@
+//@ts-check
+
 /**
  * The core server that runs on a Cloudflare worker.
  */
@@ -11,7 +13,14 @@ import {
 import { AutoRouter } from 'itty-router';
 import { PING_COMMAND } from './commands.js';
 
+/**
+ * @typedef {Object} Env
+ * @property {string} DISCORD_PUBLIC_KEY
+ * @property {string} DISCORD_APPLICATION_ID
+ */
+
 class JsonResponse extends Response {
+
 	constructor(body, init) {
 		const jsonBody = JSON.stringify(body);
 		init = init || {
@@ -37,7 +46,7 @@ router.get('/', (_request, env) => {
  * include a JSON payload described here:
  * https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object
  */
-router.post('/', async (request, env) => {
+router.post('/interaction', async (request, env) => {
 	const { isValid, interaction } = await server.verifyDiscordRequest(
 		request,
 		env,
@@ -76,6 +85,12 @@ router.post('/', async (request, env) => {
 });
 router.all('*', () => new Response('Not Found.', { status: 404 }));
 
+/**
+ * Verifies that a request is a valid Discord interaction.
+ * @param {Request} request
+ * @param {Env} env
+ * @returns {Promise<{ interaction?: Object, isValid: boolean }>}
+ */
 async function verifyDiscordRequest(request, env) {
 	const signature = request.headers.get('x-signature-ed25519');
 	const timestamp = request.headers.get('x-signature-timestamp');
