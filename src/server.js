@@ -20,7 +20,6 @@ import { PING_COMMAND } from './commands.js';
  */
 
 class JsonResponse extends Response {
-
 	constructor(body, init) {
 		const jsonBody = JSON.stringify(body);
 		init = init || {
