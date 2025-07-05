@@ -1,0 +1,9 @@
+{
+	"compatibility_date": "2025-06-17",
+	"main": "src/server.js",
+	"name": "my-disclip",
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 0.1
+	}
+}
