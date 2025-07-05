@@ -36,8 +36,14 @@ const router = AutoRouter();
 /**
  * A simple :wave: hello page to verify the worker is working.
  */
-router.get('/', (_request, env) => {
-	return new Response(`👋 ${env.DISCORD_APPLICATION_ID}`);
+router.get('/', (_request, _env) => {
+	return new Response(null, {
+		status: 301,
+		headers: {
+			Location: 'https://github.com/RyanLua/Disclip',
+			'Cache-Control': 'max-age=3600', // Cache for 1 hour
+		},
+	});
 });
 
 /**
@@ -45,7 +51,7 @@ router.get('/', (_request, env) => {
  * include a JSON payload described here:
  * https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object
  */
-router.post('/interaction', async (request, env) => {
+router.post('/interactions', async (request, env) => {
 	const { isValid, interaction } = await server.verifyDiscordRequest(
 		request,
 		env,
