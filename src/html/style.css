@@ -8,8 +8,6 @@
 }
 
 :root {
-	color-scheme: light dark;
-
 	--username-color: light-dark(rgb(50, 51, 56), rgb(255, 255, 255));
 	--message-color: light-dark(rgb(47, 48, 53), rgb(223, 224, 226));
 	--timestamp-color: light-dark(rgb(112, 113, 122), rgb(155, 156, 163));
@@ -56,9 +54,15 @@
 	--space-lg: 24px;
 	--space-xl: 30px;
 	--space-xxl: 40px;
+
+	color-scheme: light dark;
 }
 
 html {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 	font-family:
 		"gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	background: radial-gradient(
@@ -66,22 +70,18 @@ html {
 		var(--color-blurple) 20.65%,
 		var(--color-dark-blurple) 85.16%
 	);
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 .card {
-	box-shadow: var(--card-shadow);
-	background-color: var(--card-background-color);
-	border-radius: var(--radius-sm);
-	padding: var(--space-sm);
 	display: flex;
 	gap: var(--space-sm);
-	border: var(--card-border);
-	word-break: break-word;
 	max-width: 400px;
+	padding: var(--space-sm);
+	word-break: break-word;
+	background-color: var(--card-background-color);
+	border: var(--card-border);
+	border-radius: var(--radius-sm);
+	box-shadow: var(--card-shadow);
 }
 
 .avatar {
@@ -91,12 +91,12 @@ html {
 }
 
 .username {
-	font-weight: var(--font-weight-medium);
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
-	color: var(--username-color);
 	gap: var(--space-xxs);
+	align-items: center;
+	font-weight: var(--font-weight-medium);
+	color: var(--username-color);
 
 	& > * {
 		font-size: 0.75rem;
@@ -105,12 +105,12 @@ html {
 
 .tag {
 	display: flex;
-	font-weight: var(--font-weight-semibold);
+	gap: var(--space-xxs);
 	align-items: center;
+	padding: 0 var(--space-xxs);
+	font-weight: var(--font-weight-semibold);
 	background-color: var(--tag-background-color);
 	border-radius: var(--radius-xs);
-	gap: var(--space-xxs);
-	padding: 0 var(--space-xxs);
 
 	&.bot {
 		color: var(--color-white);
@@ -131,9 +131,9 @@ html {
 	color: var(--message-color);
 
 	& img {
-		max-width: 100%;
-		border-radius: var(--radius-sm);
-		margin-top: var(--space-xxs);
 		display: block;
+		max-width: 100%;
+		margin-top: var(--space-xxs);
+		border-radius: var(--radius-sm);
 	}
 }
