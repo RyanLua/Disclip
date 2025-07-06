@@ -51,8 +51,11 @@ In your code editor, duplicate `.example.dev.vars` and rename it to `.dev.vars` 
 On your Discord app's settings, enter your app credentials in `.dev.vars`:
 
 - On the **General Information** page, copy the value for **Application ID**. In `.dev.vars`, enter your pasted value in `DISCORD_APPLICATION_ID`
+  ![Application ID on General Information page in App Settings](assets/application-id.png)
 - Back on the **General Information** page, copy the value for **Public Key**. In `.dev.vars`, enter your pasted value in `DISCORD_PUBLIC_KEY`
+  ![Public Key on General Information page in App Settings](assets/public-key.png)
 - On the **Bot** page under **Token**, click "Reset Token" to generate a new bot token. In `.dev.vars`, enter your pasted value in `DISCORD_TOKEN`
+- ![Token on Bot page in App Settings](assets/token.png)
 
 > [!WARNING]
 > Make sure to never share your token or check it into any kind of version control or someone could take control of your bot.
