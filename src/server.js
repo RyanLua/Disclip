@@ -11,7 +11,7 @@ import {
 	verifyKey,
 } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
-import { PING_COMMAND } from './commands.js';
+import { CLIP_COMMAND, PING_COMMAND } from './commands.js';
 
 /**
  * @typedef {Object} Env
@@ -77,6 +77,14 @@ router.post('/interactions', async (request, env) => {
 					data: {
 						content: 'Pong! 🏓',
 						flags: InteractionResponseFlags.EPHEMERAL,
+					},
+				});
+			}
+			case CLIP_COMMAND.name.toLowerCase(): {
+				return new JsonResponse({
+					type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+					data: {
+						content: `Hello, ${interaction.member?.user?.username || interaction.user?.username || 'Unknown User'}! 👋`,
 					},
 				});
 			}
