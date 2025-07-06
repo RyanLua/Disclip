@@ -146,3 +146,13 @@ Go to your app's settings and on the **General Information** page under **Intera
 ![Interaction Endpoint URL on General Information page in App Settings](assets/interaction-endpoint-url.png)
 
 Click **Save Changes** and ensure your endpoint is successfully verified.
+
+### Adding your app to servers and DMs
+
+You can now add your app to servers and DMs using the install link generated in the **Install Link** section of the **Installation** page in your app's settings.
+
+![Install link section on Installation page in App Settings](assets/install-link.png)
+
+Copy the install link and paste it in your browser and click **Add to My Apps** or **Add to Server**.
+
+You now have your own Disclip clone set up and deployed! You can test it by typing `/` or opening the app context menu on any message to clip it.
