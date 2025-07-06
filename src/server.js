@@ -36,11 +36,11 @@ const router = AutoRouter();
 /**
  * A simple :wave: hello page to verify the worker is working.
  */
-router.get('/', (_request, _env) => {
+router.get('/', (_request, env) => {
 	return new Response(null, {
 		status: 301,
 		headers: {
-			Location: 'https://github.com/RyanLua/Disclip',
+			Location: `https://discord.com/oauth2/authorize?client_id=${env.DISCORD_APPLICATION_ID}`,
 			'Cache-Control': 'max-age=3600', // Cache for 1 hour
 		},
 	});
