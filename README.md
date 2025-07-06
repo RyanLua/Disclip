@@ -143,8 +143,6 @@ Copy your workers.dev URL from the output, which in this case is `https://discli
 
 Go to your app's settings and on the **General Information** page under **Interaction Endpoint URL**, paste your workers.dev URL and append `/interactions`.
 
-If your URL is `https://disclip.ryanluu.workers.dev`, then your **Interaction Endpoint URL** will be `https://disclip.ryanluu.workers.dev/interactions`.
-
 ![Interaction Endpoint URL on General Information page in App Settings](assets/interaction-endpoint-url.png)
 
 Click **Save Changes** and ensure your endpoint is successfully verified.
