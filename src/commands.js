@@ -35,7 +35,7 @@ export const PING_COMMAND = {
  * @type {import('discord-api-types/v10').RESTPostAPIApplicationCommandsJSONBody}
  */
 export const CLIP_COMMAND = {
-	name: 'clip',
+	name: 'Clip Message',
 	integration_types: [
 		ApplicationIntegrationType.GuildInstall,
 		ApplicationIntegrationType.UserInstall,
