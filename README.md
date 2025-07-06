@@ -12,3 +12,88 @@ Save precious messages and funny moments with Disclip. Turn any Discord message 
 Disclip is a [Discord app](https://support-apps.discord.com/hc/en-us/articles/26577510840087) which allows you to save any Discord message as a image including servers, and DMs. Written with [discord.js](https://discord.js.org/) for [Summer of Making](https://summer.hackclub.com/).
 
 ![Example of clipped message using Disclip](assets/message.png)
+
+## Development Setup
+
+> [!TIP]
+> This guide is for developers who want to set up their own Disclip clone for development purposes. You can install official Disclip app using the [install link](https://discord.com/oauth2/authorize?client_id=621149242744111114).
+
+It is recommended you [make your first Discord app](https://discord.com/developers/docs/quick-start/getting-started) before you start setting up Disclip so you are familiar with the Discord Developer Portal and how to create an app.
+
+This guide will walk you through the steps to create, configure, and deploy your own Disclip clone to [Cloudflare Workers](https://workers.cloudflare.com/).
+
+### Installing dependencies
+
+> [!NOTE]
+> Make sure you have [Node.js](https://nodejs.org/en/download) installed. You can check if you have Node.js by running `node -v`.
+
+Clone the project:
+
+```console
+git clone https://github.com/RyanLua/Disclip.git
+```
+
+Navigate to the cloned directory and install dependencies:
+
+```console
+cd Disclip
+npm install
+```
+
+### Getting app credentials
+
+You will need to [create a Discord app](https://discord.com/developers/applications?new_application=true) in the Discord Developer Portal if you haven't already.
+
+After you create your app, you'll land on the **General Information** page of the app's settings where you can update basic information about your app like its description and icon.
+
+In your code editor, duplicate `.example.dev.vars` and rename it to `.dev.vars` in the root of the project directory.
+
+On your Discord app's settings, enter your app credentials in `.dev.vars`:
+
+- On the **General Information** page, copy the value for **Application ID**. In `.dev.vars`, enter your pasted value in `DISCORD_APPLICATION_ID`
+- Back on the **General Information** page, copy the value for **Public Key**. In `.dev.vars`, enter your pasted value in `DISCORD_PUBLIC_KEY`
+- On the **Bot** page under **Token**, click "Reset Token" to generate a new bot token. In `.dev.vars`, enter your pasted value in `DISCORD_TOKEN`
+
+> [!WARNING]
+> Make sure to never share your token or check it into any kind of version control or someone could take control of your bot.
+
+When you're done, your `.dev.vars` file should look similar to this:
+
+```dotenv
+DISCORD_APPLICATION_ID: "621149242744111114"
+DISCORD_PUBLIC_KEY: "445c5654d426763870ecc6060f0a12f983817a33550ad5c0499fc322fdd45072"
+DISCORD_TOKEN: "NjIxMTQ5TjQyNzQ0MTEyMTE1.GcUa2R.ks2XadvqhA7Q-kQorySUwm2leia8Zkx1mfIqbI"
+```
+
+### Configuring your app
+
+You will need to configure your Discord app to allow it to be installed on servers and DMs along with setting up an install link for users to install your app.
+
+#### Installation Contexts
+
+On the **Installation** page, then under **Installation Contexts** make sure both "User Install" and "Guild Install" are selected.
+
+![Installation contexts section on Installation page in App Settings](assets/installation-contexts.png)
+
+#### Install Link
+
+On the **Installation** page, go to the **Install Link** section and select "Discord Provided Link" if it's not already selected.
+
+When **Discord Provided Link** is selected, a new **Default Install Settings** section will appear, which we'll configure next.
+
+![Install link section on Installation page in App Settings](assets/install-link.png)
+
+#### Scopes and Bot Permissions
+
+On the **Installation** page in the **Default Install Settings** section:
+
+- For **User Install**, add the `applications.commands` scope
+- For **Guild Install**, add the `applications.commands` scope and `bot` scope. When you select `bot`, a new **Permissions** menu will appear to select the bot user's permissions. Select `Send Messages`.
+
+![Default Install Settings on Installation page in App Settings](assets/default-install-settings.png)
+
+### Installing your app
+
+Once you add scopes, copy the URL from the **Install Link** section from before. You can paste this URL in your browser to install your app on a server or DM.
+
+Note your app will not work until you register your commands and deploy your app to Cloudflare Workers.
