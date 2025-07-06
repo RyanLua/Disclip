@@ -73,7 +73,7 @@ DISCORD_PUBLIC_KEY: "445c5654d426763870ecc6060f0a12f983817a33550ad5c0499fc322fdd
 DISCORD_TOKEN: "NjIxMTQ5TjQyNzQ0MTEyMTE1.GcUa2R.ks2XadvqhA7Q-kQorySUwm2leia8Zkx1mfIqbI"
 ```
 
-### Configuring your app
+### Configuring your Discord app
 
 You will need to configure your Discord app to allow it to be installed on servers and DMs along with setting up an install link for users to install your app.
 
@@ -100,8 +100,51 @@ On the **Installation** page in the **Default Install Settings** section:
 
 ![Default Install Settings on Installation page in App Settings](assets/default-install-settings.png)
 
-### Installing your app
+### Registering commands
 
-Once you add scopes, copy the URL from the **Install Link** section from before. You can paste this URL in your browser to install your app on a server or DM.
+In your terminal within the project folder, run the following command:
 
-Note your app will not work until you register your commands and deploy your app to Cloudflare Workers.
+```console
+npm run register
+```
+
+The commands will be available in your Discord app after a few minutes. You can test them by typing `/` or right clicking and opening the app context menu in any server or DM where your app is installed. They won't work until you deploy your app to Cloudflare Workers, which we'll do next.
+
+### Deploying to Cloudflare Workers
+
+To deploy your app to Cloudflare Workers:
+
+```console
+npm run deploy
+```
+
+If you're not logged in to Cloudflare Workers, you'll be prompted to log in. Follow the instructions to log in to your Cloudflare account. Here you can sign up for a free account if you don't have one.
+
+When you finish deploying, you should see a message similar to this:
+
+```console
+$ npm run deploy
+
+> disclip@0.0.1 deploy
+> wrangler deploy
+
+
+ ⛅️ wrangler 4.23.0
+───────────────────
+Total Upload: 216.34 KiB / gzip: 35.86 KiB
+Worker Startup Time: 8 ms
+Uploaded disclip (1.76 sec)
+Deployed disclip triggers (0.18 sec)
+  https://disclip.ryanluu.workers.dev
+Current Version ID: 25f7cc8e-97b6-4afe-9f7b-c518cea27c29
+```
+
+Copy your workers.dev URL from the output, which in this case is `https://disclip.ryanluu.workers.dev`. Your URL will be different.
+
+Go to your app's settings and on the **General Information** page under **Interaction Endpoint URL**, paste your workers.dev URL and append `/interactions`.
+
+If your URL is `https://disclip.ryanluu.workers.dev`, then your **Interaction Endpoint URL** will be `https://disclip.ryanluu.workers.dev/interactions`.
+
+![Interaction Endpoint URL on General Information page in App Settings](assets/interaction-endpoint-url.png)
+
+Click **Save Changes** and ensure your endpoint is successfully verified.
