@@ -68,6 +68,8 @@ router.post('/interactions', async (request, env) => {
 		});
 	}
 
+	console.log(interaction);
+
 	if (interaction.type === InteractionType.APPLICATION_COMMAND) {
 		// Most user commands will come as `APPLICATION_COMMAND`.
 		switch (interaction.data.name.toLowerCase()) {
@@ -81,10 +83,19 @@ router.post('/interactions', async (request, env) => {
 				});
 			}
 			case CLIP_COMMAND.name.toLowerCase(): {
+				const targetMessageId = interaction.data.target_id;
+				const targetMessage =
+					interaction.data.resolved.messages[targetMessageId];
+				const imageBaseUrl = 'https://cdn.discordapp.com/';
+
 				return new JsonResponse({
 					type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
 					data: {
-						content: `Hello, ${interaction.member?.user?.username || interaction.user?.username || 'Unknown User'}! 👋`,
+						content: `Author Username: ${targetMessage.author.username}
+Author Avatar: ${imageBaseUrl}/avatars/${targetMessage.author.id}/${targetMessage.author.avatar}.png
+Message Content: ${targetMessage.content}
+Server Tag Badge: ${imageBaseUrl}/guild-tag-badges/${targetMessage.author.clan?.identity_guild_id}/${targetMessage.author.clan?.badge}.png
+Server Tag: ${targetMessage.author.clan?.tag}`,
 					},
 				});
 			}
