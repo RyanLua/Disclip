@@ -37,10 +37,11 @@
 		"discord-api-types": "^0.38.13",
 		"discord-interactions": "^4.3.0",
 		"dotenv": "^17.0.0",
-		"itty-router": "^5.0.18",
-		"wrangler": "^4.22.0"
+		"itty-router": "^5.0.18"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.0.6"
+		"@biomejs/biome": "2.0.6",
+		"@cloudflare/puppeteer": "^1.0.3",
+		"wrangler": "^4.23.0"
 	}
 }
