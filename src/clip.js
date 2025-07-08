@@ -199,39 +199,33 @@ async function generateMessageScreenshot(message, env) {
 	return screenshot;
 }
 
-export async function generateMessageClip(
-	targetMessage,
-	env,
-	applicationId,
-	interactionToken,
-) {
-	// Generate screenshot of the message
-	const screenshot = await generateMessageScreenshot(targetMessage, env);
+export async function generateMessageClip(interaction, env) {
+	const targetId = interaction.data.target_id;
+	const targetMessage = interaction.data.resolved.messages[targetId];
+	const image = await generateMessageScreenshot(targetMessage, env);
 
-	// Create FormData for the followup message
-	const formData = new FormData();
-	formData.append(
-		'files[0]',
-		new Blob([screenshot], { type: 'image/png' }),
-		'attachment.png',
-	);
-
-	const payload = {
-		attachments: [
-			{
-				id: 0,
-				filename: 'attachment.png',
-			},
-		],
+	const attachments = [
+		{
+			id: 0,
+			filename: 'clip.png',
+		},
+	];
+	const msgJson = {
+		attachments,
 	};
 
-	formData.append('payload_json', JSON.stringify(payload));
+	const formData = new FormData();
+	formData.append('payload_json', JSON.stringify(msgJson));
+	formData.append('files[0]', new Blob([image]), 'clip.png');
 
-	await fetch(
-		`https://discord.com/api/v10/webhooks/${applicationId}/${interactionToken}`,
-		{
-			method: 'POST',
-			body: formData,
-		},
-	);
+	const discordUrl = `https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`;
+	const discordResponse = await fetch(discordUrl, {
+		method: 'POST',
+		body: formData,
+	});
+	if (!discordResponse.ok) {
+		console.error('Failed to send followup to discord', discordResponse.status);
+		const json = await discordResponse.json();
+		console.error({ response: json, msgJson: JSON.stringify(msgJson) });
+	}
 }

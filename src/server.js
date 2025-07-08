@@ -77,19 +77,7 @@ router.post('/interactions', async (request, env, ctx) => {
 				});
 			}
 			case CLIP_COMMAND.name.toLowerCase(): {
-				const targetMessageId = interaction.data.target_id;
-				const targetMessage =
-					interaction.data.resolved.messages[targetMessageId];
-
-				// Process the screenshot generation asynchronously
-				ctx.waitUntil(
-					generateMessageClip(
-						targetMessage,
-						env,
-						env.DISCORD_APPLICATION_ID,
-						interaction.token,
-					),
-				);
+				ctx.waitUntil(generateMessageClip(interaction, env));
 
 				return new JsonResponse({
 					type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
