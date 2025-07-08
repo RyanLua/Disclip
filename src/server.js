@@ -1,5 +1,3 @@
-//@ts-check
-
 /**
  * The core server that runs on a Cloudflare worker.
  */
@@ -11,6 +9,7 @@ import {
 	verifyKey,
 } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
+import { generateMessageScreenshot } from './clip.js';
 import { CLIP_COMMAND, PING_COMMAND } from './commands.js';
 
 /**
@@ -51,7 +50,7 @@ router.get('/', (_request, env) => {
  * include a JSON payload described here:
  * https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object
  */
-router.post('/interactions', async (request, env) => {
+router.post('/interactions', async (request, env, ctx) => {
 	const { isValid, interaction } = await server.verifyDiscordRequest(
 		request,
 		env,
@@ -86,17 +85,63 @@ router.post('/interactions', async (request, env) => {
 				const targetMessageId = interaction.data.target_id;
 				const targetMessage =
 					interaction.data.resolved.messages[targetMessageId];
-				const imageBaseUrl = 'https://cdn.discordapp.com/';
 
+				// Process the screenshot generation asynchronously
+				ctx.waitUntil(
+					(async () => {
+						// Generate screenshot of the message
+						const screenshot = await generateMessageScreenshot(
+							targetMessage,
+							env,
+						);
+
+						// Create FormData for the followup message
+						const formData = new FormData();
+						formData.append(
+							'files[0]',
+							new Blob([screenshot], { type: 'image/png' }),
+							'attachment.png',
+						);
+
+						const payload = {
+							attachments: [
+								{
+									id: 0,
+									filename: 'attachment.png',
+								},
+							],
+						};
+
+						formData.append('payload_json', JSON.stringify(payload));
+
+						// Send followup message with the image
+						const response = await fetch(
+							`https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`,
+							{
+								method: 'POST',
+								body: formData,
+							},
+						);
+
+						if (!response.ok) {
+							const errorText = await response.text();
+							console.error(
+								'❌ Discord API error:',
+								response.status,
+								errorText,
+							);
+							throw new Error(
+								`Discord API error: ${response.status} ${errorText}`,
+							);
+						}
+					})(),
+				);
+
+				console.log('⏳ Returning deferred response...');
+
+				// Return immediate acknowledgment
 				return new JsonResponse({
-					type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-					data: {
-						content: `Author Username: ${targetMessage.author.username}
-Author Avatar: ${imageBaseUrl}/avatars/${targetMessage.author.id}/${targetMessage.author.avatar}.png
-Message Content: ${targetMessage.content}
-Server Tag Badge: ${imageBaseUrl}/guild-tag-badges/${targetMessage.author.clan?.identity_guild_id}/${targetMessage.author.clan?.badge}.png
-Server Tag: ${targetMessage.author.clan?.tag}`,
-					},
+					type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
 				});
 			}
 			default:
