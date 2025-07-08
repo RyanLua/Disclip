@@ -32,9 +32,6 @@ class JsonResponse extends Response {
 
 const router = AutoRouter();
 
-/**
- * A simple :wave: hello page to verify the worker is working.
- */
 router.get('/', (_request, env) => {
 	return new Response(null, {
 		status: 301,
@@ -108,12 +105,6 @@ router.post('/interactions', async (request, env, ctx) => {
 });
 router.all('*', () => new Response('Not Found.', { status: 404 }));
 
-/**
- * Verifies that a request is a valid Discord interaction.
- * @param {Request} request
- * @param {Env} env
- * @returns {Promise<{ interaction?: Object, isValid: boolean }>}
- */
 async function verifyDiscordRequest(request, env) {
 	const signature = request.headers.get('x-signature-ed25519');
 	const timestamp = request.headers.get('x-signature-timestamp');

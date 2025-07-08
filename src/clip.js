@@ -4,11 +4,6 @@
 
 import puppeteer from '@cloudflare/puppeteer';
 
-/**
- * Generates HTML content for a Discord message
- * @param {Object} message - Discord message object
- * @returns {string} HTML content
- */
 function generateHtml(message) {
 	const author = message.author;
 	const username = author.username;
@@ -186,13 +181,8 @@ html {
 
 	return htmlTemplate;
 }
-/**
- * Generates a screenshot of given HTML content using Puppeteer.
- * @param {Object} html - HTML content to render
- * @param {Object} env - Cloudflare environment
- * @returns {Promise<Uint8Array>} Screenshot as PNG
- */
-export async function generateMessageScreenshot(message, env) {
+
+async function generateMessageScreenshot(message, env) {
 	const browser = await puppeteer.launch(env.BROWSER);
 	const page = await browser.newPage();
 
@@ -209,14 +199,6 @@ export async function generateMessageScreenshot(message, env) {
 	return screenshot;
 }
 
-/**
- * Generates a screenshot and posts it to Discord via webhook
- * @param {Object} targetMessage - Discord message object to screenshot
- * @param {Object} env - Cloudflare environment
- * @param {string} applicationId - Discord application ID
- * @param {string} interactionToken - Discord interaction token
- * @returns {Promise<void>}
- */
 export async function generateMessageClip(
 	targetMessage,
 	env,
