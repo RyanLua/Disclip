@@ -195,7 +195,7 @@ html {
 export async function generateMessageScreenshot(message, env) {
 	const html = generateHtml(message);
 
-	const browser = await puppeteer.launch(env.DISCLIPBROWSER);
+	const browser = await puppeteer.launch(env.BROWSER);
 	const page = await browser.newPage();
 
 	await page.setContent(html, { waitUntil: 'networkidle0' });
