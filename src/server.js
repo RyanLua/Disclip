@@ -67,8 +67,6 @@ router.post('/interactions', async (request, env, ctx) => {
 		});
 	}
 
-	console.log(interaction);
-
 	if (interaction.type === InteractionType.APPLICATION_COMMAND) {
 		// Most user commands will come as `APPLICATION_COMMAND`.
 		switch (interaction.data.name.toLowerCase()) {
@@ -114,32 +112,16 @@ router.post('/interactions', async (request, env, ctx) => {
 
 						formData.append('payload_json', JSON.stringify(payload));
 
-						// Send followup message with the image
-						const response = await fetch(
+						await fetch(
 							`https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`,
 							{
 								method: 'POST',
 								body: formData,
 							},
 						);
-
-						if (!response.ok) {
-							const errorText = await response.text();
-							console.error(
-								'❌ Discord API error:',
-								response.status,
-								errorText,
-							);
-							throw new Error(
-								`Discord API error: ${response.status} ${errorText}`,
-							);
-						}
 					})(),
 				);
 
-				console.log('⏳ Returning deferred response...');
-
-				// Return immediate acknowledgment
 				return new JsonResponse({
 					type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
 				});
