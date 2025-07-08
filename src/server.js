@@ -9,7 +9,7 @@ import {
 	verifyKey,
 } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
-import { clipMessage } from './clip.js';
+import { generateMessageClip } from './clip.js';
 import { CLIP_COMMAND, PING_COMMAND } from './commands.js';
 
 /**
@@ -86,7 +86,7 @@ router.post('/interactions', async (request, env, ctx) => {
 
 				// Process the screenshot generation asynchronously
 				ctx.waitUntil(
-					clipMessage(
+					generateMessageClip(
 						targetMessage,
 						env,
 						env.DISCORD_APPLICATION_ID,

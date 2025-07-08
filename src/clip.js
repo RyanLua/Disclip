@@ -217,7 +217,7 @@ export async function generateMessageScreenshot(message, env) {
  * @param {string} interactionToken - Discord interaction token
  * @returns {Promise<void>}
  */
-export async function clipMessage(
+export async function generateMessageClip(
 	targetMessage,
 	env,
 	applicationId,
