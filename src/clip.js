@@ -193,12 +193,12 @@ html {
  * @returns {Promise<Uint8Array>} Screenshot as PNG
  */
 export async function generateMessageScreenshot(message, env) {
-	const html = generateHtml(message);
-
 	const browser = await puppeteer.launch(env.BROWSER);
 	const page = await browser.newPage();
 
-	await page.setContent(html, { waitUntil: 'networkidle0' });
+	const html = generateHtml(message);
+
+	await page.setContent(html);
 
 	const screenshot = await page.screenshot({
 		optimizeForSpeed: true,
