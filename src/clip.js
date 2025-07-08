@@ -183,18 +183,25 @@ html {
 }
 
 async function generateMessageScreenshot(message, env) {
-	const browser = await puppeteer.launch(env.MYBROWSER);
-	const page = await browser.newPage();
+	let browser;
+	try {
+		browser = await puppeteer.launch(env.BROWSER);
+		const page = await browser.newPage();
 
-	const html = generateHtml(message);
+		const html = generateHtml(message);
 
-	await page.setContent(html);
+		await page.setContent(html);
 
-	const screenshot = await page.screenshot({
-		optimizeForSpeed: true,
-	});
+		const screenshot = await page.screenshot({
+			optimizeForSpeed: true,
+		});
 
-	return screenshot;
+		return screenshot;
+	} catch (screenshotError) {
+		console.error(`Screenshot generation failed:`, screenshotError);
+		console.error(`Screenshot error type: ${screenshotError.constructor.name}`);
+		throw screenshotError;
+	}
 }
 
 export async function generateMessageClip(interaction, env) {
