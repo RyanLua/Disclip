@@ -183,7 +183,7 @@ html {
 }
 
 async function generateMessageScreenshot(message, env) {
-	const browser = await puppeteer.launch(env.BROWSER);
+	const browser = await puppeteer.launch(env.MYBROWSER, { keep_alive: 600000 });
 	const page = await browser.newPage();
 
 	const html = generateHtml(message);
@@ -193,8 +193,6 @@ async function generateMessageScreenshot(message, env) {
 	const screenshot = await page.screenshot({
 		optimizeForSpeed: true,
 	});
-
-	await browser.close();
 
 	return screenshot;
 }
