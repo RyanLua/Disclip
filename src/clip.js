@@ -208,3 +208,48 @@ export async function generateMessageScreenshot(message, env) {
 
 	return screenshot;
 }
+
+/**
+ * Generates a screenshot and posts it to Discord via webhook
+ * @param {Object} targetMessage - Discord message object to screenshot
+ * @param {Object} env - Cloudflare environment
+ * @param {string} applicationId - Discord application ID
+ * @param {string} interactionToken - Discord interaction token
+ * @returns {Promise<void>}
+ */
+export async function clipMessage(
+	targetMessage,
+	env,
+	applicationId,
+	interactionToken,
+) {
+	// Generate screenshot of the message
+	const screenshot = await generateMessageScreenshot(targetMessage, env);
+
+	// Create FormData for the followup message
+	const formData = new FormData();
+	formData.append(
+		'files[0]',
+		new Blob([screenshot], { type: 'image/png' }),
+		'attachment.png',
+	);
+
+	const payload = {
+		attachments: [
+			{
+				id: 0,
+				filename: 'attachment.png',
+			},
+		],
+	};
+
+	formData.append('payload_json', JSON.stringify(payload));
+
+	await fetch(
+		`https://discord.com/api/v10/webhooks/${applicationId}/${interactionToken}`,
+		{
+			method: 'POST',
+			body: formData,
+		},
+	);
+}

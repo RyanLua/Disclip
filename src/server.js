@@ -9,7 +9,7 @@ import {
 	verifyKey,
 } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
-import { generateMessageScreenshot } from './clip.js';
+import { clipMessage } from './clip.js';
 import { CLIP_COMMAND, PING_COMMAND } from './commands.js';
 
 /**
@@ -86,40 +86,12 @@ router.post('/interactions', async (request, env, ctx) => {
 
 				// Process the screenshot generation asynchronously
 				ctx.waitUntil(
-					(async () => {
-						// Generate screenshot of the message
-						const screenshot = await generateMessageScreenshot(
-							targetMessage,
-							env,
-						);
-
-						// Create FormData for the followup message
-						const formData = new FormData();
-						formData.append(
-							'files[0]',
-							new Blob([screenshot], { type: 'image/png' }),
-							'attachment.png',
-						);
-
-						const payload = {
-							attachments: [
-								{
-									id: 0,
-									filename: 'attachment.png',
-								},
-							],
-						};
-
-						formData.append('payload_json', JSON.stringify(payload));
-
-						await fetch(
-							`https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`,
-							{
-								method: 'POST',
-								body: formData,
-							},
-						);
-					})(),
+					clipMessage(
+						targetMessage,
+						env,
+						env.DISCORD_APPLICATION_ID,
+						interaction.token,
+					),
 				);
 
 				return new JsonResponse({
