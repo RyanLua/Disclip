@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * The core server that runs on a Cloudflare worker.
  */
