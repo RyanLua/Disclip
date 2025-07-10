@@ -110,6 +110,10 @@ function generateHtml(message) {
 					width: 12px;
 					height: 12px;
 				}
+
+				& img[src=""] {
+					display: none;
+				}
 			}
 
 			.message {
