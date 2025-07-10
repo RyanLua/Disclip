@@ -33,10 +33,7 @@ function generateHtml(message) {
 				--tag-background-color: rgba(151, 151, 159, 0.2);
 				--card-background-color: light-dark(rgb(255, 255, 255), rgb(57, 58, 65));
 				--card-border: 1px solid light-dark(rgb(226, 226, 228), rgb(68, 69, 76));
-				--card-shadow: light-dark(
-					0 12px 36px 0 hsl(none 0% 0% / 0.12),
-					0 12px 24px 0 hsl(none 0% 0% / 0.24)
-				);
+				--card-shadow: 0 12px 36px 0 hsl(none 0% 0% / 0.12);
 
 				--color-blurple: rgb(88, 101, 242);
 				--color-light-blurple: rgb(224, 227, 255);
