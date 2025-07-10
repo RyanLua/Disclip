@@ -13,10 +13,10 @@
 			"preview_id": "988dd34eb1a1451887f9524deda522bb"
 		}
 	],
-	// "assets": {
-	// 	"directory": "./public",
-	// 	"binding": "ASSETS"
-	// },
+	"assets": {
+		"directory": "./public",
+		"binding": "ASSETS"
+	},
 	"observability": {
 		"enabled": true
 	}
