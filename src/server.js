@@ -1,13 +1,15 @@
+// @ts-check
+
 /**
  * The core server that runs on a Cloudflare worker.
  */
 
 import {
-	InteractionResponseFlags,
 	InteractionResponseType,
 	InteractionType,
-	verifyKey,
-} from 'discord-interactions';
+	MessageFlags,
+} from 'discord-api-types/v10';
+import { verifyKey } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
 import { generateMessageClip } from './clip.js';
 import { CLIP_COMMAND, PING_COMMAND } from './commands.js';
@@ -56,23 +58,23 @@ router.post('/interactions', async (request, env, ctx) => {
 		return new Response('Bad request signature.', { status: 401 });
 	}
 
-	if (interaction.type === InteractionType.PING) {
+	if (interaction.type === InteractionType.Ping) {
 		// The `PING` message is used during the initial webhook handshake, and is
 		// required to configure the webhook in the developer portal.
 		return new JsonResponse({
-			type: InteractionResponseType.PONG,
+			type: InteractionResponseType.Pong,
 		});
 	}
 
-	if (interaction.type === InteractionType.APPLICATION_COMMAND) {
+	if (interaction.type === InteractionType.ApplicationCommand) {
 		// Most user commands will come as `APPLICATION_COMMAND`.
 		switch (interaction.data.name.toLowerCase()) {
 			case PING_COMMAND.name.toLowerCase(): {
 				return new JsonResponse({
-					type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+					type: InteractionResponseType.ChannelMessageWithSource,
 					data: {
 						content: 'Pong! 🏓',
-						flags: InteractionResponseFlags.EPHEMERAL,
+						flags: MessageFlags.Ephemeral,
 					},
 				});
 			}
@@ -80,7 +82,7 @@ router.post('/interactions', async (request, env, ctx) => {
 				ctx.waitUntil(generateMessageClip(interaction, env));
 
 				return new JsonResponse({
-					type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
+					type: InteractionResponseType.DeferredChannelMessageWithSource,
 				});
 			}
 			default:
@@ -93,6 +95,12 @@ router.post('/interactions', async (request, env, ctx) => {
 });
 router.all('*', () => new Response('Not Found.', { status: 404 }));
 
+/**
+ * Verify the incoming request from Discord.
+ * @param {Request} request
+ * @param {Env} env
+ * @returns {Promise<{interaction?: import('discord-api-types/v10').APIInteraction, isValid: boolean}>}
+ */
 async function verifyDiscordRequest(request, env) {
 	const signature = request.headers.get('x-signature-ed25519');
 	const timestamp = request.headers.get('x-signature-timestamp');

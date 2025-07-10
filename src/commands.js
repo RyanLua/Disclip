@@ -1,4 +1,4 @@
-//@ts-check
+// @ts-check
 
 /**
  * Share command metadata from a common spot to be used for both runtime and registration.
