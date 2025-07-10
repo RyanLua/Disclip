@@ -1,12 +1,12 @@
-import process from 'node:process';
-import dotenv from 'dotenv';
-import { CLIP_COMMAND, PING_COMMAND } from './commands.js';
-
 /**
  * This file is meant to be run from the command line, and is not used by the
  * application server.  It's allowed to use node.js primitives, and only needs
  * to be run once.
  */
+
+import process from 'node:process';
+import dotenv from 'dotenv';
+import { CLIP_COMMAND, PING_COMMAND } from './commands.js';
 
 dotenv.config({ path: '.dev.vars' });
 

@@ -3,13 +3,20 @@
  */
 
 import {
-	InteractionResponseFlags,
 	InteractionResponseType,
 	InteractionType,
-	verifyKey,
-} from 'discord-interactions';
+	MessageFlags,
+} from 'discord-api-types/v10';
+import { verifyKey } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
-import { PING_COMMAND } from './commands.js';
+import { generateMessageClip } from './clip.js';
+import { CLIP_COMMAND, PING_COMMAND } from './commands.js';
+
+/**
+ * @typedef {Object} Env
+ * @property {string} DISCORD_PUBLIC_KEY
+ * @property {string} DISCORD_APPLICATION_ID
+ */
 
 class JsonResponse extends Response {
 	constructor(body, init) {
@@ -25,11 +32,14 @@ class JsonResponse extends Response {
 
 const router = AutoRouter();
 
-/**
- * A simple :wave: hello page to verify the worker is working.
- */
 router.get('/', (_request, env) => {
-	return new Response(`👋 ${env.DISCORD_APPLICATION_ID}`);
+	return new Response(null, {
+		status: 301,
+		headers: {
+			Location: `https://discord.com/oauth2/authorize?client_id=${env.DISCORD_APPLICATION_ID}`,
+			'Cache-Control': 'max-age=3600', // Cache for 1 hour
+		},
+	});
 });
 
 /**
@@ -37,7 +47,7 @@ router.get('/', (_request, env) => {
  * include a JSON payload described here:
  * https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object
  */
-router.post('/', async (request, env) => {
+router.post('/interactions', async (request, env, ctx) => {
 	const { isValid, interaction } = await server.verifyDiscordRequest(
 		request,
 		env,
@@ -46,24 +56,31 @@ router.post('/', async (request, env) => {
 		return new Response('Bad request signature.', { status: 401 });
 	}
 
-	if (interaction.type === InteractionType.PING) {
+	if (interaction.type === InteractionType.Ping) {
 		// The `PING` message is used during the initial webhook handshake, and is
 		// required to configure the webhook in the developer portal.
 		return new JsonResponse({
-			type: InteractionResponseType.PONG,
+			type: InteractionResponseType.Pong,
 		});
 	}
 
-	if (interaction.type === InteractionType.APPLICATION_COMMAND) {
+	if (interaction.type === InteractionType.ApplicationCommand) {
 		// Most user commands will come as `APPLICATION_COMMAND`.
 		switch (interaction.data.name.toLowerCase()) {
 			case PING_COMMAND.name.toLowerCase(): {
 				return new JsonResponse({
-					type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+					type: InteractionResponseType.ChannelMessageWithSource,
 					data: {
 						content: 'Pong! 🏓',
-						flags: InteractionResponseFlags.EPHEMERAL,
+						flags: MessageFlags.Ephemeral,
 					},
+				});
+			}
+			case CLIP_COMMAND.name.toLowerCase(): {
+				ctx.waitUntil(generateMessageClip(interaction, env));
+
+				return new JsonResponse({
+					type: InteractionResponseType.DeferredChannelMessageWithSource,
 				});
 			}
 			default:
@@ -76,6 +93,12 @@ router.post('/', async (request, env) => {
 });
 router.all('*', () => new Response('Not Found.', { status: 404 }));
 
+/**
+ * Verify the incoming request from Discord.
+ * @param {Request} request
+ * @param {Env} env
+ * @returns {Promise<{interaction?: import('discord-api-types/v10').APIInteraction, isValid: boolean}>}
+ */
 async function verifyDiscordRequest(request, env) {
 	const signature = request.headers.get('x-signature-ed25519');
 	const timestamp = request.headers.get('x-signature-timestamp');

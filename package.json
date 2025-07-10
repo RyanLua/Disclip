@@ -30,17 +30,18 @@
 		"fix": "biome check --write .",
 		"lint": "biome check .",
 		"register": "node src/register.js",
-		"start": "wrangler dev",
+		"start": "wrangler dev --remote",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"dependencies": {
+		"@cloudflare/puppeteer": "^1.0.3",
 		"discord-api-types": "^0.38.13",
 		"discord-interactions": "^4.3.0",
 		"dotenv": "^17.0.0",
-		"itty-router": "^5.0.18",
-		"wrangler": "^4.22.0"
+		"itty-router": "^5.0.18"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.1.1"
+		"@biomejs/biome": "2.1.1",
+		"wrangler": "^4.23.0"
 	}
 }

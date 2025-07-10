@@ -1,6 +1,5 @@
 /**
- * Share command metadata from a common spot to be used for both runtime
- * and registration.
+ * Share command metadata from a common spot to be used for both runtime and registration.
  */
 
 import {
@@ -9,10 +8,12 @@ import {
 	InteractionContextType,
 } from 'discord-api-types/v10';
 
-// Ping command
+/**
+ * Ping command to check if the bot is online.
+ * @type {import('discord-api-types/v10').RESTPostAPIApplicationCommandsJSONBody}
+ */
 export const PING_COMMAND = {
 	name: 'ping',
-	type: ApplicationCommandType.ChatInput,
 	description: 'Replies with pong',
 	integration_types: [
 		ApplicationIntegrationType.GuildInstall,
@@ -23,12 +24,15 @@ export const PING_COMMAND = {
 		InteractionContextType.PrivateChannel,
 		InteractionContextType.Guild,
 	],
+	type: ApplicationCommandType.ChatInput,
 };
 
-// Clip command, for guild install only
+/**
+ * Clip command to create a clip from a message.
+ * @type {import('discord-api-types/v10').RESTPostAPIApplicationCommandsJSONBody}
+ */
 export const CLIP_COMMAND = {
-	name: 'clip',
-	type: ApplicationCommandType.Message,
+	name: 'Clip Message',
 	integration_types: [
 		ApplicationIntegrationType.GuildInstall,
 		ApplicationIntegrationType.UserInstall,
@@ -37,4 +41,5 @@ export const CLIP_COMMAND = {
 		InteractionContextType.PrivateChannel,
 		InteractionContextType.Guild,
 	],
+	type: ApplicationCommandType.Message,
 };
