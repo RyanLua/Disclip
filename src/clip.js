@@ -13,8 +13,10 @@ function generateHtml(message) {
 	const author = message.author;
 	const username = author.username;
 	const avatarUrl = `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.png`;
-	const serverTag = author.clan.tag;
-	const serverTagBadge = `https://cdn.discordapp.com/guild-tag-badges/${author.clan?.identity_guild_id}/${author.clan?.badge}.png`;
+	const serverTag = author.clan?.tag || '';
+	const serverTagBadge = author.clan
+		? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.png`
+		: '';
 	const messageContent = message.content;
 
 	// TODO: Use file later, don't hard code
