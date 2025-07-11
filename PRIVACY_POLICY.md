@@ -88,11 +88,11 @@ We may update this Privacy Policy from time to time. We will notify users of sig
 
 ## 12. Contact Information
 
-If you have questions about this Privacy Policy, please contact us through our [GitHub repository](https://github.com/RyanLua/Disclip/issues).
+If you have questions about this Privacy Policy, please contact us through our [GitHub repository](https://github.com/RyanLua/Disclip/issues) or [disclip@ryanluu.dev](mailto:disclip@ryanluu.dev).
 
 ## 13. Third-Party Services
 
 The Service integrates with:
 
 - **Discord:** Subject to [Discord's Privacy Policy](https://discord.com/privacy)
-- **Cloudflare Workers:** Subject to [Cloudflare's Privacy Policy](https://www.cloudflare.com/privacy/)
+- **Cloudflare Workers:** Subject to [Cloudflare's Privacy Policy](https://www.cloudflare.com/privacypolicy/)
