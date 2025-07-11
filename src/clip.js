@@ -162,14 +162,19 @@ async function generateMessageScreenshot(message, env) {
 	if (sessionId) {
 		try {
 			browser = await puppeteer.connect(env.BROWSER, sessionId);
-		} catch (e) {
+		} catch (sessionError) {
 			// another worker may have connected first
-			console.log(`Failed to connect to ${sessionId}. Error ${e}`);
+			console.log(`Failed to connect to ${sessionId}. Error ${sessionError}`);
 		}
 	}
 	if (!browser) {
-		// No open sessions, launch new session
-		browser = await puppeteer.launch(env.BROWSER);
+		try {
+			// No open sessions, launch new session
+			browser = await puppeteer.launch(env.BROWSER);
+		} catch (browserError) {
+			console.error('Browser launch failed:', browserError);
+			throw browserError;
+		}
 	}
 
 	sessionId = browser.sessionId(); // get current session id
