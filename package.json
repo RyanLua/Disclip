@@ -27,6 +27,8 @@
 	"main": "src/server.js",
 	"scripts": {
 		"deploy": "wrangler deploy",
+		"deploy:staging": "wrangler deploy --env staging",
+		"deploy:production": "wrangler deploy --env production",
 		"fix": "biome check --write .",
 		"lint": "biome check .",
 		"register": "node src/register.js",
