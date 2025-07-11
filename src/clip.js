@@ -186,20 +186,44 @@ export async function generateMessageClip(interaction, env) {
 	const targetId = interaction.data.target_id;
 	const targetMessage = interaction.data.resolved.messages[targetId];
 	const image = await generateMessageScreenshot(targetMessage, env);
+	const messageUrl = `https://discord.com/channels/${interaction.guild_id}/${targetMessage.channel_id}/${targetMessage.id}`;
 
 	const attachments = [
 		{
 			id: 0,
-			filename: 'clip.png',
+			filename: 'attachment.png',
 		},
 	];
+
 	const msgJson = {
+		flags: 32768,
+		components: [
+			{
+				type: 17,
+				components: [
+					{
+						type: 10,
+						content: `## Successfully Clipped Message\n\nSaved message from ${messageUrl}`,
+					},
+					{
+						type: 12,
+						items: [
+							{
+								media: {
+									url: 'attachment://attachment.png',
+								},
+							},
+						],
+					},
+				],
+			},
+		],
 		attachments,
 	};
 
 	const formData = new FormData();
 	formData.append('payload_json', JSON.stringify(msgJson));
-	formData.append('files[0]', new Blob([image]), 'clip.png');
+	formData.append('files[0]', new Blob([image]), 'attachment.png');
 
 	const discordUrl = `https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`;
 	const discordResponse = await fetch(discordUrl, {
