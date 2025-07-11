@@ -9,7 +9,7 @@
 
 Save precious messages and funny moments with Disclip. Turn any Discord message into a high-quality image to share across friends and social media.
 
-Disclip is a [Discord app](https://support-apps.discord.com/hc/en-us/articles/26577510840087) which allows you to save any Discord message as a image including servers, and DMs. Written with [discord.js](https://discord.js.org/) for [Summer of Making](https://summer.hackclub.com/).
+Disclip is a [Discord app](https://support-apps.discord.com/hc/en-us/articles/26577510840087) which allows you to save any Discord message as a image including servers, and DMs. Written for [Summer of Making](https://summer.hackclub.com/) and [Converge](https://converge.hackclub.com/) from Hack Club.
 
 ![Example of clipped message using Disclip](assets/message.png)
 
