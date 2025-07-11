@@ -169,6 +169,8 @@ async function generateMessageScreenshot(message, env) {
 			optimizeForSpeed: true,
 		});
 
+		await browser.close();
+
 		return screenshot;
 	} catch (screenshotError) {
 		console.error(`Screenshot generation failed:`, screenshotError);
