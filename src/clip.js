@@ -4,12 +4,19 @@
 
 import puppeteer from '@cloudflare/puppeteer';
 
+/**
+ * Generates HTML content for a Discord message.
+ * @param {import('discord-api-types/v10').APIMessage} message - The Discord message object.
+ * @returns {string} - The generated HTML content.
+ */
 function generateHtml(message) {
 	const author = message.author;
 	const username = author.username;
 	const avatarUrl = `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.png`;
-	const serverTag = author.clan.tag;
-	const serverTagBadge = `https://cdn.discordapp.com/guild-tag-badges/${author.clan?.identity_guild_id}/${author.clan?.badge}.png`;
+	const serverTag = author.clan?.tag || '';
+	const serverTagBadge = author.clan
+		? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.png`
+		: '';
 	const messageContent = message.content;
 
 	// TODO: Use file later, don't hard code
@@ -142,6 +149,12 @@ function generateHtml(message) {
 	return htmlTemplate;
 }
 
+/**
+ * Generate a message screenshot from a Discord message.
+ * @param {import('discord-api-types/v10').APIMessage} message - The Discord message object.
+ * @param {*} env - The environment variables.
+ * @returns {Promise<Buffer>} - The screenshot image buffer.
+ */
 async function generateMessageScreenshot(message, env) {
 	let browser;
 	try {
@@ -164,6 +177,11 @@ async function generateMessageScreenshot(message, env) {
 	}
 }
 
+/**
+ * Generate a message clip from a Discord interaction.
+ * @param {import('discord-api-types/v10').APIInteraction} interaction - The Discord interaction object.
+ * @param {*} env - The environment variables.
+ */
 export async function generateMessageClip(interaction, env) {
 	const targetId = interaction.data.target_id;
 	const targetMessage = interaction.data.resolved.messages[targetId];
