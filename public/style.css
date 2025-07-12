@@ -78,22 +78,22 @@ html {
 
 h1 {
 	font-size: 1.5rem;
-	color: var(--color-white);
+	color: var(--text-primary);
 }
 
 h2 {
 	font-size: 1.25rem;
-	color: var(--color-white);
+	color: var(--text-primary);
 }
 
 h3 {
 	font-size: 1rem;
-	color: var(--color-white);
+	color: var(--text-primary);
 }
 
 small {
 	font-size: 0.875rem;
-	color: oklab(0.751834 0.00131807 -0.008479);
+	color: light-dark(rgb(109, 110, 119), rgb(173, 174, 180));
 }
 
 code {
