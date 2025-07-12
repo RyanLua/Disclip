@@ -36,6 +36,7 @@
 	--text-primary: light-dark(rgb(50, 51, 56), rgb(255, 255, 255));
 	--text-default: light-dark(rgb(47, 48, 53), rgb(223, 224, 226));
 	--text-muted: light-dark(rgb(112, 113, 122), rgb(155, 156, 163));
+	--text-link: light-dark(rgb(0, 116, 227), rgb(123, 176, 245));
 
 	--color-blurple: rgb(88, 101, 242);
 	--color-light-blurple: rgb(224, 227, 255);
@@ -87,6 +88,11 @@ html {
 		var(--color-blurple) 20.65%,
 		var(--color-dark-blurple) 85.16%
 	);
+}
+
+a {
+	color: var(--text-link);
+	text-decoration: none;
 }
 
 h1 {
