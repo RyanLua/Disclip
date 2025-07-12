@@ -186,7 +186,7 @@ export async function generateMessageClip(interaction, env) {
 	const targetId = interaction.data.target_id;
 	const targetMessage = interaction.data.resolved.messages[targetId];
 	const image = await generateMessageScreenshot(targetMessage, env);
-	const messageUrl = `https://discord.com/channels/${interaction.guild_id}/${targetMessage.channel_id}/${targetMessage.id}`;
+	const messageUrl = `https://discord.com/channels/${interaction.guild_id || '@me'}/${targetMessage.channel_id}/${targetMessage.id}`;
 
 	const attachments = [
 		{
