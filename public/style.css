@@ -118,7 +118,19 @@ small {
 code {
 	padding: 0 0.2em;
 	font-family: var(--font-code);
-	font-size: 85%;
+	font-size: 0.875rem;
+	line-height: 1.125rem;
+	background: var(--background-code);
+	border: var(--border-normal);
+	border-radius: var(--radius-xs);
+}
+
+pre {
+	padding: 0.5em;
+	overflow-x: auto;
+	font-size: 0.875rem;
+	line-height: 1.5;
+	white-space: pre-wrap;
 	background: var(--background-code);
 	border: var(--border-normal);
 	border-radius: var(--radius-xs);
