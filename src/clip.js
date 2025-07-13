@@ -164,7 +164,7 @@ async function generateMessageScreenshot(message, env) {
 			browser = await puppeteer.connect(env.BROWSER, sessionId);
 		} catch (sessionError) {
 			// another worker may have connected first
-			console.log(`Failed to connect to ${sessionId}. Error ${sessionError}`);
+			console.error(`Failed to connect to ${sessionId}. Error ${sessionError}`);
 		}
 	}
 	if (!browser) {
