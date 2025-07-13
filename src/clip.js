@@ -4,12 +4,19 @@
 
 import puppeteer from '@cloudflare/puppeteer';
 
+/**
+ * Generates HTML content for a Discord message.
+ * @param {import('discord-api-types/v10').APIMessage} message - The Discord message object.
+ * @returns {string} - The generated HTML content.
+ */
 function generateHtml(message) {
 	const author = message.author;
 	const username = author.username;
 	const avatarUrl = `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.png`;
-	const serverTag = author.clan.tag;
-	const serverTagBadge = `https://cdn.discordapp.com/guild-tag-badges/${author.clan?.identity_guild_id}/${author.clan?.badge}.png`;
+	const serverTag = author.clan?.tag || '';
+	const serverTagBadge = author.clan
+		? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.png`
+		: '';
 	const messageContent = message.content;
 
 	// TODO: Use file later, don't hard code
@@ -142,28 +149,79 @@ function generateHtml(message) {
 	return htmlTemplate;
 }
 
+/**
+ * Generate a message screenshot from a Discord message.
+ * @param {import('discord-api-types/v10').APIMessage} message - The Discord message object.
+ * @param {*} env - The environment variables.
+ * @returns {Promise<Buffer>} - The screenshot image buffer.
+ */
 async function generateMessageScreenshot(message, env) {
+	// Pick random session from open sessions
+	let sessionId = await getRandomSession(env.BROWSER);
 	let browser;
-	try {
-		browser = await puppeteer.launch(env.BROWSER);
-		const page = await browser.newPage();
-
-		const html = generateHtml(message);
-
-		await page.setContent(html);
-
-		const screenshot = await page.screenshot({
-			optimizeForSpeed: true,
-		});
-
-		return screenshot;
-	} catch (screenshotError) {
-		console.error(`Screenshot generation failed:`, screenshotError);
-		console.error(`Screenshot error type: ${screenshotError.constructor.name}`);
-		throw screenshotError;
+	if (sessionId) {
+		try {
+			browser = await puppeteer.connect(env.BROWSER, sessionId);
+		} catch (sessionError) {
+			// another worker may have connected first
+			console.warn(`Failed to connect to ${sessionId}. Error ${sessionError}`);
+		}
 	}
+	if (!browser) {
+		try {
+			// No open sessions, launch new session
+			browser = await puppeteer.launch(env.BROWSER);
+		} catch (browserError) {
+			console.error('Browser launch failed:', browserError);
+			throw browserError;
+		}
+	}
+
+	sessionId = browser.sessionId(); // get current session id
+
+	// Generate the screenshot
+	const page = await browser.newPage();
+	const html = generateHtml(message);
+	await page.setContent(html);
+	const screenshot = await page.screenshot({
+		optimizeForSpeed: true,
+	});
+
+	// All work done, so free connection (IMPORTANT!)
+	browser.disconnect();
+
+	return screenshot;
 }
 
+/**
+ * Get a random session ID from the available sessions.
+ * @param {import("@cloudflare/puppeteer").BrowserWorker} endpoint
+ * @return {Promise<string|undefined>} - The session ID or undefined if no sessions are available.
+ * @see {@link https://developers.cloudflare.com/browser-rendering/workers-bindings/reuse-sessions/}
+ */
+async function getRandomSession(endpoint) {
+	const sessions = await puppeteer.sessions(endpoint);
+	const sessionsIds = sessions
+		.filter((v) => {
+			return !v.connectionId; // remove sessions with workers connected to them
+		})
+		.map((v) => {
+			return v.sessionId;
+		});
+	if (sessionsIds.length === 0) {
+		return;
+	}
+
+	const sessionId = sessionsIds[Math.floor(Math.random() * sessionsIds.length)];
+
+	return sessionId;
+}
+
+/**
+ * Generate a message clip from a Discord interaction.
+ * @param {import('discord-api-types/v10').APIInteraction} interaction - The Discord interaction object.
+ * @param {*} env - The environment variables.
+ */
 export async function generateMessageClip(interaction, env) {
 	const targetId = interaction.data.target_id;
 	const targetMessage = interaction.data.resolved.messages[targetId];
