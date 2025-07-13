@@ -3,6 +3,7 @@
  */
 
 import puppeteer from '@cloudflare/puppeteer';
+import { MessageFlags } from 'discord-api-types/v10';
 
 /**
  * Generates HTML content for a Discord message.
@@ -223,32 +224,49 @@ async function getRandomSession(endpoint) {
  * @param {*} env - The environment variables.
  */
 export async function generateMessageClip(interaction, env) {
-	const targetId = interaction.data.target_id;
-	const targetMessage = interaction.data.resolved.messages[targetId];
-	const image = await generateMessageScreenshot(targetMessage, env);
+	let formData;
+	let msgJson;
+	try {
+		const targetId = interaction.data.target_id;
+		const targetMessage = interaction.data.resolved.messages[targetId];
+		const image = await generateMessageScreenshot(targetMessage, env);
 
-	const attachments = [
-		{
-			id: 0,
-			filename: 'clip.png',
-		},
-	];
-	const msgJson = {
-		attachments,
-	};
+		const attachments = [
+			{
+				id: 0,
+				filename: 'clip.png',
+			},
+		];
+		const msgJson = {
+			attachments,
+		};
 
-	const formData = new FormData();
-	formData.append('payload_json', JSON.stringify(msgJson));
-	formData.append('files[0]', new Blob([image]), 'clip.png');
+		formData = new FormData();
+		formData.append('payload_json', JSON.stringify(msgJson));
+		formData.append('files[0]', new Blob([image]), 'clip.png');
+	} catch (error) {
+		console.error('Error generating message clip:', error);
 
-	const discordUrl = `https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`;
-	const discordResponse = await fetch(discordUrl, {
-		method: 'POST',
-		body: formData,
-	});
-	if (!discordResponse.ok) {
-		console.error('Failed to send followup to discord', discordResponse.status);
-		const json = await discordResponse.json();
-		console.error({ response: json, msgJson: JSON.stringify(msgJson) });
+		msgJson = {
+			content: `Failed to clip message:\`\`\`${error.stack}\`\`\``,
+			flags: MessageFlags.Ephemeral,
+		};
+
+		formData = new FormData();
+		formData.append('payload_json', JSON.stringify(msgJson));
+	} finally {
+		const discordUrl = `https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`;
+		const discordResponse = await fetch(discordUrl, {
+			method: 'POST',
+			body: formData,
+		});
+		if (!discordResponse.ok) {
+			console.error(
+				'Failed to send followup to discord',
+				discordResponse.status,
+			);
+			const json = await discordResponse.json();
+			console.error({ response: json, msgJson: JSON.stringify(msgJson) });
+		}
 	}
 }
