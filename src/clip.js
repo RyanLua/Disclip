@@ -237,7 +237,7 @@ export async function generateMessageClip(interaction, env) {
 				filename: 'clip.png',
 			},
 		];
-		const msgJson = {
+		msgJson = {
 			attachments,
 		};
 
