@@ -12,7 +12,7 @@ Disclip is a [Discord app](https://support-apps.discord.com/hc/en-us/articles/26
 
 ## Development Setup
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/RyanLua/Disclip)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2FRyanLua%2FDisclip)
 
 > [!TIP]
 > This guide is for developers who want to set up their own Disclip clone for development purposes. You can install official Disclip app using the [install link](https://discord.com/oauth2/authorize?client_id=621149242744111114).
