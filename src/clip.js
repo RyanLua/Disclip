@@ -201,7 +201,6 @@ async function generateMessageScreenshot(message, env) {
  */
 async function getRandomSession(endpoint) {
 	const sessions = await puppeteer.sessions(endpoint);
-	console.log(`Sessions: ${JSON.stringify(sessions)}`);
 	const sessionsIds = sessions
 		.filter((v) => {
 			return !v.connectionId; // remove sessions with workers connected to them
