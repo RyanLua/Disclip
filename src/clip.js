@@ -183,6 +183,16 @@ async function generateMessageScreenshot(message, env) {
 	const page = await browser.newPage();
 	const html = generateHtml(message);
 	await page.setContent(html);
+
+	const cardElement = await page.$('.card');
+	const cardBoundingBox = await cardElement.boundingBox();
+
+	await page.setViewport({
+		width: cardBoundingBox.width + 200,
+		height: cardBoundingBox.height + 200,
+		deviceScaleFactor: 2,
+	});
+
 	const screenshot = await page.screenshot({
 		optimizeForSpeed: true,
 	});
