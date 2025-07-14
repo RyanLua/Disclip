@@ -82,7 +82,7 @@ function generateHtml(message) {
 				background-color: var(--card-background-color);
 				border: var(--card-border);
 				border-radius: var(--radius-sm);
-				box-shadow: var(--card-shadow);
+				/* box-shadow: var(--card-shadow); */
 			}
 
 			.avatar {
