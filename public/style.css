@@ -145,7 +145,7 @@ pre {
 	background-color: var(--card-primary-bg);
 	border: var(--border-normal);
 	border-radius: var(--radius-sm);
-	box-shadow: var(--shadow-high);
+	/* box-shadow: var(--card-shadow); */
 }
 
 .avatar {

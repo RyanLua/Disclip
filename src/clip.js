@@ -82,7 +82,7 @@ function generateHtml(message) {
 				background-color: var(--card-background-color);
 				border: var(--card-border);
 				border-radius: var(--radius-sm);
-				box-shadow: var(--card-shadow);
+				/* box-shadow: var(--card-shadow); */
 			}
 
 			.avatar {
@@ -164,7 +164,7 @@ async function generateMessageScreenshot(message, env) {
 			browser = await puppeteer.connect(env.BROWSER, sessionId);
 		} catch (sessionError) {
 			// another worker may have connected first
-			console.log(`Failed to connect to ${sessionId}. Error ${sessionError}`);
+			console.warn(`Failed to connect to ${sessionId}. Error ${sessionError}`);
 		}
 	}
 	if (!browser) {
@@ -211,7 +211,6 @@ async function generateMessageScreenshot(message, env) {
  */
 async function getRandomSession(endpoint) {
 	const sessions = await puppeteer.sessions(endpoint);
-	console.log(`Sessions: ${JSON.stringify(sessions)}`);
 	const sessionsIds = sessions
 		.filter((v) => {
 			return !v.connectionId; // remove sessions with workers connected to them
@@ -237,20 +236,44 @@ export async function generateMessageClip(interaction, env) {
 	const targetId = interaction.data.target_id;
 	const targetMessage = interaction.data.resolved.messages[targetId];
 	const image = await generateMessageScreenshot(targetMessage, env);
+	const messageUrl = `https://discord.com/channels/${interaction.guild_id || '@me'}/${targetMessage.channel_id}/${targetMessage.id}`;
 
 	const attachments = [
 		{
 			id: 0,
-			filename: 'clip.png',
+			filename: 'attachment.png',
 		},
 	];
+
 	const msgJson = {
+		flags: 32768,
+		components: [
+			{
+				type: 17,
+				components: [
+					{
+						type: 10,
+						content: `## Successfully Clipped Message\n\nSaved message from ${messageUrl}`,
+					},
+					{
+						type: 12,
+						items: [
+							{
+								media: {
+									url: 'attachment://attachment.png',
+								},
+							},
+						],
+					},
+				],
+			},
+		],
 		attachments,
 	};
 
 	const formData = new FormData();
 	formData.append('payload_json', JSON.stringify(msgJson));
-	formData.append('files[0]', new Blob([image]), 'clip.png');
+	formData.append('files[0]', new Blob([image]), 'attachment.png');
 
 	const discordUrl = `https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`;
 	const discordResponse = await fetch(discordUrl, {
