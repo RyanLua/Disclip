@@ -12,12 +12,6 @@ import { AutoRouter } from 'itty-router';
 import { generateMessageClip } from './clip.js';
 import { CLIP_COMMAND, PING_COMMAND } from './commands.js';
 
-/**
- * @typedef {Object} Env
- * @property {string} DISCORD_PUBLIC_KEY
- * @property {string} DISCORD_APPLICATION_ID
- */
-
 class JsonResponse extends Response {
 	constructor(body, init) {
 		const jsonBody = JSON.stringify(body);
@@ -86,7 +80,7 @@ router.all('*', () => new Response('Not Found.', { status: 404 }));
 /**
  * Verify the incoming request from Discord.
  * @param {Request} request
- * @param {Env} env
+ * @param {*} env
  * @returns {Promise<{interaction?: import('discord-api-types/v10').APIInteraction, isValid: boolean}>}
  */
 async function verifyDiscordRequest(request, env) {
