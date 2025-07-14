@@ -83,7 +83,7 @@ function generateHtml(message) {
 				background-color: var(--card-background-color);
 				border: var(--card-border);
 				border-radius: var(--radius-sm);
-				box-shadow: var(--card-shadow);
+				/* box-shadow: var(--card-shadow); */
 			}
 
 			.avatar {
@@ -184,6 +184,16 @@ async function generateMessageScreenshot(message, env) {
 	const page = await browser.newPage();
 	const html = generateHtml(message);
 	await page.setContent(html);
+
+	const cardElement = await page.$('.card');
+	const cardBoundingBox = await cardElement.boundingBox();
+
+	await page.setViewport({
+		width: cardBoundingBox.width + 200,
+		height: cardBoundingBox.height + 200,
+		deviceScaleFactor: 2,
+	});
+
 	const screenshot = await page.screenshot({
 		optimizeForSpeed: true,
 	});
@@ -230,6 +240,7 @@ export async function generateMessageClip(interaction, env) {
 		const targetId = interaction.data.target_id;
 		const targetMessage = interaction.data.resolved.messages[targetId];
 		const image = await generateMessageScreenshot(targetMessage, env);
+		const messageUrl = `https://discord.com/channels/${interaction.guild_id || '@me'}/${targetMessage.channel_id}/${targetMessage.id}`;
 
 		const attachments = [
 			{
@@ -238,6 +249,28 @@ export async function generateMessageClip(interaction, env) {
 			},
 		];
 		msgJson = {
+			flags: 32768,
+			components: [
+				{
+					type: 17,
+					components: [
+						{
+							type: 10,
+							content: `## Successfully Clipped Message\n\nSaved message from ${messageUrl}`,
+						},
+						{
+							type: 12,
+							items: [
+								{
+									media: {
+										url: 'attachment://clip.png',
+									},
+								},
+							],
+						},
+					],
+				},
+			],
 			attachments,
 		};
 

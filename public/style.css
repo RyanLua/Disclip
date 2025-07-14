@@ -1,20 +1,42 @@
 @font-face {
 	font-family: "gg sans";
-	src: url("fonts/ggsansvf-VF.woff2") format("woff2-variations");
-	font-weight: 125 950;
 	font-stretch: 75% 125%;
-
 	font-style: normal;
+	font-weight: 125 950;
+	src: url("fonts/ggsansvf-VF.woff2") format("woff2-variations");
+}
+
+@font-face {
+	font-family: "gg mono";
+	font-style: normal;
+	font-weight: 400;
+	src: url("fonts/ggsansmono-Normal.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "gg mono";
+	font-style: normal;
+	font-weight: 700;
+	src: url("fonts/ggsansmono-Bold.woff2") format("woff2");
 }
 
 :root {
-	--username-color: light-dark(rgb(50, 51, 56), rgb(255, 255, 255));
-	--message-color: light-dark(rgb(47, 48, 53), rgb(223, 224, 226));
-	--timestamp-color: light-dark(rgb(112, 113, 122), rgb(155, 156, 163));
-	--tag-background-color: rgba(151, 151, 159, 0.2);
-	--card-background-color: light-dark(rgb(255, 255, 255), rgb(57, 58, 65));
-	--card-border: 1px solid light-dark(rgb(226, 226, 228), rgb(68, 69, 76));
-	--card-shadow: 0 12px 36px 0 hsl(none 0% 0% / 0.12);
+	--font-primary:
+		"gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--font-code:
+		"gg mono", "Source Code Pro", Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+
+	--card-primary-bg: light-dark(rgb(255, 255, 255), rgb(57, 58, 65));
+	--border-normal: 1px solid light-dark(rgb(210, 211, 217), rgb(72, 74, 90));
+	--shadow-high: 0 12px 36px 0 hsl(none 0% 0% / 0.12);
+
+	--background-code: light-dark(rgb(244, 245, 250), rgb(53, 55, 72));
+	--background-mod-strong: rgba(151, 151, 159, 0.2);
+
+	--text-primary: light-dark(rgb(50, 51, 56), rgb(255, 255, 255));
+	--text-default: light-dark(rgb(47, 48, 53), rgb(223, 224, 226));
+	--text-muted: light-dark(rgb(112, 113, 122), rgb(155, 156, 163));
+	--text-link: light-dark(rgb(0, 116, 227), rgb(123, 176, 245));
 
 	--color-blurple: rgb(88, 101, 242);
 	--color-light-blurple: rgb(224, 227, 255);
@@ -60,13 +82,58 @@ html {
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	font-family:
-		"gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: var(--font-primary);
 	background: radial-gradient(
 		105.43% 127.05% at 50.1% 127.05%,
 		var(--color-blurple) 20.65%,
 		var(--color-dark-blurple) 85.16%
 	);
+}
+
+a {
+	color: var(--text-link);
+	text-decoration: none;
+}
+
+h1 {
+	font-size: 1.5rem;
+	color: var(--text-primary);
+}
+
+h2 {
+	font-size: 1.25rem;
+	color: var(--text-primary);
+}
+
+h3 {
+	font-size: 1rem;
+	color: var(--text-primary);
+}
+
+small {
+	font-size: 0.875rem;
+	color: light-dark(rgb(109, 110, 119), rgb(173, 174, 180));
+}
+
+code {
+	padding: 0 0.2em;
+	font-family: var(--font-code);
+	font-size: 0.875rem;
+	line-height: 1.125rem;
+	background: var(--background-code);
+	border: var(--border-normal);
+	border-radius: var(--radius-xs);
+}
+
+pre {
+	padding: 0.5em;
+	overflow-x: auto;
+	font-size: 0.875rem;
+	line-height: 1.5;
+	white-space: pre-wrap;
+	background: var(--background-code);
+	border: var(--border-normal);
+	border-radius: var(--radius-xs);
 }
 
 .card {
@@ -75,8 +142,8 @@ html {
 	max-width: 400px;
 	padding: var(--space-sm);
 	word-break: break-word;
-	background-color: var(--card-background-color);
-	border: var(--card-border);
+	background-color: var(--card-primary-bg);
+	border: var(--border-normal);
 	border-radius: var(--radius-sm);
 	/* box-shadow: var(--card-shadow); */
 }
@@ -93,7 +160,7 @@ html {
 	gap: var(--space-xxs);
 	align-items: center;
 	font-weight: var(--font-weight-medium);
-	color: var(--username-color);
+	color: var(--text-primary);
 
 	& > * {
 		font-size: 0.75rem;
@@ -106,7 +173,7 @@ html {
 	align-items: center;
 	padding: 0 var(--space-xxs);
 	font-weight: var(--font-weight-semibold);
-	background-color: var(--tag-background-color);
+	background-color: var(--background-mod-strong);
 	border-radius: var(--radius-xs);
 
 	&.bot {
@@ -125,11 +192,11 @@ html {
 }
 
 .timestamp {
-	color: var(--timestamp-color);
+	color: var(--text-muted);
 }
 
 .message {
-	color: var(--message-color);
+	color: var(--text-default);
 
 	& img {
 		display: block;
