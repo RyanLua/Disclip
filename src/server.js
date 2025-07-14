@@ -32,16 +32,6 @@ class JsonResponse extends Response {
 
 const router = AutoRouter();
 
-router.get('/', (_request, env) => {
-	return new Response(null, {
-		status: 301,
-		headers: {
-			Location: `https://discord.com/oauth2/authorize?client_id=${env.DISCORD_APPLICATION_ID}`,
-			'Cache-Control': 'max-age=3600', // Cache for 1 hour
-		},
-	});
-});
-
 /**
  * Main route for all requests sent from Discord.  All incoming messages will
  * include a JSON payload described here:
