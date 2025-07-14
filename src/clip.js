@@ -190,6 +190,7 @@ async function generateMessageScreenshot(message, env) {
 	await page.setViewport({
 		width: cardBoundingBox.width + 200,
 		height: cardBoundingBox.height + 200,
+		deviceScaleFactor: 2,
 	});
 
 	const screenshot = await page.screenshot({
