@@ -3,7 +3,7 @@
  */
 
 import puppeteer from '@cloudflare/puppeteer';
-import { MessageFlags } from 'discord-api-types/v10';
+import { MessageFlags, ComponentType } from 'discord-api-types/v10';
 
 /**
  * Generates HTML content for a Discord message.
@@ -249,17 +249,17 @@ export async function generateMessageClip(interaction, env) {
 			},
 		];
 		msgJson = {
-			flags: 32768,
+			flags: MessageFlags.IsComponentsV2,
 			components: [
 				{
-					type: 17,
+					type: ComponentType.Container,
 					components: [
 						{
-							type: 10,
+							type: ComponentType.TextDisplay,
 							content: `## Successfully Clipped Message\n\nSaved message from ${messageUrl}`,
 						},
 						{
-							type: 12,
+							type: ComponentType.MediaGallery,
 							items: [
 								{
 									media: {
