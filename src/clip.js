@@ -3,6 +3,7 @@
  */
 
 import puppeteer from '@cloudflare/puppeteer';
+import { ComponentType, MessageFlags } from 'discord-api-types/v10';
 
 /**
  * Generates HTML content for a Discord message.
@@ -233,56 +234,72 @@ async function getRandomSession(endpoint) {
  * @param {*} env - The environment variables.
  */
 export async function generateMessageClip(interaction, env) {
-	const targetId = interaction.data.target_id;
-	const targetMessage = interaction.data.resolved.messages[targetId];
-	const image = await generateMessageScreenshot(targetMessage, env);
-	const messageUrl = `https://discord.com/channels/${interaction.guild_id || '@me'}/${targetMessage.channel_id}/${targetMessage.id}`;
+	let formData;
+	let msgJson;
+	try {
+		const targetId = interaction.data.target_id;
+		const targetMessage = interaction.data.resolved.messages[targetId];
+		const image = await generateMessageScreenshot(targetMessage, env);
+		const messageUrl = `https://discord.com/channels/${interaction.guild_id || '@me'}/${targetMessage.channel_id}/${targetMessage.id}`;
 
-	const attachments = [
-		{
-			id: 0,
-			filename: 'attachment.png',
-		},
-	];
-
-	const msgJson = {
-		flags: 32768,
-		components: [
+		const attachments = [
 			{
-				type: 17,
-				components: [
-					{
-						type: 10,
-						content: `## Successfully Clipped Message\n\nSaved message from ${messageUrl}`,
-					},
-					{
-						type: 12,
-						items: [
-							{
-								media: {
-									url: 'attachment://attachment.png',
-								},
-							},
-						],
-					},
-				],
+				id: 0,
+				filename: 'clip.png',
 			},
-		],
-		attachments,
-	};
+		];
+		msgJson = {
+			flags: MessageFlags.IsComponentsV2,
+			components: [
+				{
+					type: ComponentType.Container,
+					components: [
+						{
+							type: ComponentType.TextDisplay,
+							content: `## Successfully Clipped Message\n\nSaved message from ${messageUrl}`,
+						},
+						{
+							type: ComponentType.MediaGallery,
+							items: [
+								{
+									media: {
+										url: 'attachment://clip.png',
+									},
+								},
+							],
+						},
+					],
+				},
+			],
+			attachments,
+		};
 
-	const formData = new FormData();
-	formData.append('payload_json', JSON.stringify(msgJson));
-	formData.append('files[0]', new Blob([image]), 'attachment.png');
+		formData = new FormData();
+		formData.append('payload_json', JSON.stringify(msgJson));
+		formData.append('files[0]', new Blob([image]), 'clip.png');
+	} catch (error) {
+		console.error('Error generating message clip:', error);
 
-	const discordUrl = `https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`;
-	const discordResponse = await fetch(discordUrl, {
-		method: 'POST',
-		body: formData,
-	});
-	if (!discordResponse.ok) {
-		console.error('Failed to send followup to discord', discordResponse.status);
-		const json = await discordResponse.json();
-		console.error({ response: json, msgJson: JSON.stringify(msgJson) });
+		msgJson = {
+			content: `Failed to clip message:\`\`\`${error.stack}\`\`\``,
+			flags: MessageFlags.Ephemeral,
+		};
+
+		formData = new FormData();
+		formData.append('payload_json', JSON.stringify(msgJson));
+	} finally {
+		const discordUrl = `https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`;
+		const discordResponse = await fetch(discordUrl, {
+			method: 'POST',
+			body: formData,
+		});
+		if (!discordResponse.ok) {
+			console.error(
+				'Failed to send followup to discord',
+				discordResponse.status,
+			);
+			const json = await discordResponse.json();
+			console.error({ response: json, msgJson: JSON.stringify(msgJson) });
+		}
 	}
 }
