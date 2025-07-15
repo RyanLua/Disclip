@@ -3,7 +3,7 @@
  */
 
 import puppeteer from '@cloudflare/puppeteer';
-import { MessageFlags, ComponentType } from 'discord-api-types/v10';
+import { ComponentType, MessageFlags } from 'discord-api-types/v10';
 
 /**
  * Generates HTML content for a Discord message.
