@@ -39,19 +39,22 @@ async function generateMessageScreenshot(message, env) {
 
 	// Generate the screenshot
 	const page = await browser.newPage();
-	
+
 	// Combine HTML template with CSS
-	const htmlWithCss = template.replace('</head>', `<style>${css}</style></head>`);
+	const htmlWithCss = template.replace(
+		'</head>',
+		`<style>${css}</style></head>`,
+	);
 	await page.setContent(htmlWithCss);
 
-	// const cardElement = await page.$('.card');
-	// const cardBoundingBox = await cardElement.boundingBox();
+	const cardElement = await page.$('.card');
+	const cardBoundingBox = await cardElement.boundingBox();
 
-	// await page.setViewport({
-	// 	width: cardBoundingBox.width + 200,
-	// 	height: cardBoundingBox.height + 200,
-	// 	deviceScaleFactor: 2,
-	// });
+	await page.setViewport({
+		width: Math.ceil(cardBoundingBox.width + 200),
+		height: Math.ceil(cardBoundingBox.height + 200),
+		deviceScaleFactor: 2,
+	});
 
 	const screenshot = await page.screenshot({
 		optimizeForSpeed: true,
