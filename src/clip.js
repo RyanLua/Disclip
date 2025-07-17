@@ -4,8 +4,8 @@
 
 import puppeteer from '@cloudflare/puppeteer';
 import { ComponentType, MessageFlags } from 'discord-api-types/v10';
-import template from '../public/index.html';
-import css from '../public/style.css';
+import index from '../public/index.html';
+import style from '../public/style.css';
 
 /**
  * Generate a message screenshot from a Discord message.
@@ -13,7 +13,7 @@ import css from '../public/style.css';
  * @param {*} env - The environment variables.
  * @returns {Promise<Buffer>} - The screenshot image buffer.
  */
-async function generateMessageScreenshot(message, env) {
+async function generateMessageScreenshot(_message, env) {
 	// Pick random session from open sessions
 	let sessionId = await getRandomSession(env.BROWSER);
 	let browser;
@@ -39,13 +39,8 @@ async function generateMessageScreenshot(message, env) {
 
 	// Generate the screenshot
 	const page = await browser.newPage();
-
-	// Combine HTML template with CSS
-	const htmlWithCss = template.replace(
-		'</head>',
-		`<style>${css}</style></head>`,
-	);
-	await page.setContent(htmlWithCss);
+	await page.setContent(index);
+	await page.addStyleTag({ content: style });
 
 	const cardElement = await page.$('.card');
 	const cardBoundingBox = await cardElement.boundingBox();
