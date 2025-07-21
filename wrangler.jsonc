@@ -6,9 +6,6 @@
 	"browser": {
 		"binding": "BROWSER"
 	},
-	"limits": {
-		"cpu_ms": 10
-	},
 	"observability": {
 		"enabled": true
 	}
