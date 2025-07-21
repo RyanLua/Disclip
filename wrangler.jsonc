@@ -7,16 +7,6 @@
 		"binding": "BROWSER",
 		"experimental_remote": true
 	},
-	"kv_namespaces": [
-		{
-			"binding": "BROWSER_KV_DISCLIP",
-			"id": "61f39310be9741718a42f108bfee42e8",
-			"preview_id": "988dd34eb1a1451887f9524deda522bb"
-		}
-	],
-	"limits": {
-		"cpu_ms": 10
-	},
 	"observability": {
 		"enabled": true
 	},
