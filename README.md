@@ -11,6 +11,16 @@ Disclip is a [Discord app](https://support-apps.discord.com/hc/en-us/articles/26
 
 ![Example of clipped message using Disclip](assets/message.png)
 
+## Support Server
+
+If you have any questions, suggestions, or need help with Disclip, feel free to join our support server on Discord.
+
+* Share feedback or your experience
+* Get technical support with Disclip
+* Be the first to know about updates
+
+[![Support Server](https://discord.com/api/guilds/1387009688641732639/widget.png?style=banner4)](https://discord.com/invite/KYcCPPjF)
+
 ## Development Setup
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2FRyanLua%2FDisclip)
@@ -50,15 +60,15 @@ In your code editor, duplicate `.example.dev.vars` and rename it to `.dev.vars` 
 
 On your Discord app's settings, enter your app credentials in `.dev.vars`:
 
-- On the **General Information** page, copy the value for **Application ID**. In `.dev.vars`, enter your pasted value in `DISCORD_APPLICATION_ID`
+* On the **General Information** page, copy the value for **Application ID**. In `.dev.vars`, enter your pasted value in `DISCORD_APPLICATION_ID`
 
   ![Application ID on General Information page in App Settings](assets/application-id.png)
 
-- Back on the **General Information** page, copy the value for **Public Key**. In `.dev.vars`, enter your pasted value in `DISCORD_PUBLIC_KEY`
+* Back on the **General Information** page, copy the value for **Public Key**. In `.dev.vars`, enter your pasted value in `DISCORD_PUBLIC_KEY`
 
   ![Public Key on General Information page in App Settings](assets/public-key.png)
 
-- On the **Bot** page under **Token**, click "Reset Token" to generate a new bot token. In `.dev.vars`, enter your pasted value in `DISCORD_TOKEN`
+* On the **Bot** page under **Token**, click "Reset Token" to generate a new bot token. In `.dev.vars`, enter your pasted value in `DISCORD_TOKEN`
 
   ![Token on Bot page in App Settings](assets/token.png)
 
@@ -95,8 +105,8 @@ When **Discord Provided Link** is selected, a new **Default Install Settings** s
 
 On the **Installation** page in the **Default Install Settings** section:
 
-- For **User Install**, add the `applications.commands` scope
-- For **Guild Install**, add the `applications.commands` scope and `bot` scope. When you select `bot`, a new **Permissions** menu will appear to select the bot user's permissions. Select `Send Messages`.
+* For **User Install**, add the `applications.commands` scope
+* For **Guild Install**, add the `applications.commands` scope and `bot` scope. When you select `bot`, a new **Permissions** menu will appear to select the bot user's permissions. Select `Send Messages`.
 
 ![Default Install Settings on Installation page in App Settings](assets/default-install-settings.png)
 
