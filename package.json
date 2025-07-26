@@ -26,11 +26,11 @@
 	"type": "module",
 	"main": "src/server.js",
 	"scripts": {
-		"deploy": "wrangler deploy --no-bundle",
+		"deploy": "wrangler deploy",
 		"fix": "biome check --write .",
 		"lint": "biome check .",
 		"register": "node src/register.js",
-		"start": "wrangler dev --x-remote-bindings --no-bundle",
+		"start": "wrangler dev",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"dependencies": {

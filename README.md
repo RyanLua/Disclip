@@ -3,12 +3,23 @@
 [![Continuous Integration](https://github.com/RyanLua/Disclip/actions/workflows/ci.yaml/badge.svg)](https://github.com/RyanLua/Disclip/actions/workflows/ci.yaml)
 [![Discord](https://discord.com/api/guilds/1387009688641732639/widget.png)](https://discord.com/invite/KYcCPPjF)
 [![GitHub License](https://img.shields.io/github/license/RyanLua/Disclip)](https://github.com/RyanLua/Disclip?tab=MIT-1-ov-file#readme)
+[![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
 
 Save precious messages and funny moments with Disclip. Turn any Discord message into a high-quality image to share across friends and social media.
 
 Disclip is a [Discord app](https://support-apps.discord.com/hc/en-us/articles/26577510840087) which allows you to save any Discord message as a image including servers, and DMs. Written for [Summer of Making](https://summer.hackclub.com/) and [Converge](https://converge.hackclub.com/) from Hack Club.
 
 ![Example of clipped message using Disclip](assets/message.png)
+
+## Support Server
+
+If you have any questions, suggestions, or need help with Disclip, feel free to join our support server on Discord.
+
+* Share feedback or your experience
+* Get technical support with Disclip
+* Be the first to know about updates
+
+[![Support Server](https://discord.com/api/guilds/1387009688641732639/widget.png?style=banner4)](https://discord.com/invite/KYcCPPjF)
 
 ## Development Setup
 
@@ -49,15 +60,15 @@ In your code editor, duplicate `.example.dev.vars` and rename it to `.dev.vars` 
 
 On your Discord app's settings, enter your app credentials in `.dev.vars`:
 
-- On the **General Information** page, copy the value for **Application ID**. In `.dev.vars`, enter your pasted value in `DISCORD_APPLICATION_ID`
+* On the **General Information** page, copy the value for **Application ID**. In `.dev.vars`, enter your pasted value in `DISCORD_APPLICATION_ID`
 
   ![Application ID on General Information page in App Settings](assets/application-id.png)
 
-- Back on the **General Information** page, copy the value for **Public Key**. In `.dev.vars`, enter your pasted value in `DISCORD_PUBLIC_KEY`
+* Back on the **General Information** page, copy the value for **Public Key**. In `.dev.vars`, enter your pasted value in `DISCORD_PUBLIC_KEY`
 
   ![Public Key on General Information page in App Settings](assets/public-key.png)
 
-- On the **Bot** page under **Token**, click "Reset Token" to generate a new bot token. In `.dev.vars`, enter your pasted value in `DISCORD_TOKEN`
+* On the **Bot** page under **Token**, click "Reset Token" to generate a new bot token. In `.dev.vars`, enter your pasted value in `DISCORD_TOKEN`
 
   ![Token on Bot page in App Settings](assets/token.png)
 
@@ -94,8 +105,8 @@ When **Discord Provided Link** is selected, a new **Default Install Settings** s
 
 On the **Installation** page in the **Default Install Settings** section:
 
-- For **User Install**, add the `applications.commands` scope
-- For **Guild Install**, add the `applications.commands` scope and `bot` scope. When you select `bot`, a new **Permissions** menu will appear to select the bot user's permissions. Select `Send Messages`.
+* For **User Install**, add the `applications.commands` scope
+* For **Guild Install**, add the `applications.commands` scope and `bot` scope. When you select `bot`, a new **Permissions** menu will appear to select the bot user's permissions. Select `Send Messages`.
 
 ![Default Install Settings on Installation page in App Settings](assets/default-install-settings.png)
 
