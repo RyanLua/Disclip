@@ -6,7 +6,6 @@ import puppeteer from '@cloudflare/puppeteer';
 import { ComponentType, MessageFlags } from 'discord-api-types/v10';
 import index from '../public/index.html';
 import style from '../public/style.css';
-import { json } from 'itty-router';
 
 /**
  * Generate a message screenshot from a Discord message.
