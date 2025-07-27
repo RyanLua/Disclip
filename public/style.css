@@ -3,7 +3,7 @@
 	font-stretch: 75% 125%;
 	font-style: normal;
 	font-weight: 125 950;
-	src: url("https://github.com/RyanLua/Disclip/raw/refs/heads/main/public/fonts/ggsansvf-VF.woff2")
+	src: url("fonts/ggsansvf-VF.woff2")
 		format("woff2-variations");
 }
 
@@ -11,7 +11,7 @@
 	font-family: "gg mono";
 	font-style: normal;
 	font-weight: 400;
-	src: url("https://github.com/RyanLua/Disclip/raw/refs/heads/main/public/fonts/ggsansmono-Normal.woff2")
+	src: url("fonts/ggsansmono-Normal.woff2")
 		format("woff2");
 }
 
@@ -19,7 +19,7 @@
 	font-family: "gg mono";
 	font-style: normal;
 	font-weight: 700;
-	src: url("https://github.com/RyanLua/Disclip/raw/refs/heads/main/public/fonts/ggsansmono-Bold.woff2")
+	src: url("fonts/ggsansmono-Bold.woff2")
 		format("woff2");
 }
 
