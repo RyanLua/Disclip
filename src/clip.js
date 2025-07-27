@@ -63,6 +63,7 @@ async function generateMessageScreenshot(_message, env) {
 
 /**
  * Get a random session ID from the available sessions.
+ * @todo Fix this when developing locally, where it will error because it can't get sessions while local.
  * @param {import("@cloudflare/puppeteer").BrowserWorker} endpoint
  * @return {Promise<string|undefined>} - The session ID or undefined if no sessions are available.
  * @see {@link https://developers.cloudflare.com/browser-rendering/workers-bindings/reuse-sessions/}
