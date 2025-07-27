@@ -37,42 +37,34 @@ async function generateMessageScreenshot(message, env) {
 
 	sessionId = browser.sessionId(); // get current session id
 
-	// Extract message data
-	const author = message.author;
-	const username = author.username;
-	const avatarUrl = author.avatar
-		? `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.png`
-		: null;
-	const serverTag = author.clan?.tag || '';
-	const serverTagBadge = author.clan
-		? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.png`
-		: '';
-	const messageContent = message.content;
-
 	// Generate the screenshot
 	const page = await browser.newPage();
 	await page.setContent(index);
 	await page.addStyleTag({ content: style });
 
-	await page.evaluate(
-		(avatarUrl, username, messageContent, serverTag, serverTagBadge) => {
-			document.querySelector('.avatar').setAttribute('src', avatarUrl);
+	await page.evaluate((message) => {
+		const author = message.author;
+		const username = author.username;
+		const avatarUrl = author.avatar
+			? `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.png`
+			: null;
+		const serverTag = author.clan?.tag || '';
+		const serverTagBadge = author.clan
+			? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.png`
+			: '';
+		const messageContent = message.content;
 
-			const usernameElement = document.querySelector('.username');
-			usernameElement.firstChild.textContent = username;
+		document.querySelector('.avatar').setAttribute('src', avatarUrl);
 
-			const tagElement = document.querySelector('.username .tag');
-			tagElement.querySelector('span').textContent = serverTag;
-			tagElement.querySelector('img').setAttribute('src', serverTagBadge);
+		const usernameElement = document.querySelector('.username');
+		usernameElement.firstChild.textContent = username;
 
-			document.querySelector('.message').textContent = messageContent;
-		},
-		avatarUrl,
-		username,
-		messageContent,
-		serverTag,
-		serverTagBadge,
-	);
+		const tagElement = document.querySelector('.username .tag');
+		tagElement.querySelector('span').textContent = serverTag;
+		tagElement.querySelector('img').setAttribute('src', serverTagBadge);
+
+		document.querySelector('.message').textContent = messageContent;
+	}, message);
 
 	const cardElement = await page.$('.card');
 	const cardBoundingBox = await cardElement.boundingBox();
