@@ -4,9 +4,17 @@
 	"compatibility_date": "2025-07-24",
 	"compatibility_flags": ["nodejs_compat"],
 	"browser": {
-		"binding": "BROWSER"
+		"binding": "BROWSER",
+		"experimental_remote": true
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
+	"rules": [
+		{
+			"type": "Text",
+			"globs": ["**/*.css"],
+			"fallthrough": true
+		}
+	]
 }
