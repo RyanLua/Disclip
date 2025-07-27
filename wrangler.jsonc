@@ -15,6 +15,11 @@
 			"type": "Text",
 			"globs": ["**/*.css"],
 			"fallthrough": true
+		},
+		{
+			"type": "Data",
+			"globs": ["**/*.woff2"],
+			"fallthrough": true
 		}
 	]
 }
