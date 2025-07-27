@@ -3,24 +3,21 @@
 	font-stretch: 75% 125%;
 	font-style: normal;
 	font-weight: 125 950;
-	src: url("fonts/ggsansvf-VF.woff2")
-		format("woff2-variations");
+	src: url("fonts/ggsansvf-VF.woff2") format("woff2-variations");
 }
 
 @font-face {
 	font-family: "gg mono";
 	font-style: normal;
 	font-weight: 400;
-	src: url("fonts/ggsansmono-Normal.woff2")
-		format("woff2");
+	src: url("fonts/ggsansmono-Normal.woff2") format("woff2");
 }
 
 @font-face {
 	font-family: "gg mono";
 	font-style: normal;
 	font-weight: 700;
-	src: url("fonts/ggsansmono-Bold.woff2")
-		format("woff2");
+	src: url("fonts/ggsansmono-Bold.woff2") format("woff2");
 }
 
 :root {
