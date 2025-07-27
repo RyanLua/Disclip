@@ -55,14 +55,23 @@ async function generateMessageScreenshot(message, env) {
 	await page.addStyleTag({ content: style });
 
 	await page.evaluate(
-		(avatarUrl, username, messageContent) => {
+		(avatarUrl, username, messageContent, serverTag, serverTagBadge) => {
 			document.querySelector('.avatar').setAttribute('src', avatarUrl);
-			document.querySelector('.username').textContent = username;
+
+			const usernameElement = document.querySelector('.username');
+			usernameElement.firstChild.textContent = username;
+
+			const tagElement = document.querySelector('.username .tag');
+			tagElement.querySelector('span').textContent = serverTag;
+			tagElement.querySelector('img').setAttribute('src', serverTagBadge);
+
 			document.querySelector('.message').textContent = messageContent;
 		},
 		avatarUrl,
 		username,
 		messageContent,
+		serverTag,
+		serverTagBadge,
 	);
 
 	const cardElement = await page.$('.card');
