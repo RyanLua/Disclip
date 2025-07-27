@@ -75,8 +75,8 @@ async function generateMessageScreenshot(message, env) {
 	const cardBoundingBox = await cardElement.boundingBox();
 
 	await page.setViewport({
-		width: Math.ceil(cardBoundingBox.width + 200),
-		height: Math.ceil(cardBoundingBox.height + 200),
+		width: cardBoundingBox.width + 200,
+		height: cardBoundingBox.height + 200,
 		deviceScaleFactor: 2,
 	});
 
