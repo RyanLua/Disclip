@@ -35,8 +35,6 @@ async function generateMessageScreenshot(message, env) {
 		}
 	}
 
-	console.log(JSON.stringify(message));
-
 	sessionId = browser.sessionId(); // get current session id
 
 	// Generate the screenshot
