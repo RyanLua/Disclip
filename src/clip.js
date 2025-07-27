@@ -48,7 +48,9 @@ async function generateMessageScreenshot(message, env) {
 	await page.evaluate((message) => {
 		const author = message.author;
 		const username = author.username;
-		const defaultAvatarIndex = (BigInt(author.id) >> 22n) % 6n;
+		const defaultAvatarIndex = author.discriminator
+			? Number(author.discriminator) % 5 // Legacy username system
+			: (BigInt(author.id) >> 22n) % 6n; // New username system
 		const avatarUrl = author.avatar
 			? `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.png`
 			: `https://cdn.discordapp.com/embed/avatars/${defaultAvatarIndex}.png`;
