@@ -6,6 +6,7 @@ import puppeteer from '@cloudflare/puppeteer';
 import { ComponentType, MessageFlags } from 'discord-api-types/v10';
 import index from '../public/index.html';
 import style from '../public/style.css';
+import { json } from 'itty-router';
 
 /**
  * Generate a message screenshot from a Discord message.
@@ -35,6 +36,8 @@ async function generateMessageScreenshot(message, env) {
 		}
 	}
 
+	console.log(JSON.stringify(message));
+
 	sessionId = browser.sessionId(); // get current session id
 
 	// Generate the screenshot
@@ -45,9 +48,10 @@ async function generateMessageScreenshot(message, env) {
 	await page.evaluate((message) => {
 		const author = message.author;
 		const username = author.username;
+		const defaultAvatarIndex = (BigInt(author.id) >> 22n) % 6n;
 		const avatarUrl = author.avatar
 			? `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.png`
-			: null;
+			: `https://cdn.discordapp.com/embed/avatars/${defaultAvatarIndex}.png`;
 		const serverTag = author.clan?.tag || '';
 		const serverTagBadge = author.clan
 			? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.png`
