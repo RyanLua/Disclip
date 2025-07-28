@@ -44,7 +44,7 @@ async function generateMessageScreenshot(message, env) {
 
 	await page.evaluate((message) => {
 		const author = message.author;
-		const username = author.global_name || author.username;
+		const username = author.username || author.global_name;
 		const defaultAvatarIndex = author.discriminator
 			? Number(author.discriminator) % 5 // Legacy username system
 			: (BigInt(author.id) >> 22n) % 6n; // New username system
