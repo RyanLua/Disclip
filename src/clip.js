@@ -3,10 +3,10 @@
  */
 
 import puppeteer from '@cloudflare/puppeteer';
-import { errorMsgJson } from '../public/components/error-stacktrace.js';
-import { clipMsgJson } from '../public/components/message-clip.js';
 import index from '../public/index.html';
 import style from '../public/style.css';
+import { errorMsgJson } from './components/error-stacktrace.js';
+import { clipMsgJson } from './components/message-clip.js';
 
 /**
  * Generate a message screenshot from a Discord message.
