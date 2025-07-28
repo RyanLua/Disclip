@@ -30,7 +30,7 @@
 		"fix": "biome check --write .",
 		"lint": "biome check .",
 		"register": "node src/register.js",
-		"start": "wrangler dev",
+		"start": "wrangler dev --x-remote-bindings",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"dependencies": {

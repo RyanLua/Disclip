@@ -1,12 +1,20 @@
 {
 	"name": "disclip",
 	"main": "src/server.js",
-	"compatibility_date": "2025-07-24",
+	"compatibility_date": "2025-07-25",
 	"compatibility_flags": ["nodejs_compat"],
 	"browser": {
-		"binding": "BROWSER"
+		"binding": "BROWSER",
+		"experimental_remote": true
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
+	"rules": [
+		{
+			"type": "Data",
+			"globs": ["**/*.woff2"],
+			"fallthrough": true
+		}
+	]
 }
