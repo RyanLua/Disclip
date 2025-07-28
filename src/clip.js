@@ -4,7 +4,7 @@
 
 import puppeteer from '@cloudflare/puppeteer';
 import { MessageFlags } from 'discord-api-types/v10';
-import msgJsonTemplate from '../public/components/message-clip.json';
+import { msgJsonTemplate } from '../public/components/message-clip.js';
 import index from '../public/index.html';
 import style from '../public/style.css';
 
@@ -128,13 +128,7 @@ export async function generateMessageClip(interaction, env) {
 		const image = await generateMessageScreenshot(targetMessage, env);
 		const messageUrl = `https://discord.com/channels/${interaction.guild_id || '@me'}/${targetMessage.channel_id}/${targetMessage.id}`;
 
-		// Replace placeholders in the message JSON
-		msgJson = JSON.parse(JSON.stringify(msgJsonTemplate));
-		msgJson.components[0].components[0].content =
-			msgJson.components[0].components[0].content.replace(
-				'{{messageLink}}',
-				messageUrl,
-			);
+		msgJson = msgJsonTemplate(messageUrl);
 
 		formData = new FormData();
 		formData.append('payload_json', JSON.stringify(msgJson));
@@ -161,7 +155,10 @@ export async function generateMessageClip(interaction, env) {
 				discordResponse.status,
 			);
 			const json = await discordResponse.json();
-			console.error({ response: json, msgJson: JSON.stringify(msgJson) });
+			console.error({
+				response: json,
+				msgJson: JSON.stringify(msgJson),
+			});
 		}
 	}
 }
