@@ -5,12 +5,11 @@
 import {
 	InteractionResponseType,
 	InteractionType,
-	MessageFlags,
 } from 'discord-api-types/v10';
 import { verifyKey } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
 import { generateMessageClip } from './clip.js';
-import { CLIP_COMMAND, PING_COMMAND } from './commands.js';
+import { CLIP_COMMAND } from './commands.js';
 
 /**
  * @typedef {Object} Env
@@ -67,15 +66,6 @@ router.post('/interactions', async (request, env, ctx) => {
 	if (interaction.type === InteractionType.ApplicationCommand) {
 		// Most user commands will come as `APPLICATION_COMMAND`.
 		switch (interaction.data.name.toLowerCase()) {
-			case PING_COMMAND.name.toLowerCase(): {
-				return new JsonResponse({
-					type: InteractionResponseType.ChannelMessageWithSource,
-					data: {
-						content: 'Pong! 🏓',
-						flags: MessageFlags.Ephemeral,
-					},
-				});
-			}
 			case CLIP_COMMAND.name.toLowerCase(): {
 				ctx.waitUntil(generateMessageClip(interaction, env));
 
