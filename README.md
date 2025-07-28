@@ -1,7 +1,7 @@
 # Disclip
 
 [![Continuous Integration](https://github.com/RyanLua/Disclip/actions/workflows/ci.yaml/badge.svg)](https://github.com/RyanLua/Disclip/actions/workflows/ci.yaml)
-[![Discord](https://discord.com/api/guilds/1387009688641732639/widget.png)](https://discord.com/invite/KYcCPPjF)
+[![Discord](https://discord.com/api/guilds/1387009688641732639/widget.png)](https://discord.gg/XkAHS8MkTe)
 [![GitHub License](https://img.shields.io/github/license/RyanLua/Disclip)](https://github.com/RyanLua/Disclip?tab=MIT-1-ov-file#readme)
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
 
@@ -19,7 +19,7 @@ If you have any questions, suggestions, or need help with Disclip, feel free to 
 * Get technical support with Disclip
 * Be the first to know about updates
 
-[![Support Server](https://discord.com/api/guilds/1387009688641732639/widget.png?style=banner4)](https://discord.com/invite/KYcCPPjF)
+[![Support Server](https://discord.com/api/guilds/1387009688641732639/widget.png?style=banner4)](https://discord.gg/XkAHS8MkTe)
 
 ## Development Setup
 

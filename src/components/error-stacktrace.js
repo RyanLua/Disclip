@@ -25,7 +25,7 @@ export const errorMsgJson = (errorStacktrace) => ({
 							type: ComponentType.Button,
 							style: ButtonStyle.Link,
 							label: 'Support Server',
-							url: 'https://discord.com/invite/KYcCPPjF',
+							url: 'https://discord.gg/XkAHS8MkTe',
 						},
 					],
 				},
