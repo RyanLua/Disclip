@@ -3,8 +3,8 @@
  */
 
 import puppeteer from '@cloudflare/puppeteer';
-import { MessageFlags } from 'discord-api-types/v10';
-import { msgJsonTemplate } from '../public/components/message-clip.js';
+import { errorMsgJson } from '../public/components/error-stacktrace.js';
+import { clipMsgJson } from '../public/components/message-clip.js';
 import index from '../public/index.html';
 import style from '../public/style.css';
 
@@ -128,7 +128,7 @@ export async function generateMessageClip(interaction, env) {
 		const image = await generateMessageScreenshot(targetMessage, env);
 		const messageUrl = `https://discord.com/channels/${interaction.guild_id || '@me'}/${targetMessage.channel_id}/${targetMessage.id}`;
 
-		msgJson = msgJsonTemplate(messageUrl);
+		msgJson = clipMsgJson(messageUrl);
 
 		formData = new FormData();
 		formData.append('payload_json', JSON.stringify(msgJson));
@@ -136,10 +136,7 @@ export async function generateMessageClip(interaction, env) {
 	} catch (error) {
 		console.error('Error generating message clip:', error);
 
-		msgJson = {
-			content: `Failed to clip message:\`\`\`${error.stack}\`\`\``,
-			flags: MessageFlags.Ephemeral,
-		};
+		msgJson = errorMsgJson(error.stack || 'Unknown error occurred');
 
 		formData = new FormData();
 		formData.append('payload_json', JSON.stringify(msgJson));

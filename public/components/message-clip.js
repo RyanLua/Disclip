@@ -4,7 +4,7 @@ import { ComponentType, MessageFlags } from 'discord-api-types/v10';
  * @param {string} messageUrl - URL of the Discord message
  * @returns {import('discord-api-types/v10').RESTPostAPIWebhookWithTokenJSONBody}
  */
-export const msgJsonTemplate = (messageUrl) => ({
+export const clipMsgJson = (messageUrl) => ({
 	flags: MessageFlags.IsComponentsV2,
 	components: [
 		{
