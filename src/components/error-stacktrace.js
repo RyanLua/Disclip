@@ -15,19 +15,19 @@ export const errorMsgJson = (errorStacktrace) => ({
 			type: ComponentType.Container,
 			components: [
 				{
-					type: ComponentType.Section,
+					type: ComponentType.TextDisplay,
+					content: `## Error\n\nUnknown error occurred:\n\`\`\`\n${errorStacktrace}\n\`\`\``,
+				},
+				{
+					type: ComponentType.ActionRow,
 					components: [
 						{
-							type: ComponentType.TextDisplay,
-							content: `## Error\n\nUnknown error occurred:\n\`\`\`\n${errorStacktrace}\n\`\`\``,
+							type: ComponentType.Button,
+							style: ButtonStyle.Link,
+							label: 'Support Server',
+							url: 'https://discord.com/invite/KYcCPPjF',
 						},
 					],
-					accessory: {
-						type: ComponentType.Button,
-						style: ButtonStyle.Link,
-						label: 'Support Server',
-						url: 'https://discord.com/invite/KYcCPPjF',
-					},
 				},
 			],
 		},
