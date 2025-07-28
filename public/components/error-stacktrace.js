@@ -5,9 +5,10 @@ import {
 } from 'discord-api-types/v10';
 
 /**
- * @type {import('discord-api-types/v10').RESTPostAPIWebhookWithTokenJSONBody}
+ * @param {string} errorStacktrace - The error stacktrace to display
+ * @returns {import('discord-api-types/v10').RESTPostAPIWebhookWithTokenJSONBody}
  */
-export const msgJsonTemplate = {
+export const msgJsonTemplate = (errorStacktrace) => ({
 	flags: MessageFlags.IsComponentsV2,
 	components: [
 		{
@@ -18,8 +19,7 @@ export const msgJsonTemplate = {
 					components: [
 						{
 							type: ComponentType.TextDisplay,
-							content:
-								'## Error\n\nUnknown error occurred:\n\n```\nSomething unexpected occurred\n```',
+							content: `## Error\n\nUnknown error occurred:\n\n\`\`\`\n${errorStacktrace}\n\`\`\``,
 						},
 					],
 					accessory: {
@@ -32,4 +32,4 @@ export const msgJsonTemplate = {
 			],
 		},
 	],
-};
+});
