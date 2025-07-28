@@ -3,7 +3,8 @@
  */
 
 import puppeteer from '@cloudflare/puppeteer';
-import { ComponentType, MessageFlags } from 'discord-api-types/v10';
+import { MessageFlags } from 'discord-api-types/v10';
+import msgJsonTemplate from '../public/components/message-clip.json';
 import index from '../public/index.html';
 import style from '../public/style.css';
 
@@ -127,37 +128,13 @@ export async function generateMessageClip(interaction, env) {
 		const image = await generateMessageScreenshot(targetMessage, env);
 		const messageUrl = `https://discord.com/channels/${interaction.guild_id || '@me'}/${targetMessage.channel_id}/${targetMessage.id}`;
 
-		const attachments = [
-			{
-				id: 0,
-				filename: 'clip.png',
-			},
-		];
-		msgJson = {
-			flags: MessageFlags.IsComponentsV2,
-			components: [
-				{
-					type: ComponentType.Container,
-					components: [
-						{
-							type: ComponentType.TextDisplay,
-							content: `## Successfully Clipped Message\n\nSaved message from ${messageUrl}`,
-						},
-						{
-							type: ComponentType.MediaGallery,
-							items: [
-								{
-									media: {
-										url: 'attachment://clip.png',
-									},
-								},
-							],
-						},
-					],
-				},
-			],
-			attachments,
-		};
+		// Replace placeholders in the message JSON
+		msgJson = JSON.parse(JSON.stringify(msgJsonTemplate));
+		msgJson.components[0].components[0].content =
+			msgJson.components[0].components[0].content.replace(
+				'{{messageLink}}',
+				messageUrl,
+			);
 
 		formData = new FormData();
 		formData.append('payload_json', JSON.stringify(msgJson));

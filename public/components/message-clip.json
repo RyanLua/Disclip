@@ -6,19 +6,25 @@
 			"components": [
 				{
 					"type": 10,
-					"content": "## Successfully Clipped Message\n\nSaved message from https://discord.com/channels/1387009688641732639/1387009689950093475/1392301667776594051"
+					"content": "## Successfully Clipped Message\n\nSaved message from {{messageLink}}"
 				},
 				{
 					"type": 12,
 					"items": [
 						{
 							"media": {
-								"url": "attachment://attachment.png"
+								"url": "attachment://clip.png"
 							}
 						}
 					]
 				}
 			]
+		}
+	],
+	"attachments": [
+		{
+			"id": 0,
+			"filename": "clip.png"
 		}
 	]
 }
