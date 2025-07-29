@@ -5,8 +5,7 @@
 import puppeteer from '@cloudflare/puppeteer';
 import index from '../public/index.html';
 import style from '../public/style.css';
-import { errorMsgJson } from './components/error-stacktrace.js';
-import { clipMsgJson } from './components/message-clip.js';
+import { clipMsgJson, errorMsgJson } from './components.js';
 
 /**
  * Generate a message screenshot from a Discord message.
