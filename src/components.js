@@ -9,7 +9,7 @@ import {
  * @param {string} messageUrl - URL of the Discord message
  * @returns {import('discord-api-types/v10').RESTPostAPIWebhookWithTokenJSONBody}
  */
-export const clipMsgJson = (messageUrl) => ({
+export const CLIP_COMPONENT = (messageUrl) => ({
 	flags: MessageFlags.IsComponentsV2,
 	components: [
 		{
@@ -45,7 +45,7 @@ export const clipMsgJson = (messageUrl) => ({
  * @param {string} errorStacktrace - The error stacktrace to display
  * @returns {import('discord-api-types/v10').RESTPostAPIWebhookWithTokenJSONBody}
  */
-export const errorMsgJson = (errorStacktrace) => ({
+export const ERROR_COMPONENT = (errorStacktrace) => ({
 	flags: MessageFlags.IsComponentsV2,
 	components: [
 		{

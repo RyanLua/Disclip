@@ -5,7 +5,7 @@
 import puppeteer from '@cloudflare/puppeteer';
 import index from '../public/index.html';
 import style from '../public/style.css';
-import { clipMsgJson, errorMsgJson } from './components.js';
+import { CLIP_COMPONENT, ERROR_COMPONENT } from './components.js';
 
 /**
  * Generate a message screenshot from a Discord message.
@@ -127,7 +127,7 @@ export async function generateMessageClip(interaction, env) {
 		const image = await generateMessageScreenshot(targetMessage, env);
 		const messageUrl = `https://discord.com/channels/${interaction.guild_id || '@me'}/${targetMessage.channel_id}/${targetMessage.id}`;
 
-		msgJson = clipMsgJson(messageUrl);
+		msgJson = CLIP_COMPONENT(messageUrl);
 
 		formData = new FormData();
 		formData.append('payload_json', JSON.stringify(msgJson));
@@ -135,7 +135,7 @@ export async function generateMessageClip(interaction, env) {
 	} catch (error) {
 		console.error('Error generating message clip:', error);
 
-		msgJson = errorMsgJson(error.stack || 'Unknown error occurred');
+		msgJson = ERROR_COMPONENT(error.stack || 'Unknown error occurred');
 
 		formData = new FormData();
 		formData.append('payload_json', JSON.stringify(msgJson));
