@@ -19,6 +19,9 @@
 			"complexity": {
 				"useSimplifiedLogicExpression": "error"
 			}
+		},
+		"domains": {
+			"project": "all"
 		}
 	},
 	"javascript": {
