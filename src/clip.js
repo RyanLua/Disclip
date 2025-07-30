@@ -39,7 +39,7 @@ async function generateMessageScreenshot(message, env) {
 
 	// Generate the screenshot
 	const page = await browser.newPage();
-	await page.setContent(index, { waitUntil: 'networkidle2' });
+	await page.setContent(index, { waitUntil: 'networkidle0' });
 	await page.addStyleTag({ content: style });
 
 	await page.evaluate((message) => {
