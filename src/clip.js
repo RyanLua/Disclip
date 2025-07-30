@@ -3,9 +3,9 @@
  */
 
 import puppeteer from '@cloudflare/puppeteer';
-import { ComponentType, MessageFlags } from 'discord-api-types/v10';
 import index from '../public/index.html';
 import style from '../public/style.css';
+import { CLIP_COMPONENT, ERROR_COMPONENT } from './components.js';
 
 /**
  * Generate a message screenshot from a Discord message.
@@ -127,37 +127,7 @@ export async function generateMessageClip(interaction, env) {
 		const image = await generateMessageScreenshot(targetMessage, env);
 		const messageUrl = `https://discord.com/channels/${interaction.guild_id || '@me'}/${targetMessage.channel_id}/${targetMessage.id}`;
 
-		const attachments = [
-			{
-				id: 0,
-				filename: 'clip.png',
-			},
-		];
-		msgJson = {
-			flags: MessageFlags.IsComponentsV2,
-			components: [
-				{
-					type: ComponentType.Container,
-					components: [
-						{
-							type: ComponentType.TextDisplay,
-							content: `## Successfully Clipped Message\n\nSaved message from ${messageUrl}`,
-						},
-						{
-							type: ComponentType.MediaGallery,
-							items: [
-								{
-									media: {
-										url: 'attachment://clip.png',
-									},
-								},
-							],
-						},
-					],
-				},
-			],
-			attachments,
-		};
+		msgJson = CLIP_COMPONENT(messageUrl);
 
 		formData = new FormData();
 		formData.append('payload_json', JSON.stringify(msgJson));
@@ -165,10 +135,7 @@ export async function generateMessageClip(interaction, env) {
 	} catch (error) {
 		console.error('Error generating message clip:', error);
 
-		msgJson = {
-			content: `Failed to clip message:\`\`\`${error.stack}\`\`\``,
-			flags: MessageFlags.Ephemeral,
-		};
+		msgJson = ERROR_COMPONENT(error.stack || 'Unknown error occurred');
 
 		formData = new FormData();
 		formData.append('payload_json', JSON.stringify(msgJson));
@@ -184,7 +151,10 @@ export async function generateMessageClip(interaction, env) {
 				discordResponse.status,
 			);
 			const json = await discordResponse.json();
-			console.error({ response: json, msgJson: JSON.stringify(msgJson) });
+			console.error({
+				response: json,
+				msgJson: JSON.stringify(msgJson),
+			});
 		}
 	}
 }
