@@ -52,7 +52,7 @@ router.post('/interactions', async (request, env, ctx) => {
 		request,
 		env,
 	);
-	if (!(isValid && interaction)) {
+	if (!isValid || !interaction) {
 		return new Response('Bad request signature.', { status: 401 });
 	}
 
