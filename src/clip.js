@@ -39,12 +39,12 @@ async function generateMessageScreenshot(message, env) {
 
 	// Generate the screenshot
 	const page = await browser.newPage();
-	await page.setContent(index);
+	await page.setContent(index, { waitUntil: 'load' });
 	await page.addStyleTag({ content: style });
 
 	await page.evaluate((message) => {
 		const author = message.author;
-		const username = author.username || author.global_name;
+		const username = author.global_name || author.username;
 		const defaultAvatarIndex = author.discriminator
 			? Number(author.discriminator) % 5 // Legacy username system
 			: (BigInt(author.id) >> 22n) % 6n; // New username system
