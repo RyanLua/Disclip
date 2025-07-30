@@ -39,7 +39,7 @@ async function generateMessageScreenshot(message, env) {
 
 	// Generate the screenshot
 	const page = await browser.newPage();
-	await page.setContent(index, { waitUntil: 'load' });
+	await page.setContent(index, { waitUntil: 'domcontentloaded' });
 	await page.addStyleTag({ content: style });
 
 	await page.evaluate((message) => {
