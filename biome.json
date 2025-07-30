@@ -16,6 +16,9 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true
+		},
+		"domains": {
+			"project": "all"
 		}
 	},
 	"javascript": {
