@@ -30,6 +30,7 @@
 	--border-normal: 1px solid light-dark(rgb(210, 211, 217), rgb(72, 74, 90));
 	--shadow-high: 0 12px 36px 0 hsl(none 0% 0% / 0.12);
 
+	--background-spoiler: rgba(151, 151, 159, 0.08);
 	--background-code: light-dark(rgb(244, 245, 250), rgb(53, 55, 72));
 	--background-mod-strong: rgba(151, 151, 159, 0.2);
 
@@ -197,6 +198,11 @@ pre {
 
 .message {
 	color: var(--text-default);
+
+	& span {
+		background-color: var(--background-spoiler);
+		border-radius: var(--radius-xs);
+	}
 
 	& img {
 		display: block;
