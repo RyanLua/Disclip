@@ -33,8 +33,10 @@
 	--background-spoiler: rgba(151, 151, 159, 0.08);
 	--background-code: light-dark(rgb(244, 245, 250), rgb(53, 55, 72));
 	--background-mod-strong: rgba(151, 151, 159, 0.2);
+	--spine-default: light-dark(rgb(203, 203, 207), rgb(94, 95, 102));
 
 	--text-primary: light-dark(rgb(50, 51, 56), rgb(255, 255, 255));
+	--text-secondary: light-dark(rgb(95, 96, 106), rgb(196, 197, 201));
 	--text-default: light-dark(rgb(47, 48, 53), rgb(223, 224, 226));
 	--text-muted: light-dark(rgb(112, 113, 122), rgb(155, 156, 163));
 	--text-link: light-dark(rgb(0, 116, 227), rgb(123, 176, 245));
@@ -135,6 +137,13 @@ pre {
 	background: var(--background-code);
 	border: var(--border-normal);
 	border-radius: var(--radius-xs);
+}
+
+blockquote {
+	padding: 0 8px 0 12px;
+	margin: 4px 0;
+	color: var(--text-secondary);
+	border-left: 4px solid var(--spine-default);
 }
 
 .card {
