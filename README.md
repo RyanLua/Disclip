@@ -4,6 +4,7 @@
 [![Discord](https://discord.com/api/guilds/1387009688641732639/widget.png)](https://discord.gg/XkAHS8MkTe)
 [![GitHub License](https://img.shields.io/github/license/RyanLua/Disclip)](https://github.com/RyanLua/Disclip?tab=MIT-1-ov-file#readme)
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FRyanLua%2FDisclip.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FRyanLua%2FDisclip?ref=badge_shield)
 
 Save precious messages and funny moments with Disclip. Turn any Discord message into a high-quality image to share across friends and social media.
 
@@ -166,3 +167,7 @@ You can now add your app to servers and DMs using the install link generated in 
 Copy the install link and paste it in your browser and click **Add to My Apps** or **Add to Server**.
 
 You now have your own Disclip clone set up and deployed! You can test it by typing `/` or opening the app context menu on any message to clip it.
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FRyanLua%2FDisclip.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FRyanLua%2FDisclip?ref=badge_large)
