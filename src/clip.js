@@ -39,7 +39,7 @@ async function generateMessageScreenshot(message, env) {
 
 	// Generate the screenshot
 	const page = await browser.newPage();
-	await page.setContent(index, { waitUntil: 'networkidle0' });
+	await page.setContent(index);
 	await page.addStyleTag({ content: style });
 
 	await page.evaluate((message) => {
@@ -69,9 +69,12 @@ async function generateMessageScreenshot(message, env) {
 		document.querySelector('.message').textContent = messageContent;
 	}, message);
 
+	// Wait for images to load
+	await page.waitForNetworkIdle();
+
+	// Set the viewport size based on the card element
 	const cardElement = await page.$('.card');
 	const cardBoundingBox = await cardElement.boundingBox();
-
 	await page.setViewport({
 		width: cardBoundingBox.width + 200,
 		height: cardBoundingBox.height + 200,
