@@ -95,57 +95,81 @@ html {
 	);
 }
 
-a {
-	color: var(--text-link);
-	text-decoration: none;
-}
+.message {
+	color: var(--text-default);
 
-h1 {
-	font-size: 1.5rem;
-	color: var(--text-primary);
-}
+	& a {
+		color: var(--text-link);
+		text-decoration: none;
+	}
 
-h2 {
-	font-size: 1.25rem;
-	color: var(--text-primary);
-}
+	& h1 {
+		font-size: 1.5rem;
+		color: var(--text-primary);
+	}
 
-h3 {
-	font-size: 1rem;
-	color: var(--text-primary);
-}
+	& h2 {
+		font-size: 1.25rem;
+		color: var(--text-primary);
+	}
 
-small {
-	font-size: 0.875rem;
-	color: light-dark(rgb(109, 110, 119), rgb(173, 174, 180));
-}
+	& h3 {
+		font-size: 1rem;
+		color: var(--text-primary);
+	}
 
-code {
-	padding: 0 0.2em;
-	font-family: var(--font-code);
-	font-size: 0.875rem;
-	line-height: 1.125rem;
-	background: var(--background-code);
-	border: var(--border-normal);
-	border-radius: var(--radius-xs);
-}
+	& small {
+		font-size: 0.875rem;
+		color: light-dark(rgb(109, 110, 119), rgb(173, 174, 180));
+	}
 
-pre {
-	padding: 0.5em;
-	overflow-x: auto;
-	font-size: 0.875rem;
-	line-height: 1.5;
-	white-space: pre-wrap;
-	background: var(--background-code);
-	border: var(--border-normal);
-	border-radius: var(--radius-xs);
-}
+	& code {
+		padding: 0 0.2em;
+		font-family: var(--font-code);
+		font-size: 0.875rem;
+		line-height: 1.125rem;
+		background: var(--background-code);
+		border: var(--border-normal);
+		border-radius: var(--radius-xs);
+	}
 
-blockquote {
-	padding: 0 8px 0 12px;
-	margin: 4px 0;
-	color: var(--text-secondary);
-	border-left: 4px solid var(--spine-default);
+	& pre {
+		padding: 0.5em;
+		overflow-x: auto;
+		font-size: 0.875rem;
+		line-height: 1.5;
+		white-space: pre-wrap;
+		background: var(--background-code);
+		border: var(--border-normal);
+		border-radius: var(--radius-xs);
+	}
+
+	& blockquote {
+		padding: 0 8px 0 12px;
+		margin: 4px 0;
+		color: var(--text-secondary);
+		border-left: 4px solid var(--spine-default);
+	}
+
+	& .spoiler {
+		background-color: var(--background-spoiler);
+		border-radius: var(--radius-xs);
+	}
+
+	& .mention {
+		padding: 0 2px;
+		font-weight: var(--font-weight-medium);
+		color: var(--mention-foreground);
+		background-color: var(--mention-background);
+		border-radius: var(--radius-xs);
+	}
+
+	& img {
+		display: block;
+		max-width: 100%;
+		margin-top: var(--space-xxs);
+		border-radius: var(--radius-sm);
+	}
 }
 
 .card {
@@ -205,28 +229,4 @@ blockquote {
 
 .timestamp {
 	color: var(--text-muted);
-}
-
-.message {
-	color: var(--text-default);
-
-	& .spoiler {
-		background-color: var(--background-spoiler);
-		border-radius: var(--radius-xs);
-	}
-
-	& .mention {
-		padding: 0 2px;
-		font-weight: var(--font-weight-medium);
-		color: var(--mention-foreground);
-		background-color: var(--mention-background);
-		border-radius: var(--radius-xs);
-	}
-
-	& img {
-		display: block;
-		max-width: 100%;
-		margin-top: var(--space-xxs);
-		border-radius: var(--radius-sm);
-	}
 }
