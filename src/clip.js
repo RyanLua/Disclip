@@ -45,31 +45,6 @@ async function generateMessageScreenshot(message, env) {
 	console.log(JSON.stringify(message));
 
 	await page.evaluate((message) => {
-		// Function to convert markdown formatting to HTML
-		function parseMarkdown(text) {
-			return (
-				text
-					// change \n to <br> for line breaks
-					.replace(/\n/g, '<br>')
-					// **bold**
-					.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-					// __underline__
-					.replace(/__(.*?)__/g, '<u>$1</u>')
-					// *italic*
-					.replace(/\*([^*]+?)\*/g, '<em>$1</em>')
-					// _italic_
-					.replace(/\b_([^_]+?)_\b/g, '<em>$1</em>')
-					// ||spoiler||
-					.replace(/\|\|([^|]+?)\|\|/g, '<span class="spoiler">$1</span>')
-					// ~~strikethrough~~
-					.replace(/~~(.*?)~~/g, '<del>$1</del>')
-					// ```code block```
-					.replace(/```([^`]+?)```/g, '<pre>$1</pre>')
-					// `code`
-					.replace(/`([^`]+?)`/g, '<code>$1</code>')
-			);
-		}
-
 		const author = message.author;
 		const username = author.global_name || author.username;
 		const defaultAvatarIndex = author.discriminator
@@ -82,7 +57,34 @@ async function generateMessageScreenshot(message, env) {
 		const serverTagBadge = author.clan
 			? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.png`
 			: '';
-		const messageContent = parseMarkdown(message.content);
+
+		// Parse message content and replace markdown with HTML
+		const messageContent = message.content
+			.replace(/\n/g, '<br>') // change \n to <br> for line breaks
+
+			// Headers
+			.replace(/^### (.+)$/gm, '<h3>$1</h3>') // ### Header 3
+			.replace(/^## (.+)$/gm, '<h2>$1</h2>') // ## Header 2
+			.replace(/^# (.+)$/gm, '<h1>$1</h1>') // # Header 1
+
+			// Subtext
+			.replace(/^-# (.+)$/gm, '<small>$1</small>') // -# Subtext
+
+			// Block quotes
+			.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>') // > Block quote
+
+			// Masked links
+			.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>') // [text](url)
+
+			.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // **bold**
+			.replace(/__(.*?)__/g, '<u>$1</u>') // __underline__
+			.replace(/\*([^*]+?)\*/g, '<em>$1</em>') // *italic*
+			.replace(/\b_([^_]+?)_\b/g, '<em>$1</em>') // _italic_
+			.replace(/\|\|([^|]+?)\|\|/g, '<span class="spoiler">$1</span>') // ||spoiler||
+			.replace(/~~(.*?)~~/g, '<del>$1</del>') // ~~strikethrough~~
+			.replace(/```([^`]+?)```/g, '<pre>$1</pre>') // ```code block```
+			.replace(/`([^`]+?)`/g, '<code>$1</code>'); // `code`
+
 
 		document.querySelector('.avatar').setAttribute('src', avatarUrl);
 
