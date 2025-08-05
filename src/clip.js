@@ -85,7 +85,6 @@ async function generateMessageScreenshot(message, env) {
 			.replace(/```([^`]+?)```/g, '<pre>$1</pre>') // ```code block```
 			.replace(/`([^`]+?)`/g, '<code>$1</code>'); // `code`
 
-
 		document.querySelector('.avatar').setAttribute('src', avatarUrl);
 
 		const usernameElement = document.querySelector('.username');
@@ -102,8 +101,8 @@ async function generateMessageScreenshot(message, env) {
 	const cardBoundingBox = await cardElement.boundingBox();
 
 	await page.setViewport({
-		width: cardBoundingBox.width + 200,
-		height: cardBoundingBox.height + 200,
+		width: Math.ceil(cardBoundingBox.width + 200),
+		height: Math.ceil(cardBoundingBox.height + 200),
 		deviceScaleFactor: 2,
 	});
 
