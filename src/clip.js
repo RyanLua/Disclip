@@ -42,7 +42,34 @@ async function generateMessageScreenshot(message, env) {
 	await page.setContent(index, { waitUntil: 'networkidle0' });
 	await page.addStyleTag({ content: style });
 
+	console.log(JSON.stringify(message));
+
 	await page.evaluate((message) => {
+		// Function to convert markdown formatting to HTML
+		function parseMarkdown(text) {
+			return (
+				text
+					// change \n to <br> for line breaks
+					.replace(/\n/g, '<br>')
+					// **bold**
+					.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+					// __underline__
+					.replace(/__(.*?)__/g, '<u>$1</u>')
+					// *italic*
+					.replace(/\*([^*]+?)\*/g, '<em>$1</em>')
+					// _italic_
+					.replace(/\b_([^_]+?)_\b/g, '<em>$1</em>')
+					// ||spoiler||
+					.replace(/\|\|([^|]+?)\|\|/g, '<span class="spoiler">$1</span>')
+					// ~~strikethrough~~
+					.replace(/~~(.*?)~~/g, '<del>$1</del>')
+					// ```code block```
+					.replace(/```([^`]+?)```/g, '<pre>$1</pre>')
+					// `code`
+					.replace(/`([^`]+?)`/g, '<code>$1</code>')
+			);
+		}
+
 		const author = message.author;
 		const username = author.global_name || author.username;
 		const defaultAvatarIndex = author.discriminator
@@ -55,7 +82,7 @@ async function generateMessageScreenshot(message, env) {
 		const serverTagBadge = author.clan
 			? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.png`
 			: '';
-		const messageContent = message.content;
+		const messageContent = parseMarkdown(message.content);
 
 		document.querySelector('.avatar').setAttribute('src', avatarUrl);
 
@@ -66,7 +93,7 @@ async function generateMessageScreenshot(message, env) {
 		tagElement.querySelector('span').textContent = serverTag;
 		tagElement.querySelector('img').setAttribute('src', serverTagBadge);
 
-		document.querySelector('.message').textContent = messageContent;
+		document.querySelector('.message').innerHTML = messageContent;
 	}, message);
 
 	const cardElement = await page.$('.card');
