@@ -42,8 +42,6 @@ async function generateMessageScreenshot(message, env) {
 	await page.setContent(index, { waitUntil: 'networkidle0' });
 	await page.addStyleTag({ content: style });
 
-	console.log(JSON.stringify(message));
-
 	await page.evaluate((message) => {
 		const author = message.author;
 		const username = author.global_name || author.username;
