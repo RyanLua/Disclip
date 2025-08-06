@@ -67,7 +67,7 @@ async function generateMessageScreenshot(message, env) {
 			.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>') // [text](url)
 			.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // **bold**
 			.replace(/__(.+?)__/g, '<u>$1</u>') // __underline__
-			.replace(/(\*|_)([^*_]+?)\1/g, '<em>$2</em>') // *italic* or _italic_
+			.replace(/(\*|_)(.+?)\1/g, '<em>$2</em>') // *italic* or _italic_
 			.replace(/\|\|(.+?)\|\|/g, '<span class="spoiler">$1</span>') // ||spoiler||
 			.replace(/~~(.+?)~~/g, '<del>$1</del>') // ~~strikethrough~~
 			.replace(/```([^`]+?)```/g, '<pre>$1</pre>') // ```code block```
