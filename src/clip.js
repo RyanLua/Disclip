@@ -59,20 +59,19 @@ async function generateMessageScreenshot(message, env) {
 		// TODO: Move this parsing to a separate function/module
 		// Parse message content and replace markdown with HTML
 		const messageContent = message.content
-			.replace(/^### (.*)$/gm, '<h3>$1</h3>') // ### header 3
-			.replace(/^## (.*)$/gm, '<h2>$1</h2>') // ## header 2
-			.replace(/^# (.*)$/gm, '<h1>$1</h1>') // # header 1
-			.replace(/^-# (.*)$/gm, '<small>$1</small>') // -# subtext
-			.replace(/^> (.*)$/gm, '<blockquote>$1</blockquote>') // > blockquote
+			.replace(/^### (.+)$/gm, '<h3>$1</h3>') // ### header 3
+			.replace(/^## (.+)$/gm, '<h2>$1</h2>') // ## header 2
+			.replace(/^# (.+)$/gm, '<h1>$1</h1>') // # header 1
+			.replace(/^-# (.+)$/gm, '<small>$1</small>') // -# subtext
+			.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>') // > blockquote
 			.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>') // [text](url)
-			.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // **bold**
-			.replace(/__(.*?)__/g, '<u>$1</u>') // __underline__
-			.replace(/\*([^*]+?)\*/g, '<em>$1</em>') // *italic*
-			.replace(/\b_([^_]+?)_\b/g, '<em>$1</em>') // _italic_
-			.replace(/\|\|([^|]+?)\|\|/g, '<span class="spoiler">$1</span>') // ||spoiler||
-			.replace(/~~(.*?)~~/g, '<del>$1</del>') // ~~strikethrough~~
+			.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // **bold**
+			.replace(/__(.+?)__/g, '<u>$1</u>') // __underline__
+			.replace(/(\*|_)([^*_]+?)\1/g, '<em>$2</em>') // *italic* or _italic_
+			.replace(/\|\|(.+?)\|\|/g, '<span class="spoiler">$1</span>') // ||spoiler||
+			.replace(/~~(.+?)~~/g, '<del>$1</del>') // ~~strikethrough~~
 			.replace(/```([^`]+?)```/g, '<pre>$1</pre>') // ```code block```
-			.replace(/`([^`]+?)`/g, '<code>$1</code>') // `code`
+			.replace(/`([^`]+)`/g, '<code>$1</code>') // `inline code`
 			.replace(/\n/g, '<br>'); // change \n to <br> for line breaks
 
 		document.querySelector('.avatar').setAttribute('src', avatarUrl);
