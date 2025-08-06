@@ -59,21 +59,7 @@ async function generateMessageScreenshot(message, env) {
 		// Parse message content and replace markdown with HTML
 		const messageContent = message.content
 			.replace(/\n/g, '<br>') // change \n to <br> for line breaks
-
-			// Headers
-			.replace(/^### (.+)$/gm, '<h3>$1</h3>') // ### Header 3
-			.replace(/^## (.+)$/gm, '<h2>$1</h2>') // ## Header 2
-			.replace(/^# (.+)$/gm, '<h1>$1</h1>') // # Header 1
-
-			// Subtext
-			.replace(/^-# (.+)$/gm, '<small>$1</small>') // -# Subtext
-
-			// Block quotes
-			.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>') // > Block quote
-
-			// Masked links
 			.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>') // [text](url)
-
 			.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // **bold**
 			.replace(/__(.*?)__/g, '<u>$1</u>') // __underline__
 			.replace(/\*([^*]+?)\*/g, '<em>$1</em>') // *italic*
