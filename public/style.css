@@ -33,10 +33,15 @@
 	--border-normal: 1px solid light-dark(rgb(210, 211, 217), rgb(72, 74, 90));
 	--shadow-high: 0 12px 36px 0 hsl(none 0% 0% / 0.12);
 
+	--background-spoiler: rgba(151, 151, 159, 0.08);
 	--background-code: light-dark(rgb(244, 245, 250), rgb(53, 55, 72));
 	--background-mod-strong: rgba(151, 151, 159, 0.2);
+	--mention-background: rgb(59, 63, 101);
+	--mention-foreground: rgb(206, 215, 255);
+	--spine-default: light-dark(rgb(203, 203, 207), rgb(94, 95, 102));
 
 	--text-primary: light-dark(rgb(50, 51, 56), rgb(255, 255, 255));
+	--text-secondary: light-dark(rgb(95, 96, 106), rgb(196, 197, 201));
 	--text-default: light-dark(rgb(47, 48, 53), rgb(223, 224, 226));
 	--text-muted: light-dark(rgb(112, 113, 122), rgb(155, 156, 163));
 	--text-link: light-dark(rgb(0, 116, 227), rgb(123, 176, 245));
@@ -93,50 +98,81 @@ html {
 	);
 }
 
-a {
-	color: var(--text-link);
-	text-decoration: none;
-}
+.message {
+	color: var(--text-default);
 
-h1 {
-	font-size: 1.5rem;
-	color: var(--text-primary);
-}
+	& a {
+		color: var(--text-link);
+		text-decoration: none;
+	}
 
-h2 {
-	font-size: 1.25rem;
-	color: var(--text-primary);
-}
+	& h1 {
+		font-size: 1.5rem;
+		color: var(--text-primary);
+	}
 
-h3 {
-	font-size: 1rem;
-	color: var(--text-primary);
-}
+	& h2 {
+		font-size: 1.25rem;
+		color: var(--text-primary);
+	}
 
-small {
-	font-size: 0.875rem;
-	color: light-dark(rgb(109, 110, 119), rgb(173, 174, 180));
-}
+	& h3 {
+		font-size: 1rem;
+		color: var(--text-primary);
+	}
 
-code {
-	padding: 0 0.2em;
-	font-family: var(--font-code);
-	font-size: 0.875rem;
-	line-height: 1.125rem;
-	background: var(--background-code);
-	border: var(--border-normal);
-	border-radius: var(--radius-xs);
-}
+	& small {
+		font-size: 0.875rem;
+		color: light-dark(rgb(109, 110, 119), rgb(173, 174, 180));
+	}
 
-pre {
-	padding: 0.5em;
-	overflow-x: auto;
-	font-size: 0.875rem;
-	line-height: 1.5;
-	white-space: pre-wrap;
-	background: var(--background-code);
-	border: var(--border-normal);
-	border-radius: var(--radius-xs);
+	& code {
+		padding: 0 0.2em;
+		font-family: var(--font-code);
+		font-size: 0.875rem;
+		line-height: 1.125rem;
+		background: var(--background-code);
+		border: var(--border-normal);
+		border-radius: var(--radius-xs);
+	}
+
+	& pre {
+		padding: 0.5em;
+		overflow-x: auto;
+		font-size: 0.875rem;
+		line-height: 1.5;
+		white-space: pre-wrap;
+		background: var(--background-code);
+		border: var(--border-normal);
+		border-radius: var(--radius-xs);
+	}
+
+	& blockquote {
+		padding: 0 8px 0 12px;
+		margin: 4px 0;
+		color: var(--text-secondary);
+		border-left: 4px solid var(--spine-default);
+	}
+
+	& .spoiler {
+		background-color: var(--background-spoiler);
+		border-radius: var(--radius-xs);
+	}
+
+	& .mention {
+		padding: 0 2px;
+		font-weight: var(--font-weight-medium);
+		color: var(--mention-foreground);
+		background-color: var(--mention-background);
+		border-radius: var(--radius-xs);
+	}
+
+	& img {
+		display: block;
+		max-width: 100%;
+		margin-top: var(--space-xxs);
+		border-radius: var(--radius-sm);
+	}
 }
 
 .card {
@@ -196,15 +232,4 @@ pre {
 
 .timestamp {
 	color: var(--text-muted);
-}
-
-.message {
-	color: var(--text-default);
-
-	& img {
-		display: block;
-		max-width: 100%;
-		margin-top: var(--space-xxs);
-		border-radius: var(--radius-sm);
-	}
 }

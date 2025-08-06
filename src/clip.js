@@ -55,7 +55,24 @@ async function generateMessageScreenshot(message, env) {
 		const serverTagBadge = author.clan
 			? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.png`
 			: '';
-		const messageContent = message.content;
+
+		// TODO: Move this parsing to a separate function/module
+		// Parse message content and replace markdown with HTML
+		const messageContent = message.content
+			.replace(/^### (.+)$/gm, '<h3>$1</h3>') // ### header 3
+			.replace(/^## (.+)$/gm, '<h2>$1</h2>') // ## header 2
+			.replace(/^# (.+)$/gm, '<h1>$1</h1>') // # header 1
+			.replace(/^-# (.+)$/gm, '<small>$1</small>') // -# subtext
+			.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>') // > blockquote
+			.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>') // [text](url)
+			.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // **bold**
+			.replace(/__(.+?)__/g, '<u>$1</u>') // __underline__
+			.replace(/(\*|_)([^*_]+?)\1/g, '<em>$2</em>') // *italic* or _italic_
+			.replace(/\|\|(.+?)\|\|/g, '<span class="spoiler">$1</span>') // ||spoiler||
+			.replace(/~~(.+?)~~/g, '<del>$1</del>') // ~~strikethrough~~
+			.replace(/```([^`]+?)```/g, '<pre>$1</pre>') // ```code block```
+			.replace(/`([^`]+)`/g, '<code>$1</code>') // `inline code`
+			.replace(/\n/g, '<br>'); // change \n to <br> for line breaks
 
 		document.querySelector('.avatar').setAttribute('src', avatarUrl);
 
@@ -66,7 +83,7 @@ async function generateMessageScreenshot(message, env) {
 		tagElement.querySelector('span').textContent = serverTag;
 		tagElement.querySelector('img').setAttribute('src', serverTagBadge);
 
-		document.querySelector('.message').textContent = messageContent;
+		document.querySelector('.message').innerHTML = messageContent;
 	}, message);
 
 	// Wait for images to load
@@ -76,8 +93,8 @@ async function generateMessageScreenshot(message, env) {
 	const cardElement = await page.$('.card');
 	const cardBoundingBox = await cardElement.boundingBox();
 	await page.setViewport({
-		width: cardBoundingBox.width + 200,
-		height: cardBoundingBox.height + 200,
+		width: Math.ceil(cardBoundingBox.width + 200),
+		height: Math.ceil(cardBoundingBox.height + 200),
 		deviceScaleFactor: 2,
 	});
 
