@@ -142,7 +142,7 @@ pre {
 .card {
 	display: flex;
 	gap: var(--space-sm);
-	max-width: 400px;
+	max-width: 600px;
 	padding: var(--space-sm);
 	word-break: break-word;
 	background-color: var(--card-primary-bg);
