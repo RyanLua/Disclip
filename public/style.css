@@ -65,6 +65,8 @@
 	--font-weight-bold: 700;
 	--font-weight-extrabold: 800;
 
+	--custom-emoji-size-emoji: 1.375em;
+
 	--radius-none: 0px;
 	--radius-xs: 4px;
 	--radius-sm: 8px;
@@ -100,11 +102,6 @@ html {
 
 .message {
 	color: var(--text-default);
-
-	& a {
-		color: var(--text-link);
-		text-decoration: none;
-	}
 
 	& h1 {
 		font-size: 1.5rem;
@@ -154,6 +151,11 @@ html {
 		border-left: 4px solid var(--spine-default);
 	}
 
+	& .emoji {
+		width: var(--custom-emoji-size-emoji);
+		height: var(--custom-emoji-size-emoji);
+	}
+
 	& .spoiler {
 		background-color: var(--background-spoiler);
 		border-radius: var(--radius-xs);
@@ -167,7 +169,7 @@ html {
 		border-radius: var(--radius-xs);
 	}
 
-	& img {
+	& .attachment {
 		display: block;
 		max-width: 100%;
 		margin-top: var(--space-xxs);
