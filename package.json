@@ -35,6 +35,7 @@
 	},
 	"dependencies": {
 		"@cloudflare/puppeteer": "^1.0.3",
+		"@twemoji/api": "^16.0.1",
 		"discord-api-types": "^0.38.13",
 		"discord-interactions": "^4.3.0",
 		"dotenv": "^17.0.0",
