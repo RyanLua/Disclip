@@ -41,6 +41,9 @@ async function generateMessageScreenshot(message, env) {
 	const page = await browser.newPage();
 	await page.setContent(index);
 	await page.addStyleTag({ content: style });
+	await page.addScriptTag({
+		url: 'https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js',
+	});
 
 	await page.evaluate((message) => {
 		const author = message.author;
@@ -83,7 +86,16 @@ async function generateMessageScreenshot(message, env) {
 		tagElement.querySelector('span').textContent = serverTag;
 		tagElement.querySelector('img').setAttribute('src', serverTagBadge);
 
-		document.querySelector('.message').innerHTML = messageContent;
+		// Set message element
+		const messageElement = document.querySelector('.message');
+		messageElement.innerHTML = messageContent;
+
+		// Parse message element with Twemoji
+		const twemoji = window.twemoji;
+		twemoji.parse(messageElement, {
+			folder: 'svg',
+			ext: '.svg',
+		});
 	}, message);
 
 	// Wait for images to load
