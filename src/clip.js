@@ -62,6 +62,10 @@ async function generateMessageScreenshot(message, env) {
 		// TODO: Move this parsing to a separate function/module
 		// Parse message content and replace markdown with HTML
 		const messageContent = message.content
+			.replace(
+				/<a?:([^:>]+):(\d+)>/g,
+				'<img src="https://cdn.discordapp.com/emojis/$2.webp" alt="$1" class="emoji">',
+			) // custom emojis
 			.replace(/^### (.+)$/gm, '<h3>$1</h3>') // ### header 3
 			.replace(/^## (.+)$/gm, '<h2>$1</h2>') // ## header 2
 			.replace(/^# (.+)$/gm, '<h1>$1</h1>') // # header 1
