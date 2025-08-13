@@ -41,6 +41,9 @@ async function generateMessageScreenshot(message, env) {
 	const page = await browser.newPage();
 	await page.setContent(index);
 	await page.addStyleTag({ content: style });
+	await page.addScriptTag({
+		url: 'https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js',
+	});
 
 	await page.evaluate((message) => {
 		const author = message.author;
@@ -49,16 +52,20 @@ async function generateMessageScreenshot(message, env) {
 			? Number(author.discriminator) % 5 // Legacy username system
 			: (BigInt(author.id) >> 22n) % 6n; // New username system
 		const avatarUrl = author.avatar
-			? `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.png`
+			? `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.webp`
 			: `https://cdn.discordapp.com/embed/avatars/${defaultAvatarIndex}.png`;
 		const serverTag = author.clan?.tag || '';
 		const serverTagBadge = author.clan
-			? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.png`
+			? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.webp`
 			: '';
 
 		// TODO: Move this parsing to a separate function/module
 		// Parse message content and replace markdown with HTML
 		const messageContent = message.content
+			.replace(
+				/<a?:([^:>]+):(\d+)>/g,
+				'<img src="https://cdn.discordapp.com/emojis/$2.webp" alt="$1" class="emoji">',
+			) // custom emojis
 			.replace(/^### (.+)$/gm, '<h3>$1</h3>') // ### header 3
 			.replace(/^## (.+)$/gm, '<h2>$1</h2>') // ## header 2
 			.replace(/^# (.+)$/gm, '<h1>$1</h1>') // # header 1
@@ -83,7 +90,16 @@ async function generateMessageScreenshot(message, env) {
 		tagElement.querySelector('span').textContent = serverTag;
 		tagElement.querySelector('img').setAttribute('src', serverTagBadge);
 
-		document.querySelector('.message').innerHTML = messageContent;
+		// Set message element
+		const messageElement = document.querySelector('.message');
+		messageElement.innerHTML = messageContent;
+
+		// Parse message element with Twemoji
+		const twemoji = window.twemoji;
+		twemoji.parse(messageElement, {
+			folder: 'svg',
+			ext: '.svg',
+		});
 	}, message);
 
 	// Wait for images to load

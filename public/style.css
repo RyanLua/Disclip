@@ -101,11 +101,6 @@ html {
 .message {
 	color: var(--text-default);
 
-	& a {
-		color: var(--text-link);
-		text-decoration: none;
-	}
-
 	& h1 {
 		font-size: 1.5rem;
 		color: var(--text-primary);
@@ -154,12 +149,12 @@ html {
 		border-left: 4px solid var(--spine-default);
 	}
 
-	& .spoiler {
+	& span.spoiler {
 		background-color: var(--background-spoiler);
 		border-radius: var(--radius-xs);
 	}
 
-	& .mention {
+	& span.mention {
 		padding: 0 2px;
 		font-weight: var(--font-weight-medium);
 		color: var(--mention-foreground);
@@ -167,7 +162,13 @@ html {
 		border-radius: var(--radius-xs);
 	}
 
-	& img {
+	& img.emoji {
+		width: 1.375em;
+		height: 1.375em;
+		vertical-align: -0.375em;
+	}
+
+	& img.attachment {
 		display: block;
 		max-width: 100%;
 		margin-top: var(--space-xxs);
