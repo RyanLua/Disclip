@@ -52,11 +52,11 @@ async function generateMessageScreenshot(message, env) {
 			? Number(author.discriminator) % 5 // Legacy username system
 			: (BigInt(author.id) >> 22n) % 6n; // New username system
 		const avatarUrl = author.avatar
-			? `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.png`
+			? `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.webp`
 			: `https://cdn.discordapp.com/embed/avatars/${defaultAvatarIndex}.png`;
 		const serverTag = author.clan?.tag || '';
 		const serverTagBadge = author.clan
-			? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.png`
+			? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.webp`
 			: '';
 
 		// TODO: Move this parsing to a separate function/module
