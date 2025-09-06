@@ -9,5 +9,12 @@
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
+	"rules": [
+		{
+			"type": "Text",
+			"globs": ["**/*.css"],
+			"fallthrough": true
+		}
+	]
 }
