@@ -57,9 +57,9 @@ On your Discord app's settings, enter your app credentials in `.dev.vars`:
 When you're done, your `.dev.vars` file should look similar to this:
 
 ```dotenv
-DISCORD_APPLICATION_ID: "621149242744111114"
-DISCORD_PUBLIC_KEY: "445c5654d426763870ecc6060f0a12f983817a33550ad5c0499fc322fdd45072"
-DISCORD_TOKEN: "NjIxMTQ5TjQyNzQ0MTEyMTE1.GcUa2R.ks2XadvqhA7Q-kQorySUwm2leia8Zkx1mfIqbI"
+DISCORD_APPLICATION_ID="621149242744111114"
+DISCORD_PUBLIC_KEY="445c5654d426763870ecc6060f0a12f983817a33550ad5c0499fc322fdd45072"
+DISCORD_TOKEN="NjIxMTQ5TjQyNzQ0MTEyMTE1.GcUa2R.ks2XadvqhA7Q-kQorySUwm2leia8Zkx1mfIqbI"
 ```
 
 ### Configuring your Discord app
