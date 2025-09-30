@@ -58,6 +58,7 @@ async function generateMessageScreenshot(message, env) {
 		const serverTagBadge = author.clan
 			? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.webp`
 			: '';
+		const botTag = author.bot;
 
 		// TODO: Move this parsing to a separate function/module
 		// Parse message content and replace markdown with HTML
@@ -86,9 +87,18 @@ async function generateMessageScreenshot(message, env) {
 		const usernameElement = document.querySelector('.username');
 		usernameElement.firstChild.textContent = username;
 
-		const tagElement = document.querySelector('.username .tag');
-		tagElement.querySelector('span').textContent = serverTag;
-		tagElement.querySelector('img').setAttribute('src', serverTagBadge);
+		const serverTagElement = document.getElementById('server-tag');
+		if (serverTag) {
+			serverTagElement.querySelector('span').textContent = serverTag;
+			serverTagElement.querySelector('img').setAttribute('src', serverTagBadge);
+		} else {
+			serverTagElement.style.display = 'none';
+		}
+
+		const botTagElement = document.getElementById('bot-tag');
+		if (!botTag) {
+			botTagElement.style.display = 'none';
+		}
 
 		// Set message element
 		const messageElement = document.querySelector('.message');
