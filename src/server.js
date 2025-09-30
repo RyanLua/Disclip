@@ -78,6 +78,12 @@ router.post('/interactions', async (request, env, ctx) => {
 		}
 	}
 
+	if (interaction.type === InteractionType.MessageComponent) {
+		const componentId = interaction.data.custom_id;
+
+		console.log(`Received interaction for component: ${componentId}`);
+	}
+
 	console.error('Unknown Type');
 	return new JsonResponse({ error: 'Unknown Type' }, { status: 400 });
 });
