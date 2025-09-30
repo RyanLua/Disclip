@@ -29,6 +29,17 @@ export const CLIP_COMPONENT = (messageUrl) => ({
 						},
 					],
 				},
+				{
+					type: ComponentType.ActionRow,
+					components: [
+						{
+							style: ButtonStyle.Secondary,
+							type: ComponentType.Button,
+							custom_id: 'save_clip',
+							label: 'Save to DMs',
+						},
+					],
+				},
 			],
 		},
 	],
