@@ -12,6 +12,10 @@ Disclip is a [Discord app](https://support-apps.discord.com/hc/en-us/articles/26
 
 ![Example of clipped message using Disclip](assets/message.png)
 
+## Add App
+
+You can add Disclip as a user or server app using the [install link](https://discord.com/oauth2/authorize?client_id=621149242744111114). See our [app on the App Directory](https://canary.discord.com/discovery/applications/621149242744111114) for more.
+
 ## Support Server
 
 If you have any questions, suggestions, or need help with Disclip, feel free to join our support server on Discord.
