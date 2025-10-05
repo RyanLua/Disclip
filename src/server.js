@@ -64,9 +64,11 @@ router.post('/interactions', async (request, env, ctx) => {
 	}
 
 	if (interaction.type === InteractionType.ApplicationCommand) {
+		const commandName = interaction.data.name;
+
 		// Most user commands will come as `APPLICATION_COMMAND`.
-		switch (interaction.data.name.toLowerCase()) {
-			case CLIP_COMMAND.name.toLowerCase(): {
+		switch (commandName) {
+			case CLIP_COMMAND.name: {
 				ctx.waitUntil(generateMessageClip(interaction, env));
 
 				return new JsonResponse({
@@ -81,7 +83,7 @@ router.post('/interactions', async (request, env, ctx) => {
 	if (interaction.type === InteractionType.MessageComponent) {
 		const componentId = interaction.data.custom_id;
 
-		console.log(`Received interaction for component: ${componentId}`);
+		console.log(interaction);
 	}
 
 	console.error('Unknown Type');
