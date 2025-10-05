@@ -10,8 +10,8 @@ import {
 import { verifyKey } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
 import { generateMessageClip } from './clip.js';
-import { saveClip } from './save-clip.js';
 import { CLIP_COMMAND, SILENT_CLIP_COMMAND } from './commands.js';
+import { saveClip } from './save-clip.js';
 
 /**
  * @typedef {Object} Env
