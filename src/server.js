@@ -76,7 +76,7 @@ router.post('/interactions', async (request, env, ctx) => {
 			}
 			case SILENT_CLIP_COMMAND.name.toLowerCase(): {
 				ctx.waitUntil(
-					generateMessageClip(interaction, env, { ephemeral: true }),
+					generateMessageClip(interaction, env),
 				);
 
 				return new JsonResponse({
