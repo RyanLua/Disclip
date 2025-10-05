@@ -7,6 +7,7 @@ import {
 /**
  * Component for clipping a message.
  * @param {string} messageUrl - URL of the Discord message
+ * @param {string}
  * @returns {import('discord-api-types/v10').RESTPostAPIWebhookWithTokenJSONBody}
  */
 export const CLIP_COMPONENT = (messageUrl) => ({
@@ -17,7 +18,7 @@ export const CLIP_COMPONENT = (messageUrl) => ({
 			components: [
 				{
 					type: ComponentType.TextDisplay,
-					content: `## Successfully Clipped Message\n\nSaved message from ${messageUrl}`,
+					content: `## Clipped Message\n\nOriginal message from ${messageUrl}`,
 				},
 				{
 					type: ComponentType.MediaGallery,
@@ -64,7 +65,7 @@ export const ERROR_COMPONENT = (errorStacktrace) => ({
 			components: [
 				{
 					type: ComponentType.TextDisplay,
-					content: `## Error\n\nUnknown error occurred:\n\`\`\`\n${errorStacktrace}\n\`\`\``,
+					content: `## Error\n\nUnknown error occurred\n\`\`\`\n${errorStacktrace}\n\`\`\``,
 				},
 				{
 					type: ComponentType.ActionRow,
