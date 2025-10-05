@@ -6,7 +6,7 @@
 
 import process from 'node:process';
 import dotenv from 'dotenv';
-import { CLIP_COMMAND } from './commands.js';
+import { CLIP_COMMAND, SILENT_CLIP_COMMAND } from './commands.js';
 
 dotenv.config({ path: '.dev.vars' });
 
@@ -34,7 +34,7 @@ const response = await fetch(url, {
 		Authorization: `Bot ${token}`,
 	},
 	method: 'PUT',
-	body: JSON.stringify([CLIP_COMMAND]),
+	body: JSON.stringify([CLIP_COMMAND, SILENT_CLIP_COMMAND]),
 });
 
 if (response.ok) {
