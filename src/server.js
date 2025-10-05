@@ -5,11 +5,12 @@
 import {
 	InteractionResponseType,
 	InteractionType,
+	MessageFlags,
 } from 'discord-api-types/v10';
 import { verifyKey } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
 import { generateMessageClip } from './clip.js';
-import { CLIP_COMMAND } from './commands.js';
+import { CLIP_COMMAND, SILENT_CLIP_COMMAND } from './commands.js';
 
 /**
  * @typedef {Object} Env
@@ -73,6 +74,16 @@ router.post('/interactions', async (request, env, ctx) => {
 
 				return new JsonResponse({
 					type: InteractionResponseType.DeferredChannelMessageWithSource,
+				});
+			}
+			case SILENT_CLIP_COMMAND.name.toLowerCase(): {
+				ctx.waitUntil(generateMessageClip(interaction, env));
+
+				return new JsonResponse({
+					type: InteractionResponseType.DeferredChannelMessageWithSource,
+					data: {
+						flags: MessageFlags.Ephemeral,
+					},
 				});
 			}
 			default:
