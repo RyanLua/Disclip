@@ -24,3 +24,20 @@ export const CLIP_COMMAND = {
 	],
 	type: ApplicationCommandType.Message,
 };
+
+/**
+ * Silent clip command that sends an ephemeral message.
+ * @type {import('discord-api-types/v10').RESTPostAPIApplicationCommandsJSONBody}
+ */
+export const SILENT_CLIP_COMMAND = {
+	name: 'Clip Message (silent)',
+	integration_types: [
+		ApplicationIntegrationType.GuildInstall,
+		ApplicationIntegrationType.UserInstall,
+	],
+	contexts: [
+		InteractionContextType.PrivateChannel,
+		InteractionContextType.Guild,
+	],
+	type: ApplicationCommandType.Message,
+};
