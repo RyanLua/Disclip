@@ -10,6 +10,7 @@ import {
 import { verifyKey } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
 import { generateMessageClip } from './clip.js';
+import { saveClip } from './save-clip.js';
 import { CLIP_COMMAND, SILENT_CLIP_COMMAND } from './commands.js';
 
 /**
@@ -94,7 +95,21 @@ router.post('/interactions', async (request, env, ctx) => {
 	if (interaction.type === InteractionType.MessageComponent) {
 		const componentId = interaction.data.custom_id;
 
-		console.log(interaction);
+		if (componentId === 'save_clip') {
+			// Send a DM to the user asynchronously
+			ctx.waitUntil(saveClip(interaction, env));
+
+			// Acknowledge the interaction ephemerally so the button press responds immediately
+			return new JsonResponse({
+				type: InteractionResponseType.ChannelMessageWithSource,
+				data: {
+					content: 'Saved clipped message to DMs.',
+					flags: MessageFlags.Ephemeral,
+				},
+			});
+		}
+
+		return new JsonResponse({ error: 'Unknown component' }, { status: 400 });
 	}
 
 	console.error('Unknown Type');
