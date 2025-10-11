@@ -6,6 +6,13 @@
 	"browser": {
 		"binding": "BROWSER"
 	},
+	"placement": {
+		"mode": "smart"
+	},
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1
+	},
 	"rules": [
 		{
 			"type": "Text",
