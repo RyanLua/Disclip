@@ -165,17 +165,17 @@ async function getRandomSession(endpoint) {
  * @param {*} env - The environment variables.
  */
 export async function generateMessageClip(interaction, env) {
-	let formData;
+	const formData = new FormData();
 	let msgJson;
 	try {
 		const targetId = interaction.data.target_id;
 		const targetMessage = interaction.data.resolved.messages[targetId];
+
 		const image = await generateMessageScreenshot(targetMessage, env);
 		const messageUrl = `https://discord.com/channels/${interaction.guild_id || '@me'}/${targetMessage.channel_id}/${targetMessage.id}`;
 
 		msgJson = CLIP_COMPONENT(messageUrl);
 
-		formData = new FormData();
 		formData.append('payload_json', JSON.stringify(msgJson));
 		formData.append('files[0]', new Blob([image]), 'clip.png');
 	} catch (error) {
@@ -183,24 +183,17 @@ export async function generateMessageClip(interaction, env) {
 
 		msgJson = ERROR_COMPONENT(error.stack || 'Unknown error occurred');
 
-		formData = new FormData();
 		formData.append('payload_json', JSON.stringify(msgJson));
-	} finally {
-		const discordUrl = `https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`;
-		const discordResponse = await fetch(discordUrl, {
-			method: 'POST',
-			body: formData,
-		});
-		if (!discordResponse.ok) {
-			console.error(
-				'Failed to send followup to discord',
-				discordResponse.status,
-			);
-			const json = await discordResponse.json();
-			console.error({
-				response: json,
-				msgJson: JSON.stringify(msgJson),
-			});
-		}
+	}
+
+	const discordUrl = `https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`;
+	const discordResponse = await fetch(discordUrl, {
+		method: 'POST',
+		body: formData,
+	});
+	if (!discordResponse.ok) {
+		console.error('Failed to send followup to discord', discordResponse.status);
+		const json = await discordResponse.json();
+		console.error({ response: json, msgJson: JSON.stringify(msgJson) });
 	}
 }
