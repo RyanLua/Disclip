@@ -194,6 +194,14 @@ html {
 	border-radius: var(--radius-round);
 }
 
+.avatar-decoration {
+	position: absolute;
+	width: 48px;
+	height: 48px;
+	margin-top: -4px;
+	margin-left: -4px;
+}
+
 .username {
 	display: flex;
 	flex-wrap: wrap;
