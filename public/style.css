@@ -138,34 +138,34 @@ html {
 	& > * {
 		font-size: 0.75rem;
 	}
-}
 
-.tag {
-	display: flex;
-	gap: var(--space-xxs);
-	align-items: center;
-	padding: 0 var(--space-xxs);
-	font-weight: var(--font-weight-semibold);
-	background-color: var(--background-mod-strong);
-	border-radius: var(--radius-xs);
+	& .tag {
+		display: flex;
+		gap: var(--space-xxs);
+		align-items: center;
+		padding: 0 var(--space-xxs);
+		font-weight: var(--font-weight-semibold);
+		background-color: var(--background-mod-strong);
+		border-radius: var(--radius-xs);
 
-	&.bot {
-		color: var(--color-white);
-		background-color: var(--color-blurple);
+		&.bot {
+			color: var(--color-white);
+			background-color: var(--color-blurple);
+		}
+
+		& img {
+			width: 12px;
+			height: 12px;
+		}
+
+		& img[src=""] {
+			display: none;
+		}
 	}
 
-	& img {
-		width: 12px;
-		height: 12px;
+	& .timestamp {
+		color: var(--text-muted);
 	}
-
-	& img[src=""] {
-		display: none;
-	}
-}
-
-.timestamp {
-	color: var(--text-muted);
 }
 
 .message {
