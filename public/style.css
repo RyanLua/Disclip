@@ -121,6 +121,10 @@ html {
 	height: 48px;
 	margin-top: -4px;
 	margin-left: -4px;
+
+	&[src=""] {
+		display: none;
+	}
 }
 
 .username {
