@@ -6,7 +6,7 @@
 
 import process from 'node:process';
 import dotenv from 'dotenv';
-import { CLIP_COMMAND, SILENT_CLIP_COMMAND } from './commands.js';
+import { CLIP_COMMAND, SILENT_CLIP_COMMAND } from './commands.ts';
 
 dotenv.config({ path: '.dev.vars' });
 

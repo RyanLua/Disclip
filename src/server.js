@@ -10,7 +10,7 @@ import {
 import { verifyKey } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
 import { generateMessageClip } from './clip.js';
-import { CLIP_COMMAND, SILENT_CLIP_COMMAND } from './commands.js';
+import { CLIP_COMMAND, SILENT_CLIP_COMMAND } from './commands.ts';
 
 class JsonResponse extends Response {
 	constructor(body, init) {

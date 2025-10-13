@@ -5,7 +5,7 @@
 import puppeteer from '@cloudflare/puppeteer';
 import index from '../public/index.html';
 import style from '../public/style.css';
-import { CLIP_COMPONENT, ERROR_COMPONENT } from './components.js';
+import { CLIP_COMPONENT, ERROR_COMPONENT } from './components.ts';
 
 /**
  * Generate a message screenshot from a Discord message.

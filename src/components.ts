@@ -2,14 +2,16 @@ import {
 	ButtonStyle,
 	ComponentType,
 	MessageFlags,
+	type RESTPostAPIWebhookWithTokenJSONBody,
 } from 'discord-api-types/v10';
 
 /**
  * Component for clipping a message.
- * @param {string} messageUrl - URL of the Discord message
- * @returns {import('discord-api-types/v10').RESTPostAPIWebhookWithTokenJSONBody}
+ * @param messageUrl - URL of the Discord message
  */
-export const CLIP_COMPONENT = (messageUrl) => ({
+export const CLIP_COMPONENT = (
+	messageUrl: string,
+): RESTPostAPIWebhookWithTokenJSONBody => ({
 	flags: MessageFlags.IsComponentsV2,
 	components: [
 		{
@@ -42,10 +44,11 @@ export const CLIP_COMPONENT = (messageUrl) => ({
 
 /**
  * Component for displaying an error message.
- * @param {string} errorStacktrace - The error stacktrace to display
- * @returns {import('discord-api-types/v10').RESTPostAPIWebhookWithTokenJSONBody}
+ * @param errorStacktrace - The error stacktrace to display
  */
-export const ERROR_COMPONENT = (errorStacktrace) => ({
+export const ERROR_COMPONENT = (
+	errorStacktrace: string,
+): RESTPostAPIWebhookWithTokenJSONBody => ({
 	flags: MessageFlags.IsComponentsV2,
 	components: [
 		{
