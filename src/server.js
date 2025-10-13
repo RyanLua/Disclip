@@ -9,7 +9,7 @@ import {
 } from 'discord-api-types/v10';
 import { verifyKey } from 'discord-interactions';
 import { AutoRouter } from 'itty-router';
-import { generateMessageClip } from './clip.js';
+import { generateMessageClip } from './clip.ts';
 import { CLIP_COMMAND, SILENT_CLIP_COMMAND } from './commands.ts';
 
 class JsonResponse extends Response {

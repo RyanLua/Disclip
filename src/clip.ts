@@ -2,37 +2,39 @@
  * Generates HTML content for a Discord message and then uses Puppeteer to take a screenshot of it.
  */
 
-import puppeteer from '@cloudflare/puppeteer';
+import puppeteer, {
+	type ActiveSession,
+	type BrowserWorker,
+} from '@cloudflare/puppeteer';
+import type { APIMessage } from 'discord-api-types/v10';
 import index from '../public/index.html';
 import style from '../public/style.css';
 import { CLIP_COMPONENT, ERROR_COMPONENT } from './components.ts';
 
 /**
  * Generate a message screenshot from a Discord message.
- * @param {import('discord-api-types/v10').APIMessage} message - The Discord message object.
- * @param {*} env - The environment variables.
- * @returns {Promise<Buffer>} - The screenshot image buffer.
+ * @param message - The Discord message object.
+ * @param env - The environment variables.
+ * @returns The screenshot image buffer.
  */
-async function generateMessageScreenshot(message, env) {
+async function generateMessageScreenshot(
+	message: APIMessage,
+	env,
+): Promise<Buffer> {
 	// Pick random session from open sessions
 	let sessionId = await getRandomSession(env.BROWSER);
 	let browser;
 	if (sessionId) {
 		try {
 			browser = await puppeteer.connect(env.BROWSER, sessionId);
-		} catch (sessionError) {
+		} catch (e) {
 			// another worker may have connected first
-			console.warn(`Failed to connect to ${sessionId}. Error ${sessionError}`);
+			console.log(`Failed to connect to ${sessionId}. Error ${e}`);
 		}
 	}
 	if (!browser) {
-		try {
-			// No open sessions, launch new session
-			browser = await puppeteer.launch(env.BROWSER);
-		} catch (browserError) {
-			console.error('Browser launch failed:', browserError);
-			throw browserError;
-		}
+		// No open sessions, launch new session
+		browser = await puppeteer.launch(env.BROWSER);
 	}
 
 	sessionId = browser.sessionId(); // get current session id
@@ -136,13 +138,14 @@ async function generateMessageScreenshot(message, env) {
 
 /**
  * Get a random session ID from the available sessions.
- * @todo Fix this when developing locally, where it will error because it can't get sessions while local.
- * @param {import("@cloudflare/puppeteer").BrowserWorker} endpoint
- * @return {Promise<string|undefined>} - The session ID or undefined if no sessions are available.
+ * @return The session ID or undefined if no sessions are available.
  * @see {@link https://developers.cloudflare.com/browser-rendering/workers-bindings/reuse-sessions/}
  */
-async function getRandomSession(endpoint) {
-	const sessions = await puppeteer.sessions(endpoint);
+async function getRandomSession(
+	endpoint: BrowserWorker,
+): Promise<string | undefined> {
+	const sessions: ActiveSession[] = await puppeteer.sessions(endpoint);
+	console.log(`Sessions: ${JSON.stringify(sessions)}`);
 	const sessionsIds = sessions
 		.filter((v) => {
 			return !v.connectionId; // remove sessions with workers connected to them
@@ -161,10 +164,10 @@ async function getRandomSession(endpoint) {
 
 /**
  * Generate a message clip from a Discord interaction.
- * @param {import('discord-api-types/v10').APIInteraction} interaction - The Discord interaction object.
- * @param {*} env - The environment variables.
+ * @param interaction - The Discord interaction object.
+ * @param env - The environment variables.
  */
-export async function generateMessageClip(interaction, env) {
+export async function generateMessageClip(interaction: APIInteraction, env) {
 	const formData = new FormData();
 	let msgJson;
 	try {
