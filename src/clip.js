@@ -37,105 +37,101 @@ async function generateMessageScreenshot(message, env) {
 
 	sessionId = browser.sessionId(); // get current session id
 
-	try {
-		// Generate the screenshot
-		const page = await browser.newPage();
-		await page.setContent(index);
-		await page.addStyleTag({ content: style });
-		await page.addScriptTag({
-			url: 'https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js',
+	// Generate the screenshot
+	const page = await browser.newPage();
+	await page.setContent(index);
+	await page.addStyleTag({ content: style });
+	await page.addScriptTag({
+		url: 'https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js',
+	});
+
+	await page.evaluate((message) => {
+		const author = message.author;
+		const username = author.global_name || author.username;
+		const defaultAvatarIndex = author.discriminator
+			? Number(author.discriminator) % 5 // Legacy username system
+			: (BigInt(author.id) >> 22n) % 6n; // New username system
+		const avatarUrl = author.avatar
+			? `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.webp`
+			: `https://cdn.discordapp.com/embed/avatars/${defaultAvatarIndex}.png`;
+		const serverTag = author.clan?.tag || '';
+		const serverTagBadge = author.clan
+			? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.webp`
+			: '';
+		const botTag = author.bot;
+
+		// TODO: Move this parsing to a separate function/module
+		// Parse message content and replace markdown with HTML
+		const messageContent = message.content
+			.replace(
+				/<a?:([^:>]+):(\d+)>/g,
+				'<img src="https://cdn.discordapp.com/emojis/$2.webp" alt="$1" class="emoji">',
+			) // custom emojis
+			.replace(/^### (.+)$/gm, '<h3>$1</h3>') // ### header 3
+			.replace(/^## (.+)$/gm, '<h2>$1</h2>') // ## header 2
+			.replace(/^# (.+)$/gm, '<h1>$1</h1>') // # header 1
+			.replace(/^-# (.+)$/gm, '<small>$1</small>') // -# subtext
+			.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>') // > blockquote
+			.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>') // [text](url)
+			.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // **bold**
+			.replace(/__(.+?)__/g, '<u>$1</u>') // __underline__
+			.replace(/(\*|_)(.+?)\1/g, '<em>$2</em>') // *italic* or _italic_
+			.replace(/\|\|(.+?)\|\|/g, '<span class="spoiler">$1</span>') // ||spoiler||
+			.replace(/~~(.+?)~~/g, '<del>$1</del>') // ~~strikethrough~~
+			.replace(/```([^`]+?)```/g, '<pre>$1</pre>') // ```code block```
+			.replace(/`([^`]+)`/g, '<code>$1</code>') // `inline code`
+			.replace(/\n/g, '<br>'); // change \n to <br> for line breaks
+
+		document.querySelector('.avatar').setAttribute('src', avatarUrl);
+
+		const usernameElement = document.querySelector('.username');
+		usernameElement.firstChild.textContent = username;
+
+		const serverTagElement = document.getElementById('server-tag');
+		if (serverTag) {
+			serverTagElement.querySelector('span').textContent = serverTag;
+			serverTagElement.querySelector('img').setAttribute('src', serverTagBadge);
+		} else {
+			serverTagElement.style.display = 'none';
+		}
+
+		const botTagElement = document.getElementById('bot-tag');
+		if (!botTag) {
+			botTagElement.style.display = 'none';
+		}
+
+		// Set message element
+		const messageElement = document.querySelector('.message');
+		messageElement.innerHTML = messageContent;
+
+		// Parse message element with Twemoji
+		const twemoji = window.twemoji;
+		twemoji.parse(messageElement, {
+			folder: 'svg',
+			ext: '.svg',
 		});
+	}, message);
 
-		await page.evaluate((message) => {
-			const author = message.author;
-			const username = author.global_name || author.username;
-			const defaultAvatarIndex = author.discriminator
-				? Number(author.discriminator) % 5 // Legacy username system
-				: (BigInt(author.id) >> 22n) % 6n; // New username system
-			const avatarUrl = author.avatar
-				? `https://cdn.discordapp.com/avatars/${author.id}/${author.avatar}.webp`
-				: `https://cdn.discordapp.com/embed/avatars/${defaultAvatarIndex}.png`;
-			const serverTag = author.clan?.tag || '';
-			const serverTagBadge = author.clan
-				? `https://cdn.discordapp.com/guild-tag-badges/${author.clan.identity_guild_id}/${author.clan.badge}.webp`
-				: '';
-			const botTag = author.bot;
+	// Wait for images to load
+	await page.waitForNetworkIdle();
 
-			// TODO: Move this parsing to a separate function/module
-			// Parse message content and replace markdown with HTML
-			const messageContent = message.content
-				.replace(
-					/<a?:([^:>]+):(\d+)>/g,
-					'<img src="https://cdn.discordapp.com/emojis/$2.webp" alt="$1" class="emoji">',
-				) // custom emojis
-				.replace(/^### (.+)$/gm, '<h3>$1</h3>') // ### header 3
-				.replace(/^## (.+)$/gm, '<h2>$1</h2>') // ## header 2
-				.replace(/^# (.+)$/gm, '<h1>$1</h1>') // # header 1
-				.replace(/^-# (.+)$/gm, '<small>$1</small>') // -# subtext
-				.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>') // > blockquote
-				.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>') // [text](url)
-				.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // **bold**
-				.replace(/__(.+?)__/g, '<u>$1</u>') // __underline__
-				.replace(/(\*|_)(.+?)\1/g, '<em>$2</em>') // *italic* or _italic_
-				.replace(/\|\|(.+?)\|\|/g, '<span class="spoiler">$1</span>') // ||spoiler||
-				.replace(/~~(.+?)~~/g, '<del>$1</del>') // ~~strikethrough~~
-				.replace(/```([^`]+?)```/g, '<pre>$1</pre>') // ```code block```
-				.replace(/`([^`]+)`/g, '<code>$1</code>') // `inline code`
-				.replace(/\n/g, '<br>'); // change \n to <br> for line breaks
+	// Set the viewport size based on the card element
+	const cardElement = await page.$('.card');
+	const cardBoundingBox = await cardElement.boundingBox();
+	await page.setViewport({
+		width: Math.ceil(cardBoundingBox.width + 200),
+		height: Math.ceil(cardBoundingBox.height + 200),
+		deviceScaleFactor: 2,
+	});
 
-			document.querySelector('.avatar').setAttribute('src', avatarUrl);
+	const screenshot = await page.screenshot({
+		optimizeForSpeed: true,
+	});
 
-			const usernameElement = document.querySelector('.username');
-			usernameElement.firstChild.textContent = username;
+	// All work done, so free connection (IMPORTANT!)
+	browser.disconnect();
 
-			const serverTagElement = document.getElementById('server-tag');
-			if (serverTag) {
-				serverTagElement.querySelector('span').textContent = serverTag;
-				serverTagElement
-					.querySelector('img')
-					.setAttribute('src', serverTagBadge);
-			} else {
-				serverTagElement.style.display = 'none';
-			}
-
-			const botTagElement = document.getElementById('bot-tag');
-			if (!botTag) {
-				botTagElement.style.display = 'none';
-			}
-
-			// Set message element
-			const messageElement = document.querySelector('.message');
-			messageElement.innerHTML = messageContent;
-
-			// Parse message element with Twemoji
-			const twemoji = window.twemoji;
-			twemoji.parse(messageElement, {
-				folder: 'svg',
-				ext: '.svg',
-			});
-		}, message);
-
-		// Wait for images to load
-		await page.waitForNetworkIdle();
-
-		// Set the viewport size based on the card element
-		const cardElement = await page.$('.card');
-		const cardBoundingBox = await cardElement.boundingBox();
-		await page.setViewport({
-			width: Math.ceil(cardBoundingBox.width + 200),
-			height: Math.ceil(cardBoundingBox.height + 200),
-			deviceScaleFactor: 2,
-		});
-
-		const screenshot = await page.screenshot({
-			optimizeForSpeed: true,
-		});
-
-		return screenshot;
-	} finally {
-		// All work done, so free connection (IMPORTANT!)
-		browser.disconnect();
-	}
+	return screenshot;
 }
 
 /**
@@ -191,32 +187,13 @@ export async function generateMessageClip(interaction, env) {
 	}
 
 	const discordUrl = `https://discord.com/api/v10/webhooks/${env.DISCORD_APPLICATION_ID}/${interaction.token}`;
-
-	// Start the fetch but don't await it here. Return the Promise so ctx.waitUntil()
-	// receives the Promise and can wait for the followup to be sent.
-	const discordPromise = fetch(discordUrl, {
+	const discordResponse = await fetch(discordUrl, {
 		method: 'POST',
 		body: formData,
-	})
-		.then(async (discordResponse) => {
-			if (!discordResponse.ok) {
-				console.error(
-					'Failed to send followup to discord',
-					discordResponse.status,
-				);
-				try {
-					const json = await discordResponse.json();
-					console.error({ response: json, msgJson: JSON.stringify(msgJson) });
-				} catch (jsonError) {
-					console.error('Failed to parse error response:', jsonError);
-				}
-			}
-			return discordResponse;
-		})
-		.catch((err) => {
-			console.error('Error sending followup to discord:', err);
-			throw err;
-		});
-
-	return discordPromise;
+	});
+	if (!discordResponse.ok) {
+		console.error('Failed to send followup to discord', discordResponse.status);
+		const json = await discordResponse.json();
+		console.error({ response: json, msgJson: JSON.stringify(msgJson) });
+	}
 }
