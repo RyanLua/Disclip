@@ -85,7 +85,7 @@ When **Discord Provided Link** is selected, a new **Default Install Settings** s
 On the **Installation** page in the **Default Install Settings** section:
 
 * For **User Install**, add the `applications.commands` scope
-* For **Guild Install**, add the `applications.commands` scope and `bot` scope. When you select `bot`, a new **Permissions** menu will appear to select the bot user's permissions. Select `Send Messages`.
+* For **Guild Install**, add the `applications.commands` scope
 
 ![Default Install Settings on Installation page in App Settings](assets/default-install-settings.png)
 
