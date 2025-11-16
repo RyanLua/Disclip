@@ -30,6 +30,7 @@
 		"fix": "biome check --write .",
 		"lint": "biome check .",
 		"register": "node src/register.js",
+		"publish:rules": "node src/publish-rules.js",
 		"start": "wrangler dev",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},

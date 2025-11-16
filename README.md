@@ -34,6 +34,28 @@ If you have any questions, suggestions, or need help with Disclip, feel free to 
 
 [![Support Server](https://discord.com/api/guilds/1387009688641732639/widget.png?style=banner4)](https://discord.gg/XkAHS8MkTe)
 
+## Publish Server Rules (One-Off)
+
+You can publish a styled rules message (using Discord's Components V2) to a specific channel with a one-off script.
+
+1. Add the following variables to `.dev.vars` (or your environment):
+
+```
+DISCORD_TOKEN=YOUR_BOT_TOKEN
+RULES_CHANNEL_ID=TARGET_TEXT_CHANNEL_ID
+```
+
+2. (Optional) Edit the rule text in `src/publish-rules.js` before sending.
+3. Run the script:
+
+```
+npm run publish:rules
+```
+
+If successful, the script logs the created message ID. You can delete / re-run safely; each invocation posts a new message.
+
+To update rules later, delete the old message in Discord and rerun the script (after editing text if needed).
+
 ## License
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FRyanLua%2FDisclip.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FRyanLua%2FDisclip?ref=badge_large)
