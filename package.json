@@ -9,17 +9,17 @@
 		"screenshot",
 		"clip"
 	],
-	"homepage": "https://github.com/RyanLua/Disclip#readme",
+	"homepage": "https://github.com/ryanlua/disclip#readme",
 	"bugs": {
-		"url": "https://github.com/RyanLua/Disclip/issues"
+		"url": "https://github.com/ryanlua/disclip/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/RyanLua/Disclip.git"
+		"url": "git+https://github.com/ryanlua/disclip.git"
 	},
 	"funding": {
 		"type": "individual",
-		"url": "https://github.com/sponsors/RyanLua"
+		"url": "https://github.com/sponsors/ryanlua"
 	},
 	"license": "MIT",
 	"author": "Ryan Luu <ryan.luu@ryanluu.dev>",

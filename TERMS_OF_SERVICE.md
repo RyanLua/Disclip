@@ -55,7 +55,7 @@ We may update these Terms from time to time. Continued use of the Service after 
 
 ## 10. Contact Information
 
-If you have questions about these Terms, please contact us through our [GitHub repository](https://github.com/RyanLua/Disclip/issues).
+If you have questions about these Terms, please contact us through our [GitHub repository](https://github.com/ryanlua/disclip/issues).
 
 ## 11. Governing Law
 

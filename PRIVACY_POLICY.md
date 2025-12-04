@@ -88,7 +88,7 @@ We may update this Privacy Policy from time to time. We will notify users of sig
 
 ## 12. Contact Information
 
-If you have questions about this Privacy Policy, please contact us through our [GitHub repository](https://github.com/RyanLua/Disclip/issues) or [disclip@ryanluu.dev](mailto:disclip@ryanluu.dev).
+If you have questions about this Privacy Policy, please contact us through our [GitHub repository](https://github.com/ryanlua/disclip/issues) or [disclip@ryanluu.dev](mailto:disclip@ryanluu.dev).
 
 ## 13. Third-Party Services
 

@@ -1,10 +1,10 @@
 # Disclip
 
-[![Continuous Integration](https://github.com/RyanLua/Disclip/actions/workflows/ci.yaml/badge.svg)](https://github.com/RyanLua/Disclip/actions/workflows/ci.yaml)
+[![Continuous Integration](https://github.com/ryanlua/disclip/actions/workflows/ci.yaml/badge.svg)](https://github.com/ryanlua/disclip/actions/workflows/ci.yaml)
 [![Discord](https://discord.com/api/guilds/1387009688641732639/widget.png)](https://discord.gg/XkAHS8MkTe)
-[![GitHub License](https://img.shields.io/github/license/RyanLua/Disclip)](https://github.com/RyanLua/Disclip?tab=MIT-1-ov-file#readme)
+[![GitHub License](https://img.shields.io/github/license/ryanlua/disclip)](https://github.com/ryanlua/disclip?tab=MIT-1-ov-file#readme)
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FRyanLua%2FDisclip.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FRyanLua%2FDisclip?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fryanlua%2Fdisclip.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fryanlua%2Fdisclip?ref=badge_shield)
 
 Save precious messages and funny moments with Disclip. Turn any Discord message into a high-quality image to share across friends and social media.
 
@@ -36,4 +36,4 @@ If you have any questions, suggestions, or need help with Disclip, feel free to 
 
 ## License
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FRyanLua%2FDisclip.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FRyanLua%2FDisclip?ref=badge_large)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fryanlua%2Fdisclip.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fryanlua%2Fdisclip?ref=badge_large)

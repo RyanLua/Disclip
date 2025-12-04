@@ -2,7 +2,7 @@
 
 ## Development Setup
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2FRyanLua%2FDisclip)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2Fryanlua%2Fdisclip)
 
 > [!TIP]
 > This guide is for developers who want to set up their own Disclip clone for development purposes. You can install official Disclip app using the [install link](https://discord.com/oauth2/authorize?client_id=621149242744111114).
@@ -19,7 +19,7 @@ This guide will walk you through the steps to create, configure, and deploy your
 Clone the project:
 
 ```console
-git clone https://github.com/RyanLua/Disclip.git
+git clone https://github.com/ryanlua/disclip.git
 ```
 
 Navigate to the cloned directory and install dependencies:
