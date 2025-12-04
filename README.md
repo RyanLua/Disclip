@@ -4,7 +4,6 @@
 [![Discord](https://discord.com/api/guilds/1387009688641732639/widget.png)](https://discord.gg/XkAHS8MkTe)
 [![GitHub License](https://img.shields.io/github/license/ryanlua/disclip)](https://github.com/ryanlua/disclip?tab=MIT-1-ov-file#readme)
 [![Checked with Biome](https://img.shields.io/badge/Checked_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fryanlua%2Fdisclip.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fryanlua%2Fdisclip?ref=badge_shield)
 
 Save precious messages and funny moments with Disclip. Turn any Discord message into a high-quality image to share across friends and social media.
 
@@ -33,7 +32,3 @@ If you have any questions, suggestions, or need help with Disclip, feel free to 
 * Be the first to know about updates
 
 [![Support Server](https://discord.com/api/guilds/1387009688641732639/widget.png?style=banner4)](https://discord.gg/XkAHS8MkTe)
-
-## License
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fryanlua%2Fdisclip.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fryanlua%2Fdisclip?ref=badge_large)
